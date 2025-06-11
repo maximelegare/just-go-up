@@ -1,0 +1,9 @@
+npm run lint-staged --concurent false ||
+(
+        echo '❌❗❌ Failed to commit! ❌❗❌
+         ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+        false; 
+)
+
+
+echo '✅ Eslint & Prettier Passed.'

@@ -1,0 +1,77 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "incremental": true,
+    "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@payload-config": [
+        "./src/payload.config.ts"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@payload-types": [
+        "./src/payload-types.ts"
+      ],
+      "@payload/*": [
+        "./src/payload/*"
+      ],
+      "@@/*": [
+        "./src/*"
+      ],
+      "ROOT/*": [
+        "./*"
+      ],
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mts",
+    ".next/types/**/*.ts",
+    "redirects.js",
+    "next.config.mjs",
+    "locales/locales.js",
+    ".eslintrc.cjs",
+    "commitlint.config.mjs", 
+    "release.config.cjs",
+    "./src/app/(payload)/admin/importMap.js",
+    "postcss.config.js"
+    ],
+
+  "exclude": [
+    "node_modules",
+    
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "swc": true
+  }
+}

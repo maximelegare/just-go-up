@@ -1,0 +1,10 @@
+@tailwind components;
+@tailwind utilities;
+:root {
+  --radius: 0.5rem;
+  --border: 240 6% 90%;
+}
+
+.toolbar-popup__dropdown-items .fixed-toolbar__dropdown-items {
+  background-color: red !important;
+}/*# sourceMappingURL=custom.css.map */

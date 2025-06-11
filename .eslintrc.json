@@ -1,0 +1,15 @@
+{
+  "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-object-type": "warn"
+  }
+}

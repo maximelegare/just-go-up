@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "itemsDetails": {
+      "addToCart": "Ajouter au panier",
+      "limitedEdition": "Édition limitée",
+      "available": "Disponible",
+      "unavailable": "Non-disponible"
+    },
+    "underContruction": {
+      "title": "Travaux en cours",
+      "sub": "Désolé de l'inconvénient.",
+      "button": "Se connecter"
+    }
+  },
+  "blocks": {
+    "itemsList": {
+      "pagination": {
+        "next": "Suivant",
+        "previous": "Précédent",
+        "numberOfDocumentsFound": "Showing {{limit}} - {{count}} de {{totalDocs}} élements"
+      }
+    }
+  },
+  "components": {
+    "cards": {
+      "products": {
+        "startingAt": "À partir de: ",
+        "seeMore": "Voir plus"
+      }
+    }
+  }
+}

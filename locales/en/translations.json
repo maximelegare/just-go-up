@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "itemsDetails": {
+      "addToCart": "Add to cart",
+      "limitedEdition": "Limited Edition",
+      "available": "Available",
+      "unavailable": "Unavailable"
+    },
+    "underContruction": {
+      "title": "Under Construction",
+      "sub": "Sorry for the inconvenience.",
+      "button": "Login"
+    }
+  },
+  "blocks": {
+    "itemsList": {
+      "pagination": {
+        "next": "Next",
+        "previous": "Previous",
+        "numberOfDocumentsFound": "Showing {{limit}} - {{count}} of {{totalDocs}} docs"
+      }
+    }
+  },
+  "components": {
+    "cards": {
+      "products": {
+        "startingAt": "Starting at: ",
+        "seeMore": "See more"
+      }
+    }
+  }
+}

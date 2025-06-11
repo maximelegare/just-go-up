@@ -1,0 +1,109 @@
+import type { CollectionConfig } from 'payload'
+import { CallToAction } from '../../../blocks/layouts/CallToAction/config'
+import { Content } from '../../../blocks/layouts/Content/config'
+import { MediaBlock } from '../../../blocks/layouts/MediaBlock/config'
+import { FormBlock } from '../../../blocks/layouts/Form/config'
+import { hero } from '@app/heros/config'
+
+import { revalidatePage } from './hooks/revalidatePage'
+import { ItemsListBlock } from '@app/blocks/layouts/ItemsListBlock/config'
+import { ItemDetailsLayout } from '@app/blocks/prebuiltLayouts/ItemDetailsBlock/config'
+import { superUser } from '@app/access/super'
+import { admins } from '@app/access/admins'
+import { anyone } from '@app/access/anyone'
+import { slugField } from '@app/payload/fields/slug'
+
+export const Pages: CollectionConfig = {
+  slug: 'pages',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'updatedAt'],
+    preview: (doc) => {
+      return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/next/preview?url=${encodeURIComponent(
+        `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/${doc.slug !== 'home' ? doc.slug : ''}`,
+      )}&secret=${process.env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
+    },
+  },
+  hooks: {
+    afterChange: [revalidatePage],
+  },
+  versions: {
+    drafts: true,
+  },
+  access: {
+    read: anyone,
+    update: admins,
+    create: superUser,
+    delete: superUser,
+  },
+  fields: [
+    {
+      name: 'title',
+      localized: true,
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'publishedOn',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData, value }) => {
+            if (siblingData._status === 'published' && !value) {
+              return new Date()
+            }
+            return value
+          },
+        ],
+      },
+    },
+    {
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Hero',
+          fields: [hero],
+        },
+        {
+          label: 'Content',
+          fields: [
+            {
+              name: 'hasPrebuiltLayout',
+              type: 'checkbox',
+              defaultValue: false,
+            },
+            {
+              name: 'layout',
+              type: 'blocks',
+              localized: true,
+              admin: {
+                condition: (_, siblingData) => {
+                  return siblingData?.hasPrebuiltLayout === false ? true : false
+                },
+              },
+              blocks: [CallToAction, Content, MediaBlock, FormBlock, ItemsListBlock],
+            },
+            {
+              name: 'prebuiltLayout',
+              type: 'blocks',
+              admin: {
+                condition: (_, siblingData) => {
+                  return siblingData?.hasPrebuiltLayout === true ? true : false
+                },
+              },
+              maxRows: 1,
+              blocks: [ItemDetailsLayout],
+            },
+          ],
+        },
+      ],
+    },
+    slugField(),
+  ],
+}
