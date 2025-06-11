@@ -7,7 +7,7 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
-import { resendAdapter } from '@payloadcms/email-resend'
+// import { resendAdapter } from '@payloadcms/email-resend'
 
 import {
   FixedToolbarFeature,
@@ -52,18 +52,18 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const generateTitle = () => {
-  return 'Bikanky'
+  return 'Better Climber'
 }
 
 export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  email: resendAdapter({
-    defaultFromAddress: process.env.SMTP_DEFAULT_FROM,
-    defaultFromName: process.env.SMTP_DEFAULT_FROM,
-    apiKey: process.env.RESEND_PRIVATE_KEY || '',
-  }),
+  // email: resendAdapter({
+  //   defaultFromAddress: process.env.SMTP_DEFAULT_FROM,
+  //   defaultFromName: process.env.SMTP_DEFAULT_FROM,
+  //   apiKey: process.env.RESEND_PRIVATE_KEY || '',
+  // }),
 
   //   email:  nodemailerAdapter({
   //   defaultFromAddress: 'info@payloadcms.com',

@@ -1,7 +1,7 @@
 {
-  "name": "bikanky",
+  "name": "better-climber",
   "version": "1.0.0",
-  "description": "transactionnal website for Bikanky",
+  "description": "Website about climbing to make climbers excel more at it.",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -78,6 +78,7 @@
     "lucide-react": "^0.378.0",
     "next": "15.2.3",
     "next-i18n-router": "^5.5.1",
+    "next-plugin-svgr": "^1.1.12",
     "payload": "3.40.0",
     "payload-admin-bar": "^1.0.6",
     "prism-react-renderer": "^2.3.1",
