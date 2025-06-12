@@ -79,7 +79,7 @@ export const NavigationMenuClient: React.FC<{ header: HeaderType; getInTouch: Ge
 
   return (
     <React.Fragment>
-      <Background show={showHeaderBackground} className="h-20" />
+      <Background show={showHeaderBackground} className="h-16" />
 
       <NavigationMenu
         onValueChange={toggleOverlay}
