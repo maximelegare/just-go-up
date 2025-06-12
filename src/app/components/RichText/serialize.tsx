@@ -13,7 +13,10 @@ import {
   IS_SUBSCRIPT,
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
+  ELEMENT_FORMAT_TO_TYPE,
+  ELEMENT_FORMAT_TYPE
 } from './nodeFormat'
+
 import type { Page } from '../../../payload-types'
 import { parseCSSStylesString } from '@app/utilities/parseCSSStylesString'
 import { ImageMedia } from '../Media/ImageMedia'
@@ -34,7 +37,45 @@ type Props = {
   textClassName?: string
 }
 
+
+
+
+
+
+
+
 export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
+
+  const getAlignmentClass = (format: ELEMENT_FORMAT_TYPE | number | undefined): string => {
+    let alignType:ELEMENT_FORMAT_TYPE
+
+    if (typeof format === 'number'){
+      alignType = ELEMENT_FORMAT_TO_TYPE[format]
+    }
+    else{
+      alignType = format
+    }
+
+    switch (alignType) {
+      case 'center':
+        return 'text-center'
+      case 'end':
+        return 'text-end'
+      case 'justify':
+        return 'text-justify'
+      case 'left':
+        return 'text-left'
+      case 'right':
+        return 'text-right'
+      case 'start':
+        return 'text-start'
+      default:
+        return ''
+    }
+  }
+
+
+
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
@@ -152,16 +193,24 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
               return <br className="col-start-2" key={index} />
             }
             case 'paragraph': {
+              
+              const alignClass = getAlignmentClass(node.format)
               return (
-                <p className={cn('col-start-2', textClassName)} key={index}>
+                <p className={cn('col-start-2', textClassName, alignClass)} key={index}>
                   {serializedChildren}
                 </p>
               )
             }
             case 'heading': {
               const Tag = node?.tag
+              const alignClass = getAlignmentClass(node.format)
+
+              console.log("node:", node)
+
+              console.log("alignClass", alignClass)
+
               return (
-                <Tag className="col-start-2" key={index}>
+                <Tag className={cn("col-start-2", alignClass)} key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -198,8 +247,10 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
               }
             }
             case 'quote': {
+              const alignClass = getAlignmentClass(node.format)
+
               return (
-                <blockquote className="col-start-2" key={index}>
+                <blockquote className={cn("col-start-2", alignClass)} key={index}>
                   {serializedChildren}
                 </blockquote>
               )

@@ -112,6 +112,9 @@ export const ELEMENT_FORMAT_TO_TYPE: Record<number, ElementFormatType> = {
   [IS_ALIGN_START]: 'start',
 }
 
+export type ELEMENT_FORMAT_TYPE = typeof ELEMENT_FORMAT_TO_TYPE[keyof typeof ELEMENT_FORMAT_TO_TYPE]
+
+
 export const TEXT_MODE_TO_TYPE: Record<TextModeType, 0 | 1 | 2> = {
   normal: IS_NORMAL,
   segmented: IS_SEGMENTED,
