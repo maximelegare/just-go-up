@@ -681,14 +681,15 @@ export interface Page {
             };
             blockTitle: string;
             populateBy: 'collection' | 'featured';
-            relationTo?: ('products' | 'categories' | 'variants') | null;
+            relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
             featured?: {
-              relationTo?: ('products' | 'categories' | 'variants') | null;
+              relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
               categories?: (string | Category)[] | null;
               products?: (string | Product)[] | null;
               variants?: (string | Variant)[] | null;
+              blogs?: (string | Variant)[] | null;
             };
-            layout?: ('grid' | 'carousel' | 'horizontalScroll') | null;
+            layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
             imageSelector?: ('images' | 'dots') | null;
             hasPagination?: boolean | null;
             limit?: number | null;
@@ -2443,6 +2444,7 @@ export interface PagesSelect<T extends boolean = true> {
                     categories?: T;
                     products?: T;
                     variants?: T;
+                    blogs?: T;
                   };
               layout?: T;
               imageSelector?: T;

@@ -56,6 +56,17 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
           </CarouselItem>
         )
       }
+      case 'verticalList': {
+        return (
+          <Card
+            key={idx}
+            className={cn(cardClassName)}
+            relationTo={relationTo}
+            doc={result as any}
+          />
+        )
+      }
+
       case 'grid':
       case 'horizontalScroll':
       default: {
@@ -110,6 +121,9 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
             </div>
           </ScrollArea>
         )
+      }
+      case 'verticalList': {
+        return <div className="flex flex-col gap-4">{mapCards(relationTo, 'w-full')}</div>
       }
       case 'grid':
       default: {

@@ -53,6 +53,10 @@ export const ItemsListBlock: Block = {
           label: 'Variants',
           value: 'variants',
         },
+        {
+          label: 'Blogs',
+          value: 'blogs',
+        },
       ],
     },
     {
@@ -79,6 +83,10 @@ export const ItemsListBlock: Block = {
             {
               label: 'Variants',
               value: 'variants',
+            },
+            {
+              label: 'Blogs',
+              value: 'blogs',
             },
           ],
         },
@@ -112,6 +120,16 @@ export const ItemsListBlock: Block = {
           label: 'Variants to Show',
           relationTo: 'variants',
         },
+        {
+          name: 'blogs',
+          type: 'relationship',
+          admin: {
+            condition: (_, siblingData) => siblingData.relationTo === 'variants',
+          },
+          hasMany: true,
+          label: 'Variants to Show',
+          relationTo: 'variants',
+        },
       ],
     },
     {
@@ -122,6 +140,7 @@ export const ItemsListBlock: Block = {
         { label: 'Grid', value: 'grid' },
         { label: 'Carousel', value: 'carousel' },
         { label: 'Horizontal Scroll', value: 'horizontalScroll' },
+        { label: 'Vertical list', value: 'verticalList' },
       ],
     },
     {

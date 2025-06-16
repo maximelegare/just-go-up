@@ -44,7 +44,6 @@ export const ItemsListBlock: React.FC<
   const filterValues = filterUrlParam?.includes(':') ? filterUrlParam?.split(':') : filterUrlParam
 
   const payload = await getPayload({ config: configPromise })
-
   const getSearchParamWhere = (field: string, equals: string) => {
     switch (relationTo) {
       case 'variants':
@@ -172,7 +171,7 @@ export const ItemsListBlock: React.FC<
         <OptionsBar data={optionsBar} locale={props.params.locale} className="mb-4" />
         <ItemsList
           relationTo={populateBy === 'collection' ? relationTo : featured.relationTo}
-          items={fetchedItems.docs}
+          items={fetchedItems.docs as any}
           layout={layout}
           imageSelector={imageSelector}
         />

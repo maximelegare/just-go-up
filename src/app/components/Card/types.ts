@@ -1,5 +1,5 @@
 import { RelationTo } from '../../blocks/layouts/ItemsListBlock/ItemsList'
-import { Category, Media, Product, Variant } from '@payload-types'
+import { Blog, Category, Media, Product, Variant } from '@payload-types'
 import { CSSProperties } from 'react'
 
 export type BaseCard = {
@@ -15,6 +15,10 @@ export type BaseCard = {
 export type ProductCardProps = BaseCard & {
   doc?: Product
   groupByProducts?: boolean
+}
+
+export type BlogCardProps = BaseCard & {
+  doc?: Blog
 }
 
 export type CategoryCardProps = BaseCard & {
