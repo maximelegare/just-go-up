@@ -45,6 +45,7 @@ import { Fabrics } from '@app/payload/collections/Fabrics'
 import { SearchParamValues } from '@app/payload/collections/SearchParams/values'
 import { SearchParamKeys } from '@app/payload/collections/SearchParams/keys'
 import { OptionsBars } from '@app/payload/collections/OptionsBars'
+import { Blogs } from '@app/payload/collections/blogs'
 // import { EmbedFeature } from '@payload/lexical/features/embedFeature/feature.server'
 // import { FontColorFeature } from '@payload/lexical/features/fontColorFeature/feature.server'
 
@@ -136,6 +137,7 @@ export default buildConfig({
     Products,
     SleeveLengths,
     Variants,
+    Blogs,
     Links,
     Fabrics,
     SearchParamKeys,
