@@ -22,7 +22,7 @@ export const Card = forwardRef<HTMLElement, Props>(({ children, className, style
         ...style,
       }}
       className={cn(
-        'border rounded-lg overflow-hidden bg-card hover:cursor-pointer group w-full',
+        'rounded-lg overflow-hidden bg-card text-card-foreground hover:cursor-pointer group w-full',
         className,
         // Use Tailwind's responsive utilities for default behavior
         'w-full sm:w-auto',

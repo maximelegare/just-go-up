@@ -745,7 +745,7 @@ export interface SearchParamKey {
 export interface Category {
   id: string;
   title?: string | null;
-  mainImage: string | Media;
+  mainImage?: (string | null) | Media;
   slug?: string | null;
   parent?: (string | null) | Category;
   breadcrumbs?:

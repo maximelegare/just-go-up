@@ -26,7 +26,6 @@ export const Categories: CollectionConfig = {
       name: 'mainImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     slugField(),
   ],

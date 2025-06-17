@@ -15,6 +15,7 @@ import {
 import { ScrollArea } from '@app/components/ui/scroll-area'
 import { cardComponentsMap, CardComponentsMap } from '@app/_Map/cards.map'
 import { PrerendedCard } from '@app/components/Prerenderer/Card'
+import { Separator } from '@app/components/ui/seperator'
 
 export type RelationTo = ItemsListBlockProps['relationTo'] | 'media'
 
@@ -58,12 +59,11 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
       }
       case 'verticalList': {
         return (
-          <Card
-            key={idx}
-            className={cn(cardClassName)}
-            relationTo={relationTo}
-            doc={result as any}
-          />
+          <React.Fragment key={idx}>
+            {idx === 0 && <Separator />}
+            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result as any} />
+            <Separator />
+          </React.Fragment>
         )
       }
 
