@@ -1,3 +1,8 @@
+// To install icons: https://sly-cli.fly.dev/
+
+
+
+
 import * as path from 'node:path'
 
 import fsExtra from 'fs-extra'
@@ -5,7 +10,7 @@ import { glob } from 'glob'
 import { parse } from 'node-html-parser'
 
 const cwd = process.cwd()
-const inputDir = path.join(cwd, 'other', 'svg')
+const inputDir = path.join(cwd, 'svg')
 const inputDirRelative = path.relative(cwd, inputDir)
 const typeDir = path.join(cwd, './src/app/components/Icon/types')
 const outputDir = path.join(cwd, 'public', 'icons')

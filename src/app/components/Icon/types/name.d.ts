@@ -4,7 +4,6 @@ export type IconName =
   | 'brand/facebook'
   | 'brand/instagram'
   | 'brand/pinterest'
-  | 'custom/squigly'
   | 'phosphor/arrow-circle-right'
   | 'radix/arrow-right'
-  | 'radix/cube'
+  | 'radix/calendar'

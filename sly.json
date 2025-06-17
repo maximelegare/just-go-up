@@ -3,13 +3,13 @@
   "libraries": [
     {
       "name": "@radix-ui/icons",
-      "directory": "./other/svg/radix",
+      "directory": "./svg/radix",
       "postinstall": [],
       "transformers": []
     },
     {
       "name": "phosphor-icons",
-      "directory": "./other/svg/phosphor",
+      "directory": "./svg/phosphor",
       "postinstall": [],
       "transformers": []
     }
