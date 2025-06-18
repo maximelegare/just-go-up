@@ -83,11 +83,15 @@ export default {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        globals:{
+          DEFAULT:'hsl(var(--globals-background))',
+          foreground:'hsl(var(--globals-foreground))'
+        },
         background: 'hsl(var(--background))',
         border: 'hsl(var(--border))',
         button:{
           foreground:'hsl(var(--button-foreground))',
-          "foreground-hover":'hsl(var(--foreground-hover))'
+          "foreground-hover":'hsl(var(--button-foreground-hover))'
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
