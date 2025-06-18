@@ -29,7 +29,7 @@ const LineUnderButton = ({
 }) => (
   <span
     className={cn(
-      `absolute  bottom-[-3px] left-0 h-[1px] bg-accent transition-all duration-300 ${baseWidth}`,
+      `absolute  bottom-[-3px] left-0 h-[1px] bg-button-foreground-hover transition-all duration-300 ${baseWidth}`,
       isActive ? 'w-full' : 'group-hover:w-full',
       className,
     )}

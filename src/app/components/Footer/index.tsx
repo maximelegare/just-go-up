@@ -24,10 +24,10 @@ export async function Footer({ locale, show }: FooterProps) {
   if (!show) return null
 
   return (
-    <footer className="border-t border-border bg-muted text-white">
+    <footer className="border-t border-border bg-globals text-white">
       <div className="container pt-8 pb-16">
         <Separator />
-        <div className="bg-muted relative z-20">
+        <div className="relative z-20">
           <div className="grid grid-rows-1 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8">
             {sections.map(({ section, links }, idx: number) => (
               <nav key={idx} className="flex flex-col gap-2 items-start h-full">
