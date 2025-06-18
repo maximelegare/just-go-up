@@ -5,14 +5,21 @@ import { Icon } from '../Icon'
 import {} from 'next-i18n-router'
 import { usePathname } from 'next/navigation'
 import { detectLocaleFromPathname } from '@app/utilities/detectLocale'
+import { cn } from '@app/utilities/cn'
 
 type DateProps = {
   date: string | Date
   lang?: 'en' | 'fr'
   showCalendarIcon?: boolean
+  className?: string
 }
 
-export const DisplayDate: React.FC<DateProps> = ({ date, lang, showCalendarIcon = true }) => {
+export const DisplayDate: React.FC<DateProps> = ({
+  date,
+  lang,
+  showCalendarIcon = true,
+  className,
+}) => {
   const pathname = usePathname()
   const currLocale = detectLocaleFromPathname(pathname)
 
@@ -29,7 +36,7 @@ export const DisplayDate: React.FC<DateProps> = ({ date, lang, showCalendarIcon 
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className={cn('flex items-center gap-2', className)}>
       {showCalendarIcon && <Icon name="radix/calendar" className="text-[0.5em]" />}
       <div className="text-xs">{formatted}</div>
     </div>

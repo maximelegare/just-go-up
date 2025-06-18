@@ -17,10 +17,10 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
   } = doc
 
   return (
-    <Card className="p-2" href="/test">
+    <Card className="px-2" href="/test">
       <div className="flex justify-between">
         <div>
-          <DisplayDate date={publishedOn} />
+          <DisplayDate date={publishedOn} className="opacity-60" />
           <div>
             <h3 className="my-0 font-bold">{title}</h3>
             <p>{subtitle}</p>
@@ -30,7 +30,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
               categories.map((el, idx) => {
                 return (
                   typeof el !== 'string' && (
-                    <p className="p-1 text-xs rounded-2xl bg-zinc-300 w-fit" key={idx}>
+                    <p className="p-1 text-xs rounded-2xl bg-muted w-fit" key={idx}>
                       {el.title}
                     </p>
                   )
@@ -44,9 +44,6 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
           )}
         </AspectRatio>
       </div>
-      {/* <div className="">
-            <Image src="/website-template-OG.webp" alt="Test image" fill className="object-cover" />
-            </div> */}
     </Card>
   )
 }
