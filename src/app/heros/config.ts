@@ -101,7 +101,6 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
   ],
   label: false,

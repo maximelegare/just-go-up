@@ -12,6 +12,7 @@ import { superUser } from '@app/access/super'
 import { admins } from '@app/access/admins'
 import { anyone } from '@app/access/anyone'
 import { slugField } from '@app/payload/fields/slug'
+import { DynamicContent } from '@app/blocks/layouts/DynamicContent/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -87,7 +88,14 @@ export const Pages: CollectionConfig = {
                   return siblingData?.hasPrebuiltLayout === false ? true : false
                 },
               },
-              blocks: [CallToAction, Content, MediaBlock, FormBlock, ItemsListBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                FormBlock,
+                ItemsListBlock,
+                DynamicContent,
+              ],
             },
             {
               name: 'prebuiltLayout',

@@ -196,6 +196,11 @@ export default buildConfig({
       generateLabel: (_, doc) => doc.title as string,
       generateURL: (docs) => docs.reduce((url, doc) => `/products/${doc.slug}`, ''),
     }),
+    nestedDocsPlugin({
+      collections: ['blogs'],
+      generateLabel: (_, doc) => doc.title as string,
+      generateURL: (docs) => docs.reduce((url, doc) => `/blogs/${doc.slug}`, ''),
+    }),
     seoPlugin({
       collections: ['pages'],
       generateTitle,

@@ -244,7 +244,7 @@ export interface Page {
     rightSideMedia?: (string | null) | Media;
     hasBackgroundTextOverlay?: boolean | null;
     backgroundTextOverlay?: string | null;
-    media: string | Media;
+    media?: (string | null) | Media;
   };
   hasPrebuiltLayout?: boolean | null;
   layout?:
@@ -701,6 +701,18 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'itemsList';
+          }
+        | {
+            layout?:
+              | {
+                  block?: 'content' | null;
+                  relationTo?: 'blogs' | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'dynamicContent';
           }
       )[]
     | null;
@@ -1878,6 +1890,15 @@ export interface Blog {
   isActive?: boolean | null;
   slug?: string | null;
   skipSync?: boolean | null;
+  parent?: (string | null) | Blog;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Blog;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -2456,6 +2477,19 @@ export interface PagesSelect<T extends boolean = true> {
                     show?: T;
                     showParams?: T;
                     hideParams?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        dynamicContent?:
+          | T
+          | {
+              layout?:
+                | T
+                | {
+                    block?: T;
+                    relationTo?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
@@ -3144,6 +3178,15 @@ export interface BlogsSelect<T extends boolean = true> {
   isActive?: T;
   slug?: T;
   skipSync?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
