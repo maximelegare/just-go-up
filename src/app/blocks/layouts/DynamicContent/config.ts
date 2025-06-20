@@ -25,23 +25,23 @@ export const DynamicContent: Block = {
   slug: SLUG,
   fields: [
     {
+      name: 'relationTo',
+      type: 'select',
+      options: [
+        {
+          label: 'Blogs',
+          value: 'blogs',
+        },
+      ],
+    },
+    {
       name: 'layout',
       type: 'array',
       fields: [
         {
-          name: 'block',
+          name: 'blockType',
           type: 'select',
           options: optionsToUse,
-        },
-        {
-          name: 'relationTo',
-          type: 'select',
-          options: [
-            {
-              label: 'Blogs',
-              value: 'blogs',
-            },
-          ],
         },
       ],
     },

@@ -1,71 +1,75 @@
-// import { cn } from '@app/utilities/cn'
+//@ts-nocheck
 import React from 'react'
-// import RichText from 'src/app/components/RichText'
 
-import type { Page } from '@payload-types'
+import configPromise from '@payload-config'
 
-// import { CMSLink } from '@app/components/Link'
-// import { BigTitle } from '@app/components/BigTitle'
-// import { getServerSideURL } from '@app/utilities/getServerSideURL'
+import type { Blog, Page } from '@payload-types'
+import { CollectionSlug, getPayload } from 'payload'
+import { Locale } from 'ROOT/locales/locales'
+import { getServerSideURL } from '@app/utilities/getServerSideURL'
+import { getUrlData } from '@app/utilities/searchParams'
+
+import { toKebabCase } from '@app/utilities/toKebabCase'
+import { blockComponentsMap } from '@app/_Map/blocks.map'
 
 export type DynamicContentBlockProps = Extract<Page['layout'][0], { blockType: 'dynamicContent' }>
 
 export const DynamicContentBlock: React.FC<
   {
     id?: string
-    containerClassName?: string
+    urlSearchParams?: Record<string, string>
+    params?: {
+      locale?: Locale
+    }
   } & DynamicContentBlockProps
 > = async (props) => {
-  // const fullPath = await getServerSideURL('fullpath')
+  const fullPath = await getServerSideURL('fullpath')
+  const data = getUrlData(fullPath)
 
-  const { blockType } = props
+  const payload = await getPayload({ config: configPromise })
+
+  const { relationTo, blockType, layout } = props
+
+  const fetchedItem = await payload.find({
+    locale: props.params?.locale,
+    collection: relationTo as CollectionSlug,
+    depth: 5,
+    limit: 1,
+    where: {
+      'breadcrumbs.url': {
+        equals: data.pathnameWithoutLocale,
+      },
+    },
+  })
+
+  const doc = fetchedItem.docs[0] as Blog
 
   if (blockType !== 'dynamicContent') return null
 
-  // const {
-  //   columns,
-  //   column,
-  //   containerClassName = 'container grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16 w-full',
-  //   bigTitle,
-  // } = props
-
-  // const colsSpanClasses = {
-  //   full: '12',
-  //   half: '6',
-  //   oneThird: '4',
-  //   twoThirds: '8',
-  //   fullAdaptive: '',
-  // }
-
   return (
-    <div>
-      {/* <BigTitle {...bigTitle} className="mb-[2rem]" /> */}
-      {/* {columns && columns.length > 0 && (
-        <div className={containerClassName}>
-          {columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
-            return (
-              <div
-                className={cn(
-                  `${colsSpanClasses[size] === 'fullAdaptive' ? 'w-full' : `col-span-4 lg:col-span-${colsSpanClasses[size || 'full']}`}`,
-                  {
-                    'md:col-span-2': size !== 'full',
-                  },
-                )}
-                key={index}
-              >
-                <RichText content={richText} enableGutter={false} />
-                {enableLink && <CMSLink currentUrl={fullPath} {...link} />}
-              </div>
-            )
-          })}
-        </div>
-      )}
-      {column && (
-        <div className="w-full">
-          <RichText content={column.richText} enableGutter={false} />
-        </div>
-      )} */}
-    </div>
+    <>
+      {layout.map((layoutBlock, layoutIndex) => {
+        const contentBlocks = doc?.content?.content
+        if (!Array.isArray(contentBlocks)) return null
+
+        return contentBlocks?.map((innerBlock, innerIndex) => {
+          const Block = blockComponentsMap[layoutBlock.blockType]
+
+          if (!Block) return null
+
+          return (
+            <div key={innerBlock.id ?? `${layoutIndex}-${innerIndex}`}>
+              <Block
+                id={toKebabCase(innerBlock.blockType)}
+                blockType={innerBlock.blockType}
+                {...innerBlock}
+                params={props.params}
+                urlSearchParams={props.urlSearchParams}
+              />
+            </div>
+          )
+        })
+      })}
+    </>
   )
 }

@@ -83,7 +83,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       /*
         Highlights the active link based on the page, not the params
       */
-      const currUrlPathname = getUrlData(currentUrl).pathname
+      const currUrlPathname = getUrlData(currentUrl).url.pathname
       if (href === currUrlPathname || url === currUrlPathname) return true
 
       /*

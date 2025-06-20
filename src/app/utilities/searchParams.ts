@@ -2,6 +2,7 @@ import { Link as LinkType } from '@payload-types'
 import { parse } from 'search-params'
 import { safeEncode } from '@app/utilities/safeEncode'
 import { safeDecode } from '@app/utilities/safeDecode'
+import { Locale, locales } from 'ROOT/locales/locales'
 
 export type SearchParams = LinkType['link']['searchParams']['params']
 
@@ -116,9 +117,37 @@ export const getSearchParamsFromURL = (fullPath: string): URLSearchParams | null
   return params
 }
 
-export const getUrlData = (fullPath: string): URL => {
+type GetUrlData = {
+  url: URL
+  locale: Locale
+  pathnameWithoutLocale: string
+}
+
+export const getUrlData = (fullPath: string): GetUrlData => {
   try {
-    return new URL(fullPath, process.env.PAYLOAD_PUBLIC_SERVER_URL)
+    const urlData = new URL(fullPath, process.env.PAYLOAD_PUBLIC_SERVER_URL)
+
+    const filterLocales = () => {
+      const splitUrl = urlData.pathname.split('/')
+
+      const url = splitUrl.reduce<string[]>((acc, value) => {
+        if (value === '') return acc
+
+        const isLocale = locales.some((locale) => locale.locale === value)
+        if (isLocale) return acc
+
+        acc.push(value)
+        return acc
+      }, [])
+
+      return url.join('/')
+    }
+
+    return {
+      url: urlData,
+      locale: urlData.pathname.split('/')[1] as Locale,
+      pathnameWithoutLocale: `/${filterLocales()}`,
+    }
   } catch (err) {
     console.log(err, 'wrong url format')
   }

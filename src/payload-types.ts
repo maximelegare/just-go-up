@@ -703,10 +703,10 @@ export interface Page {
             blockType: 'itemsList';
           }
         | {
+            relationTo?: 'blogs' | null;
             layout?:
               | {
-                  block?: 'content' | null;
-                  relationTo?: 'blogs' | null;
+                  blockType?: 'content' | null;
                   id?: string | null;
                 }[]
               | null;
@@ -2484,11 +2484,11 @@ export interface PagesSelect<T extends boolean = true> {
         dynamicContent?:
           | T
           | {
+              relationTo?: T;
               layout?:
                 | T
                 | {
-                    block?: T;
-                    relationTo?: T;
+                    blockType?: T;
                     id?: T;
                   };
               id?: T;
