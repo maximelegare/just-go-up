@@ -140,7 +140,7 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
 
         if (node.type === 'upload') {
           return (
-            <div key={index} className="pb-8">
+            <div key={index} className="py-8">
               <ImageMedia
                 className="col-start-1 col-span-3 w-full h-auto"
                 imgClassName="m-0 w-full h-full max-w-[500px] rounded-xl"

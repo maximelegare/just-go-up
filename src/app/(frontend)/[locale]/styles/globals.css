@@ -93,7 +93,7 @@
 
 /* Removes default margins for images */
 .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-top: 2rem;
+  margin-top: 0rem;
   margin-bottom: 0rem;
 }
 
