@@ -7,7 +7,7 @@ import { Inter } from 'next/font/google'
 
 import React from 'react'
 
-import { Footer } from '../../components/Footer'
+// import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { LivePreviewListener } from '../../components/LivePreviewListener'
 import { Providers } from '../../providers'
@@ -69,7 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <LivePreviewListener />
             <Header locale={locale} show={!pathname.includes('under-construction')} />
             {children}
-            <Footer locale={locale} show={!pathname.includes('under-construction')} />
+            {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}
             <Prerenderer numberOfCards={4} />
             {/* </ScrollArea> */}
           </div>

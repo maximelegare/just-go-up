@@ -55,7 +55,7 @@ export const LocaleSelector: React.FC<Props> = ({ triggerClassName }) => {
       <SelectContent>
         {locales.map((l) => (
           <SelectItem key={l.locale} value={l.locale}>
-            {l.flag}
+            {l.locale.toUpperCase()}
           </SelectItem>
         ))}
       </SelectContent>
