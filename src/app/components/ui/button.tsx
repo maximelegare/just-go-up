@@ -13,7 +13,7 @@ export const buttonVariant = {
   outline: 'border border-border bg-background hover:bg-card text-foreground',
   text: 'px-0 py-0 h-8',
   secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-  underline: 'px-0 py-2',
+  underline: 'text-foreground underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center',
 }
@@ -26,7 +26,7 @@ export const buttonVariantActif = {
   text: 'text-foreground',
   outline: 'border border-border bg-background hover:bg-card text-foreground',
   secondary: 'bg-secondary hover:bg-secondary/80',
-  underline: 'px-0 py-2',
+  underline: 'text-foreground underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'bg-muted',
 }

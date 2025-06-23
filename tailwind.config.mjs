@@ -172,6 +172,13 @@ export default {
               opacity: "90%",
               letterSpacing: "0.15em"
             },
+            h6: {
+              // fontSize: '0.9rem',
+              fontWeight: '400',
+              opacity: "90%",
+              letterSpacing: "0.15em"
+              
+            },
             label: {
               fontWeight: '600',
               opacity: "90%",

@@ -4,6 +4,7 @@ import { MediaBlock } from '@app/blocks/layouts/MediaBlock'
 import React, { Fragment, JSX } from 'react'
 import { CMSLink } from 'src/app/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
+import RichText from '@app/components/RichText'
 
 import {
   IS_BOLD,
@@ -139,12 +140,18 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
 
         if (node.type === 'upload') {
           return (
-            <ImageMedia
-              className="col-start-1 col-span-3 w-full h-auto"
-              imgClassName="m-0 w-full h-full max-w-[500px] rounded-xl"
-              key={index}
-              resource={{ ...(node.value as any) }}
-            />
+            <div key={index} className="pb-8">
+              <ImageMedia
+                className="col-start-1 col-span-3 w-full h-auto"
+                imgClassName="m-0 w-full h-full max-w-[500px] rounded-xl"
+                resource={{ ...(node.value as any) }}
+              />
+              {/* @ts-ignore */}
+              {typeof node.value === 'object' && node?.value?.caption && (
+                //@ts-ignore
+                <RichText content={node.value.caption} enableGutter={false} />
+              )}
+            </div>
           )
         }
 
@@ -192,10 +199,6 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
             case 'heading': {
               const Tag = node?.tag
               const alignClass = getAlignmentClass(node.format)
-
-              console.log('node:', node)
-
-              console.log('alignClass', alignClass)
 
               return (
                 <Tag className={cn('col-start-2', alignClass)} key={index}>
@@ -245,10 +248,12 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
             }
             case 'link': {
               const fields = node.fields
-
               return (
                 <CMSLink
+                  size="xs"
                   currentUrl=""
+                  className="p-0 m-0"
+                  appearance="underline"
                   key={index}
                   newTab={Boolean(fields?.newTab)}
                   reference={fields.doc as any}

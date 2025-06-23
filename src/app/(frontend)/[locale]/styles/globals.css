@@ -31,6 +31,13 @@
     opacity: 90%;
   }
  
+  h6,
+  h6>span,
+  label {
+    font-size: 0.75rem !important;
+    opacity: 90%;
+  }
+ 
 
 
 
@@ -87,7 +94,7 @@
 /* Removes default margins for images */
 .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 
 .prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)){
