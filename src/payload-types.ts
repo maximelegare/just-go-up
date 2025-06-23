@@ -208,6 +208,7 @@ export interface Page {
                   | 'underline'
                   | 'iconOnly'
                   | 'menu'
+                  | 'richtextLink'
                 )
               | null;
             /**
@@ -344,6 +345,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'richtextLink'
                     )
                   | null;
                 /**
@@ -418,6 +420,7 @@ export interface Page {
                           | 'underline'
                           | 'iconOnly'
                           | 'menu'
+                          | 'richtextLink'
                         )
                       | null;
                     /**
@@ -491,6 +494,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'richtextLink'
                     )
                   | null;
                 /**
@@ -567,6 +571,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'richtextLink'
                     )
                   | null;
                 /**
@@ -648,6 +653,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'richtextLink'
                     )
                   | null;
                 /**
@@ -883,6 +889,7 @@ export interface Variant {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'richtextLink'
               )
             | null;
           /**
@@ -957,6 +964,7 @@ export interface Variant {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'richtextLink'
                   )
                 | null;
               /**
@@ -1030,6 +1038,7 @@ export interface Variant {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'richtextLink'
               )
             | null;
           /**
@@ -1101,6 +1110,7 @@ export interface Variant {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'richtextLink'
                       )
                     | null;
                   /**
@@ -1175,6 +1185,7 @@ export interface Variant {
                             | 'underline'
                             | 'iconOnly'
                             | 'menu'
+                            | 'richtextLink'
                           )
                         | null;
                       /**
@@ -1248,6 +1259,7 @@ export interface Variant {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'richtextLink'
                       )
                     | null;
                   /**
@@ -1601,6 +1613,7 @@ export interface Link {
           | 'underline'
           | 'iconOnly'
           | 'menu'
+          | 'richtextLink'
         )
       | null;
     /**
@@ -1695,6 +1708,7 @@ export interface Blog {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'richtextLink'
                   )
                 | null;
               /**
@@ -1769,6 +1783,7 @@ export interface Blog {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'richtextLink'
                       )
                     | null;
                   /**
@@ -1842,6 +1857,7 @@ export interface Blog {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'richtextLink'
                   )
                 | null;
               /**
@@ -3633,6 +3649,7 @@ export interface Settings {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'richtextLink'
               )
             | null;
           /**

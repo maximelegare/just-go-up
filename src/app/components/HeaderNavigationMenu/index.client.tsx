@@ -15,10 +15,9 @@ import {
 import { CMSLink } from '@app/components/Link'
 import { usePathname } from 'next/navigation'
 
-import useDetectScroll, { Axis } from '@smakss/react-scroll-direction'
+// import useDetectScroll, { Axis } from '@smakss/react-scroll-direction'
 
 import { GetInTouch, Header as HeaderType } from '@payload-types'
-import { Background } from '../Header/background'
 
 import { Section } from './types'
 import { SocialMediaList } from '../SocialMediaList'
@@ -29,22 +28,22 @@ export const NavigationMenuClient: React.FC<{ header: HeaderType; getInTouch: Ge
   getInTouch,
 }) => {
   const { links } = header
-  const TOP_PX = 50
+  // const TOP_PX = 50
 
   const pathname = usePathname()
-  const [showHeaderBackground, setShowHeaderBackground] = React.useState(false)
+  // const [showHeaderBackground, setShowHeaderBackground] = React.useState(false)
   const [showOverlay, setShowOverlay] = React.useState(false)
   const fullPath = useClientSideUrl()
   const [selectedLink, setSelectedLink] = React.useState<string | null>(null)
 
-  const {
-    scrollPosition: { top },
-  } = useDetectScroll({ axis: Axis.Y })
+  // const {
+  //   scrollPosition: { top },
+  // } = useDetectScroll({ axis: Axis.Y })
 
-  React.useEffect(() => {
-    if (top > TOP_PX) setShowHeaderBackground(true)
-    else setShowHeaderBackground(false)
-  }, [top])
+  // React.useEffect(() => {
+  //   if (top > TOP_PX) setShowHeaderBackground(true)
+  //   else setShowHeaderBackground(false)
+  // }, [top])
 
   const toggleOverlay = (value: string) => {
     if (value) setShowOverlay(true)
@@ -79,15 +78,15 @@ export const NavigationMenuClient: React.FC<{ header: HeaderType; getInTouch: Ge
 
   return (
     <React.Fragment>
-      <Background show={showHeaderBackground} className="h-16" />
+      {/* <Background show={showHeaderBackground} className="h-16" /> */}
 
       <NavigationMenu
         onValueChange={toggleOverlay}
-        onMouseEnter={() => setShowHeaderBackground(true)}
-        onMouseLeave={() => {
-          if (top < TOP_PX) setShowHeaderBackground(false)
-          setSelectedLink(null)
-        }}
+        // // onMouseEnter={() => setShowHeaderBackground(true)}
+        // onMouseLeave={() => {
+        //   if (top < TOP_PX) setShowHeaderBackground(false)
+        //   setSelectedLink(null)
+        // }}
       >
         <NavigationMenuList>
           {links.map(

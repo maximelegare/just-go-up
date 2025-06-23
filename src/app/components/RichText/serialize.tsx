@@ -253,7 +253,7 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                   size="xs"
                   currentUrl=""
                   className="p-0 m-0"
-                  appearance="underline"
+                  appearance="richtextLink"
                   key={index}
                   newTab={Boolean(fields?.newTab)}
                   reference={fields.doc as any}

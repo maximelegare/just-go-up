@@ -8,6 +8,7 @@ import { Sidebar } from '@app/components/Sidebar'
 import { NavigationMenu } from '@app/components/HeaderNavigationMenu'
 import { Background } from './background'
 import { AdminBar } from '../AdminBar'
+import { Separator } from '../ui/seperator'
 
 type HeaderProps = {
   locale: Locale
@@ -17,7 +18,7 @@ type HeaderProps = {
 export async function Header({ locale, show }: HeaderProps) {
   if (!show) return null
   return (
-    <header className="fixed z-20 w-screen" id="header">
+    <header className="fixed z-20 w-screen bg-background" id="header">
       <AdminBar />
       <div className="relative h-16 items-center flex justify-between">
         <div className="flex container items-center gap-6 w-full justify-between md:justify-normal">
@@ -32,6 +33,7 @@ export async function Header({ locale, show }: HeaderProps) {
           </div>
         </div>
       </div>
+      <Separator />
       {/* used only for the mobile sizes. The other sizes are using the background located in NavigationMenu */}
       <Background className="block md:hidden" />
     </header>

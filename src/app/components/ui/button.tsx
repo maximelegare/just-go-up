@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
 import * as React from 'react'
 
-const textTransitions = 'text-button-foreground  transition-all ease-in-out duration-300'
+const textTransitions = 'text-foreground transition-all ease-in-out duration-300'
 
 export const buttonVariant = {
   default: 'bg-primary hover:bg-primary/90 hover:text-primary-foreground',
@@ -16,6 +16,7 @@ export const buttonVariant = {
   underline: 'text-foreground underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center',
+  richtextLink: 'text-foreground',
 }
 
 export const buttonVariantActif = {
@@ -26,9 +27,10 @@ export const buttonVariantActif = {
   text: 'text-foreground',
   outline: 'border border-border bg-background hover:bg-card text-foreground',
   secondary: 'bg-secondary hover:bg-secondary/80',
-  underline: 'text-foreground underline',
+  underline: 'text-foreground  underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'bg-muted',
+  richtextLink: 'text-red-400',
 }
 
 const buttonVariants = cva(

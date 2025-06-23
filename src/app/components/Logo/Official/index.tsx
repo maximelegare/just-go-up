@@ -1,8 +1,3 @@
-import LogoSVG from "ROOT/public/logo_white-withtext-white.svg"
+import LogoSVG from 'ROOT/public/logo_black-withtext-black.svg'
 
-
-
-export const Logo = () => (
-    <LogoSVG />
-  
-)
+export const Logo = () => <LogoSVG />
