@@ -318,6 +318,7 @@ export interface Page {
             bigTitle?: {
               enable?: boolean | null;
               title?: string | null;
+              subtitle?: string | null;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -540,6 +541,7 @@ export interface Page {
             bigTitle?: {
               enable?: boolean | null;
               title?: string | null;
+              subtitle?: string | null;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -620,6 +622,7 @@ export interface Page {
             bigTitle?: {
               enable?: boolean | null;
               title?: string | null;
+              subtitle?: string | null;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -854,6 +857,7 @@ export interface Variant {
       bigTitle?: {
         enable?: boolean | null;
         title?: string | null;
+        subtitle?: string | null;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom' | 'current') | null;
@@ -1071,6 +1075,7 @@ export interface Variant {
               bigTitle?: {
                 enable?: boolean | null;
                 title?: string | null;
+                subtitle?: string | null;
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom' | 'current') | null;
@@ -1664,6 +1669,7 @@ export interface Blog {
           bigTitle?: {
             enable?: boolean | null;
             title?: string | null;
+            subtitle?: string | null;
             enableLink?: boolean | null;
             link?: {
               type?: ('reference' | 'custom' | 'current') | null;
@@ -2183,6 +2189,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     enable?: T;
                     title?: T;
+                    subtitle?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2349,6 +2356,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     enable?: T;
                     title?: T;
+                    subtitle?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2406,6 +2414,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     enable?: T;
                     title?: T;
+                    subtitle?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2638,6 +2647,7 @@ export interface VariantsSelect<T extends boolean = true> {
                       | {
                           enable?: T;
                           title?: T;
+                          subtitle?: T;
                           enableLink?: T;
                           link?:
                             | T
@@ -2800,6 +2810,7 @@ export interface VariantsSelect<T extends boolean = true> {
                       | {
                           enable?: T;
                           title?: T;
+                          subtitle?: T;
                           enableLink?: T;
                           link?:
                             | T
@@ -3010,6 +3021,7 @@ export interface BlogsSelect<T extends boolean = true> {
                       | {
                           enable?: T;
                           title?: T;
+                          subtitle?: T;
                           enableLink?: T;
                           link?:
                             | T

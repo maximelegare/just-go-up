@@ -29,6 +29,14 @@ export const bigTitle: BigTitle = (fieldToUse = 'title', overrides = {}) =>
           },
         },
         {
+          name: 'subtitle',
+          type: 'text',
+          localized: true,
+          admin: {
+            condition: (_, { enable }) => Boolean(enable),
+          },
+        },
+        {
           name: 'enableLink',
           type: 'checkbox',
           defaultValue: false,

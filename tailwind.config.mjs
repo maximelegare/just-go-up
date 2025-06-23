@@ -50,10 +50,10 @@ export default {
     container: {
       center: true,
       padding: {
-        '2xl': '2rem',
+        '2xl': '12rem',
         DEFAULT: '1rem',
-        lg: '2rem',
-        md: '2rem',
+        lg: '10rem',
+        md: '6rem',
         sm: '1rem',
         xl: '2rem',
       },
@@ -161,8 +161,8 @@ export default {
             },
             h4: {
               // fontSize: '1.3rem',
-              fontWeight: '400',
-              letterSpacing: "0.1em",
+              fontWeight: '800',
+              letterSpacing: "0.14em",
               opacity: "90%"
 
             },

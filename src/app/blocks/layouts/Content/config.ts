@@ -43,7 +43,7 @@ const columnFields: Field[] = [
       features: ({ rootFeatures }) => {
         return [
           ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4', 'h5'] }),
+          HeadingFeature({ enabledHeadingSizes: ['h3', 'h4', 'h5'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]

@@ -14,15 +14,16 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
     medias: { mainImage },
     publishedOn,
     categories,
+    breadcrumbs,
   } = doc
 
   return (
-    <Card className="px-2" href="/test">
+    <Card className="px-2" href={breadcrumbs[0].url}>
       <div className="flex justify-between">
         <div>
           <DisplayDate date={publishedOn} className="opacity-60" />
           <div>
-            <h3 className="my-0 font-bold">{title}</h3>
+            <h3 className="my-0 font-bold leading-8">{title}</h3>
             <p>{subtitle}</p>
           </div>
           <div className="flex gap-1 mt-3">
