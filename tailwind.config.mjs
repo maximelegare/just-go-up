@@ -50,8 +50,8 @@ export default {
     container: {
       center: true,
       padding: {
-        '4xl':'12rem',
-        '3xl':'12rem',
+        '4xl':'28rem',
+        '3xl':'22rem',
         '2xl': '12rem',
         DEFAULT: '1rem',
         lg: '10rem',
@@ -60,6 +60,8 @@ export default {
         xl: '2rem',
       },
       screens: {
+        '4xl':'100rem',
+        '3xl':'92rem',
         '2xl': '86rem',
         lg: '64rem',
         md: '48rem',

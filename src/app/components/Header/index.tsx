@@ -21,7 +21,7 @@ export async function Header({ locale, show }: HeaderProps) {
     <header className="fixed z-20 w-screen bg-background" id="header">
       <AdminBar />
       <div className="relative h-16 items-center flex justify-between">
-        <div className="flex container items-center gap-6 w-full justify-between">
+        <div className="flex container px-[1rem] items-center gap-6 w-full justify-between">
           <div className="flex items-center">
             <Link href="/" className="z-50">
               <Logo />
