@@ -4,7 +4,6 @@ import { MediaBlock } from '@app/blocks/layouts/MediaBlock'
 import React, { Fragment, JSX } from 'react'
 import { CMSLink } from 'src/app/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
-import RichText from '@app/components/RichText'
 
 import {
   IS_BOLD,
@@ -18,10 +17,12 @@ import {
   ELEMENT_FORMAT_TYPE,
 } from './nodeFormat'
 
-import type { Page } from '../../../payload-types'
+import type { Media, Page } from '../../../payload-types'
 import { parseCSSStylesString } from '@app/utilities/parseCSSStylesString'
 import { ImageMedia } from '../Media/ImageMedia'
 import { cn } from '@app/utilities/cn'
+import { Separator } from '../ui/seperator'
+import { MediaCaption } from '../Media/MediaCaption'
 
 // type WithStyle<T> = T & { style?: React.CSSProperties }
 
@@ -110,7 +111,11 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           }
 
           return (
-            <span key={index} style={{ ...parseCSSStylesString(node.style) }}>
+            <span
+              key={index}
+              style={{ ...parseCSSStylesString(node.style) }}
+              className={textClassName}
+            >
               {text}
             </span>
           )
@@ -139,18 +144,16 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
         const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
 
         if (node.type === 'upload') {
+          const value = node.value as Media
+
           return (
             <div key={index} className="py-8">
               <ImageMedia
                 className="col-start-1 col-span-3 w-full h-auto"
-                imgClassName="m-0 w-full h-full max-w-[500px] rounded-xl"
-                resource={{ ...(node.value as any) }}
+                imgClassName="m-0 w-full h-full rounded-xl"
+                resource={{ ...value }}
               />
-              {/* @ts-ignore */}
-              {typeof node.value === 'object' && node?.value?.caption && (
-                //@ts-ignore
-                <RichText content={node.value.caption} enableGutter={false} />
-              )}
+              <MediaCaption caption={value.caption} />
             </div>
           )
         }
@@ -191,7 +194,7 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
             case 'paragraph': {
               const alignClass = getAlignmentClass(node.format)
               return (
-                <p className={cn('col-start-2', textClassName, alignClass)} key={index}>
+                <p className={cn('col-start-2', alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </p>
               )
@@ -201,25 +204,28 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
               const alignClass = getAlignmentClass(node.format)
 
               return (
-                <Tag className={cn('col-start-2', alignClass)} key={index}>
+                <Tag className={cn('col-start-2', alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </Tag>
               )
             }
             case 'list': {
               const Tag = node?.tag
+              const alignClass = getAlignmentClass(node.format)
               return (
-                <Tag className="list col-start-2" key={index}>
+                <Tag className={cn('list col-start-2', alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </Tag>
               )
             }
             case 'listitem': {
+              const alignClass = getAlignmentClass(node.format)
+
               if (node?.checked != null) {
                 return (
                   <li
                     aria-checked={node.checked ? 'true' : 'false'}
-                    className={` ${node.checked ? '' : ''}`}
+                    className={cn(`${node.checked ? '' : ''}`, alignClass, textClassName)}
                     key={index}
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="checkbox"
@@ -231,7 +237,7 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                 )
               } else {
                 return (
-                  <li key={index} value={node?.value}>
+                  <li className={cn(alignClass, textClassName)} key={index} value={node?.value}>
                     {serializedChildren}
                   </li>
                 )
@@ -263,6 +269,9 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                   {serializedChildren}
                 </CMSLink>
               )
+            }
+            case 'horizontalrule': {
+              return <Separator type="dots" key={index} />
             }
 
             default:
