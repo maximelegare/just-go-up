@@ -202,7 +202,7 @@ export default buildConfig({
       generateURL: (docs) => docs.reduce((url, doc) => `/blogs/${doc.slug}`, ''),
     }),
     seoPlugin({
-      collections: ['pages'],
+      collections: ['pages', 'blogs'],
       generateTitle,
       tabbedUI: true,
       uploadsCollection: 'media',

@@ -320,6 +320,8 @@ export interface Page {
               enable?: boolean | null;
               title?: string | null;
               subtitle?: string | null;
+              showMainImage?: boolean | null;
+              image?: (string | null) | Media;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -546,6 +548,8 @@ export interface Page {
               enable?: boolean | null;
               title?: string | null;
               subtitle?: string | null;
+              showMainImage?: boolean | null;
+              image?: (string | null) | Media;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -628,6 +632,8 @@ export interface Page {
               enable?: boolean | null;
               title?: string | null;
               subtitle?: string | null;
+              showMainImage?: boolean | null;
+              image?: (string | null) | Media;
               enableLink?: boolean | null;
               link?: {
                 type?: ('reference' | 'custom' | 'current') | null;
@@ -736,7 +742,7 @@ export interface Page {
         blockType: 'itemDetails';
       }[]
     | null;
-  slug?: string | null;
+  slug: string;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -755,7 +761,7 @@ export interface Page {
  */
 export interface SearchParamKey {
   id: string;
-  slug?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -767,7 +773,7 @@ export interface Category {
   id: string;
   title?: string | null;
   mainImage?: (string | null) | Media;
-  slug?: string | null;
+  slug: string;
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -826,7 +832,7 @@ export interface Product {
   defaultVariant?: (string | null) | Variant;
   publishedOn?: string | null;
   isActive?: boolean | null;
-  slug?: string | null;
+  slug: string;
   skipSync?: boolean | null;
   parent?: (string | null) | Product;
   breadcrumbs?:
@@ -864,6 +870,8 @@ export interface Variant {
         enable?: boolean | null;
         title?: string | null;
         subtitle?: string | null;
+        showMainImage?: boolean | null;
+        image?: (string | null) | Media;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom' | 'current') | null;
@@ -1085,6 +1093,8 @@ export interface Variant {
                 enable?: boolean | null;
                 title?: string | null;
                 subtitle?: string | null;
+                showMainImage?: boolean | null;
+                image?: (string | null) | Media;
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom' | 'current') | null;
@@ -1321,7 +1331,7 @@ export interface Variant {
   sku: string;
   isActive?: boolean | null;
   isLimitedEdition?: boolean | null;
-  slug?: string | null;
+  slug: string;
   availability?: {
     availabilityType?: ('boolean' | 'stock') | null;
     isAvailable?: boolean | null;
@@ -1341,7 +1351,7 @@ export interface Fabric {
   title: string;
   SKU?: string | null;
   mainImage: string | Media;
-  slug?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1361,7 +1371,7 @@ export interface SleeveLength {
  */
 export interface SearchParamValue {
   id: string;
-  slug?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1578,7 +1588,7 @@ export interface OptionsBar {
         id?: string | null;
       }[]
     | null;
-  slug?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1683,6 +1693,8 @@ export interface Blog {
             enable?: boolean | null;
             title?: string | null;
             subtitle?: string | null;
+            showMainImage?: boolean | null;
+            image?: (string | null) | Media;
             enableLink?: boolean | null;
             link?: {
               type?: ('reference' | 'custom' | 'current') | null;
@@ -1910,7 +1922,7 @@ export interface Blog {
     mainImage?: (string | null) | Media;
   };
   isActive?: boolean | null;
-  slug?: string | null;
+  slug: string;
   skipSync?: boolean | null;
   parent?: (string | null) | Blog;
   breadcrumbs?:
@@ -1921,6 +1933,14 @@ export interface Blog {
         id?: string | null;
       }[]
     | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -2206,6 +2226,8 @@ export interface PagesSelect<T extends boolean = true> {
                     enable?: T;
                     title?: T;
                     subtitle?: T;
+                    showMainImage?: T;
+                    image?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2373,6 +2395,8 @@ export interface PagesSelect<T extends boolean = true> {
                     enable?: T;
                     title?: T;
                     subtitle?: T;
+                    showMainImage?: T;
+                    image?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2431,6 +2455,8 @@ export interface PagesSelect<T extends boolean = true> {
                     enable?: T;
                     title?: T;
                     subtitle?: T;
+                    showMainImage?: T;
+                    image?: T;
                     enableLink?: T;
                     link?:
                       | T
@@ -2664,6 +2690,8 @@ export interface VariantsSelect<T extends boolean = true> {
                           enable?: T;
                           title?: T;
                           subtitle?: T;
+                          showMainImage?: T;
+                          image?: T;
                           enableLink?: T;
                           link?:
                             | T
@@ -2827,6 +2855,8 @@ export interface VariantsSelect<T extends boolean = true> {
                           enable?: T;
                           title?: T;
                           subtitle?: T;
+                          showMainImage?: T;
+                          image?: T;
                           enableLink?: T;
                           link?:
                             | T
@@ -3038,6 +3068,8 @@ export interface BlogsSelect<T extends boolean = true> {
                           enable?: T;
                           title?: T;
                           subtitle?: T;
+                          showMainImage?: T;
+                          image?: T;
                           enableLink?: T;
                           link?:
                             | T
@@ -3214,6 +3246,13 @@ export interface BlogsSelect<T extends boolean = true> {
         url?: T;
         label?: T;
         id?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;

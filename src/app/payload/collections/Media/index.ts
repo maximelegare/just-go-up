@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import {
+  AlignFeature,
   FixedToolbarFeature,
   HeadingFeature,
   lexicalEditor,
@@ -38,6 +39,7 @@ export const Media: CollectionConfig = {
             FixedToolbarFeature(),
             HeadingFeature({ enabledHeadingSizes: ['h6'] }),
             LinkFeature(),
+            AlignFeature(),
           ]
         },
       }),
