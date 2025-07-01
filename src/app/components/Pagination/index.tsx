@@ -41,10 +41,6 @@ export const Pagination: React.FC<{
   const hasExtraPrevPages = page - 1 > 1
   const hasExtraNextPages = page + 1 < totalPages
 
-  React.useEffect(() => {
-    console.log(pathname)
-  }, [])
-
   return (
     <div className={cn('my-12 not-prose', className)}>
       <PaginationComponent>

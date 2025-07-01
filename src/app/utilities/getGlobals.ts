@@ -11,8 +11,6 @@ type Global = keyof Config['globals']
 export async function getGlobal(slug: Global, depth = 0, locale: Locale = defaultLocale) {
   const payload = await getPayload({ config: configPromise })
 
-  console.log(locale)
-
   const global = await payload.findGlobal({
     slug,
     locale,

@@ -16,7 +16,6 @@ export const PreRenderCardsGrid = () => {
     if (containerRef && 'current' in containerRef && containerRef.current) {
       const { width } = containerRef.current.getBoundingClientRect()
       setContainerWidth(width)
-      console.log('WIDTH::', width)
     }
   }, [cardRef, containerRef])
 
