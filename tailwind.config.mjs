@@ -50,6 +50,8 @@ export default {
     container: {
       center: true,
       padding: {
+        '4xl':'12rem',
+        '3xl':'12rem',
         '2xl': '12rem',
         DEFAULT: '1rem',
         lg: '10rem',
@@ -153,24 +155,24 @@ export default {
               fontWeight: '400',
               lineheight: "0",
               letterSpacing: "0.15em",
-              opacity: "90%"
+
             },
             h3: {
               // fontSize: '1.9rem',
-              fontWeight: '400',
+              fontWeight: '800',
+              letterSpacing: "0.08em",
             },
             h4: {
               // fontSize: '1.3rem',
               fontWeight: '800',
               letterSpacing: "0.14em",
-              opacity: "90%"
-
+  
             },
             h5: {
               // fontSize: '0.9rem',
-              fontWeight: '600',
-              opacity: "90%",
-              letterSpacing: "0.15em"
+              fontWeight: '700',
+              letterSpacing: "0.15em",
+         
             },
             h6: {
               // fontSize: '0.9rem',
@@ -199,6 +201,9 @@ export default {
               fontWeight: '300',
               opacity: '0.85',
             },
+            ul:{
+              marginTop:'0'
+            }
           },
         },
       }),

@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 @layer base {
-
   h1
    {
     font-size: clamp(1.6em, 1.6vw + 2rem, 5em) !important;
@@ -17,18 +16,15 @@
   h3,
   h3>span {
     font-size: 1.5rem !important;
-    opacity: 90%;
   }
   h4,
   h4>span {
     font-size: 1rem !important;
-    opacity: 90%;
   }
   h5,
   h5>span,
   label {
     font-size: 0.8rem !important;
-    opacity: 90%;
   }
  
   h6,
@@ -45,22 +41,21 @@
     h2,
     h2>span {
       font-size: 2.3rem !important;
-      opacity: 90%;
+
     }
     h3,
   h3>span {
-    font-size: 1.9rem !important;
-    opacity: 90%;
+    font-size: 1.8rem !important;
+
   }
   h4,
   h4>span {
-    font-size: 1.4rem !important;
-    opacity: 90%;
+    font-size: 1.2rem !important;
+
   }
   h5,
   h5>span {
-    font-size: 0.9rem !important;
-    opacity: 90%;
+    font-size: 0.85rem !important;
   }
     }  
 
@@ -81,15 +76,19 @@
 }
 
 .prose :where(h3 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.prose :where(h4 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 0;
 }
 
+.prose :where(h4 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+.prose :where(h5 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
 
 /* Removes default margins for images */
 .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
@@ -97,9 +96,15 @@
   margin-bottom: 0rem;
 }
 
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)){
+  margin-top: 0;
+  margin-bottom: 1; 
+}
+
+
 .prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)){
   margin-top: 0;
-  margin-bottom: 0; 
+  margin-bottom: 1rem; 
 }
 
 @layer base {
