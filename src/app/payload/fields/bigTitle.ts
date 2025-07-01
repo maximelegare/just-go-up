@@ -32,8 +32,23 @@ export const bigTitle: BigTitle = (fieldToUse = 'title', overrides = {}) =>
           name: 'subtitle',
           type: 'text',
           localized: true,
+          hooks: {
+            beforeValidate: [autoFillField('subtitle')],
+          },
           admin: {
             condition: (_, { enable }) => Boolean(enable),
+          },
+        },
+        switchField({ label: 'Show main image', name: 'showMainImage' }),
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          hooks: {
+            beforeValidate: [autoFillField('mainImage')],
+          },
+          admin: {
+            condition: (_, { enable, showMainImage }) => Boolean(enable) && Boolean(showMainImage),
           },
         },
         {
