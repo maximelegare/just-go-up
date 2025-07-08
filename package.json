@@ -1,7 +1,7 @@
 {
-  "name": "better-climber",
+  "name": "just-go-up",
   "version": "1.0.0",
-  "description": "Website about climbing to make climbers excel more at it.",
+  "description": " Climbing related blog to make climbers excel more at it.",
   "license": "MIT",
   "type": "module",
   "scripts": {
