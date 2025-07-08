@@ -162,7 +162,7 @@ export default {
             h3: {
               // fontSize: '1.9rem',
               fontWeight: '800',
-              letterSpacing: "0.08em",
+              letterSpacing: "0.02em",
             },
             h4: {
               // fontSize: '1.3rem',

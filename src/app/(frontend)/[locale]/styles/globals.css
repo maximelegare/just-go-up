@@ -81,12 +81,12 @@
 }
 
 .prose :where(h4 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   margin-bottom: 0;
 }
 
 .prose :where(h5 ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   margin-bottom: 0;
 }
 

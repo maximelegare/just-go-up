@@ -14,7 +14,7 @@ export const BigTitle: React.FC<
 
   return (
     <div className="container relative">
-      <div className="h-full z-10 mb-8">
+      <div className="h-full z-10 mb-6">
         <div className="prose">
           <h1 className="font-bold">{title}</h1>
         </div>
@@ -27,7 +27,12 @@ export const BigTitle: React.FC<
           <div>
             <div className="relative w-full h-full min-h-[40vh] lg:min-h-[60vh]">
               {typeof image !== 'string' && (
-                <Media fill imgClassName="-z-10 rounded object-cover" priority resource={image} />
+                <Media
+                  fill
+                  imgClassName="-z-10 rounded-xl object-cover"
+                  priority
+                  resource={image}
+                />
               )}
             </div>
             {typeof image !== 'string' && <MediaCaption caption={image?.caption} />}
