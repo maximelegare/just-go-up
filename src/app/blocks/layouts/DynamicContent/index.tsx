@@ -11,6 +11,7 @@ import { getUrlData } from '@app/utilities/searchParams'
 
 import { toKebabCase } from '@app/utilities/toKebabCase'
 import { blockComponentsMap } from '@app/_Map/blocks.map'
+import { notFound } from 'next/navigation'
 
 export type DynamicContentBlockProps = Extract<Page['layout'][0], { blockType: 'dynamicContent' }>
 
@@ -43,6 +44,11 @@ export const DynamicContentBlock: React.FC<
   })
 
   const doc = fetchedItem.docs[0] as Blog
+
+  // Redirects to not found if item not active
+  if (!doc.isActive) {
+    return notFound()
+  }
 
   if (blockType !== 'dynamicContent') return null
 

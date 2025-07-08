@@ -83,6 +83,13 @@ export const ItemsListBlock: React.FC<
             equals: true,
           },
         }
+      case 'blogs': {
+        return {
+          isActive: {
+            equals: true,
+          },
+        }
+      }
       default:
         return {}
     }
