@@ -13,7 +13,7 @@ export const generateMeta = async (args: { doc: Page }): Promise<Metadata> => {
     'url' in doc.meta.image &&
     `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
-  const title = doc?.meta?.title ? doc?.meta?.title + ' | Better Climber' : 'Better Climber'
+  const title = doc?.meta?.title ? doc?.meta?.title + ' | Just Go Up' : 'Just Go Up'
 
   return {
     description: doc?.meta?.description,

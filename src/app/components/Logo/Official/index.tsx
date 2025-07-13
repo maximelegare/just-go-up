@@ -1,3 +1,3 @@
-import LogoSVG from 'ROOT/public/logo_black-withtext-black.svg'
+import LogoSVG from 'ROOT/public/just-go-up_black_withText.svg'
 
 export const Logo = () => <LogoSVG />
