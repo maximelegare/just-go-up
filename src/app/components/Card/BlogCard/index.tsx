@@ -4,7 +4,6 @@ import React from 'react'
 import { Card } from '../Base'
 import { BlogCardProps } from '../types'
 import { Media } from '@app/components/Media'
-import { AspectRatio } from '@app/components/Media/AspectRatio'
 import { DisplayDate } from '@app/components/Date'
 
 export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
@@ -22,11 +21,20 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
       <div className="flex justify-between">
         <div>
           <DisplayDate date={publishedOn} className="opacity-60" />
-          <div>
-            <h3 className="my-0 font-bold leading-8">{title}</h3>
-            <p>{subtitle}</p>
+          <div className="grid grid-cols-2 mt-6">
+            <div className="flex flex-col gap-4 not-prose">
+              <h3 className="font-bold leading-8">{title}</h3>
+              <p>{subtitle}</p>
+            </div>
+            <div className="flex w-full justify-end">
+              <div className="w-32 lg:w-52 xl:60">
+                {mainImage && typeof mainImage !== 'string' && (
+                  <Media resource={mainImage} imgClassName="rounded-[0.5rem]" />
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex gap-1 mt-3">
+          <div className="flex gap-1 mt-3  ">
             {categories &&
               categories.map((el, idx) => {
                 return (
@@ -39,11 +47,6 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
               })}
           </div>
         </div>
-        <AspectRatio ratio="aspect-square" width="w-40">
-          {mainImage && typeof mainImage !== 'string' && (
-            <Media fill objectFit="cover" resource={mainImage} />
-          )}
-        </AspectRatio>
       </div>
     </Card>
   )
