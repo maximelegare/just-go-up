@@ -1,7 +1,7 @@
 import { cn } from '@app/utilities/cn'
 import { Product, Variant } from '@payload-types'
 import React from 'react'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 import { Blocks } from '@app/components/Blocks'
 import { VariantsSection } from './VariantsSection'
 

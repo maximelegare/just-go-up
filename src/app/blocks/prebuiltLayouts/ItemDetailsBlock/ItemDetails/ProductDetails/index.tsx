@@ -4,7 +4,7 @@ import React from 'react'
 import { DetailsSection } from './sections/DetailsSection'
 import { BigTitle } from '@app/components/BigTitle'
 import { MoreDetailsSection } from './sections/MoreDetailsSection'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 import { PayloadRedirects } from '@app/components/PayloadRedirects'
 import { ImagesSection } from './sections/ImagesSection'
 

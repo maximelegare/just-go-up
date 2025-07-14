@@ -21,7 +21,7 @@ import type { Media, Page } from '../../../payload-types'
 import { parseCSSStylesString } from '@app/utilities/parseCSSStylesString'
 import { ImageMedia } from '../Media/ImageMedia'
 import { cn } from '@app/utilities/cn'
-import { Separator } from '../ui/seperator'
+import { Separator } from '../ui/separator'
 import { MediaCaption } from '../Media/MediaCaption'
 
 // type WithStyle<T> = T & { style?: React.CSSProperties }

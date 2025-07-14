@@ -10,8 +10,8 @@ import React from 'react'
 // import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { LivePreviewListener } from '../../components/LivePreviewListener'
-import { Providers } from '../../providers'
-import { mergeOpenGraph } from '../../utilities/mergeOpenGraph'
+import { Providers } from '@app/providers'
+import { mergeOpenGraph } from '@app/utilities/mergeOpenGraph'
 import './styles/globals.css'
 // import { ScrollArea } from '@app/components/ui/scroll-area'
 import { getGlobal } from '@app/utilities/getGlobals'
@@ -67,6 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className="prose">
             {/* <ScrollArea className="h-screen w-screen"> */}
             <LivePreviewListener />
+
             <Header locale={locale} show={!pathname.includes('under-construction')} />
             {children}
             {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}

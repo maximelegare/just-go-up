@@ -5,7 +5,7 @@ import { Price } from '@app/components/Price'
 import { Variant } from '@payload-types'
 import React from 'react'
 import { translate } from 'ROOT/locales/i18n.server'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 
 type PriceSectionProps = {
   doc: Variant

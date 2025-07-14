@@ -15,7 +15,7 @@ import {
 import { ScrollArea } from '@app/components/ui/scroll-area'
 import { cardComponentsMap, CardComponentsMap } from '@app/_Map/cards.map'
 import { PrerendedCard } from '@app/components/Prerenderer/Card'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 
 export type RelationTo = ItemsListBlockProps['relationTo'] | 'media'
 

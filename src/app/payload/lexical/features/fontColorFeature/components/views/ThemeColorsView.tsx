@@ -6,7 +6,7 @@ import { createSentenceFromCamelCase } from '../../utils/createSentenceFromCamel
 import { translateColor } from '../../utils/translateColor'
 import { RadioGroup, RadioGroupItem } from '@app/components/ui/radio-group'
 import { Label } from '@app/components/ui/label'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 import { ColorFormat } from '../ColorPicker'
 
 type Props = {

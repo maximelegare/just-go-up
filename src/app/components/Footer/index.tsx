@@ -5,7 +5,7 @@ import type { Footer, GetInTouch } from '@payload-types'
 
 import { CMSLink } from '../Link'
 import { LocaleSelector } from '@app/providers/Locale/LocaleSelector'
-import { Separator } from '@app/components/ui/seperator'
+import { Separator } from '@app/components/ui/separator'
 import { SocialMediaList } from '../SocialMediaList'
 import { Locale } from 'ROOT/locales/locales'
 import { getServerSideURL } from '@app/utilities/getServerSideURL'

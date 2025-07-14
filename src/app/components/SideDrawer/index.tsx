@@ -16,7 +16,7 @@ import { CMSLink } from '@app/components/Link'
 
 import { Logo } from '@app/components/Logo/Official'
 import Link from 'next/link'
-import { Separator } from '../ui/seperator'
+import { Separator } from '../ui/separator'
 import { getServerSideURL } from '@app/utilities/getServerSideURL'
 
 type SideDrawerProps = {

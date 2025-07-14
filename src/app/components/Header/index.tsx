@@ -6,7 +6,7 @@ import { Locale } from 'ROOT/locales/locales'
 import Link from 'next/link'
 import { NavigationMenu } from '@app/components/HeaderNavigationMenu'
 import { AdminBar } from '../AdminBar'
-import { Separator } from '../ui/seperator'
+import { Separator } from '../ui/separator'
 import { LocaleSelector } from '@app/providers/Locale/LocaleSelector'
 
 type HeaderProps = {
