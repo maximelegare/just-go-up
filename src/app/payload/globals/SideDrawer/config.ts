@@ -1,14 +1,14 @@
 import type { GlobalConfig } from 'payload'
 
-export const Sidebar: GlobalConfig = {
-  slug: 'sidebar',
+export const SideDrawer: GlobalConfig = {
+  slug: 'sideDrawer',
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: 'sidebarSections',
-      label: 'Sidebar links',
+      name: 'sections',
+      label: 'Links',
       type: 'array',
       fields: [
         {

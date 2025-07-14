@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from '@app/components/ui/sheet'
 import { getCachedGlobal } from '@app/utilities/getGlobals'
-import { Sidebar as SidebarType } from '@payload-types'
+import { SideDrawer as SideDrawerType } from '@payload-types'
 
 import { Menu } from 'lucide-react'
 import { Locale } from 'ROOT/locales/locales'
@@ -19,12 +19,12 @@ import Link from 'next/link'
 import { Separator } from '../ui/seperator'
 import { getServerSideURL } from '@app/utilities/getServerSideURL'
 
-type SidebarProps = {
+type SideDrawerProps = {
   locale: Locale
 }
 
-export async function Sidebar({ locale }: SidebarProps) {
-  const { sidebarSections }: SidebarType = await getCachedGlobal('sidebar', 3, locale)()
+export async function SideDrawer({ locale }: SideDrawerProps) {
+  const { sections }: SideDrawerType = await getCachedGlobal('sideDrawer', 3, locale)()
 
   const fullPath = await getServerSideURL('fullpath')
 
@@ -41,8 +41,8 @@ export async function Sidebar({ locale }: SidebarProps) {
         </SheetHeader>
 
         <div className="flex flex-col flex-grow">
-          {sidebarSections?.map(({ links }, idx: number) => (
-            <div key={idx} className={`${idx === sidebarSections.length - 1 ? 'flex-grow' : ''}`}>
+          {sections?.map(({ links }, idx: number) => (
+            <div key={idx} className={`${idx === sections.length - 1 ? 'flex-grow' : ''}`}>
               <Separator className="my-2" />
               <nav className="flex flex-col gap-2 items-start h-full">
                 {links.map(({ link }, linkIdx: number) => (

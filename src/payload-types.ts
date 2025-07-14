@@ -119,14 +119,14 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    sidebar: Sidebar;
+    sideDrawer: SideDrawer;
     getInTouch: GetInTouch;
     settings: Settings;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    sidebar: SidebarSelect<false> | SidebarSelect<true>;
+    sideDrawer: SideDrawerSelect<false> | SideDrawerSelect<true>;
     getInTouch: GetInTouchSelect<false> | GetInTouchSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
@@ -3624,11 +3624,11 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sidebar".
+ * via the `definition` "sideDrawer".
  */
-export interface Sidebar {
+export interface SideDrawer {
   id: string;
-  sidebarSections?:
+  sections?:
     | {
         links?: (string | Link)[] | null;
         id?: string | null;
@@ -3770,10 +3770,10 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sidebar_select".
+ * via the `definition` "sideDrawer_select".
  */
-export interface SidebarSelect<T extends boolean = true> {
-  sidebarSections?:
+export interface SideDrawerSelect<T extends boolean = true> {
+  sections?:
     | T
     | {
         links?: T;

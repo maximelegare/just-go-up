@@ -29,7 +29,7 @@ import { Users } from './app/payload/collections/Users'
 import { SleeveLengths } from '@app/payload/collections/SleeveLengths'
 import { Footer } from './app/payload/globals/Footer/config'
 import { Header } from './app/payload/globals/Header/config'
-import { Sidebar } from './app/payload/globals/Sidebar/config'
+import { SideDrawer } from './app/payload/globals/SideDrawer/config'
 import { Settings } from './app/payload/globals/Settings/config'
 import { revalidateRedirects } from './app/payload/hooks/revalidateRedirects'
 import { defaultLocale, locales } from 'ROOT/locales/locales'
@@ -153,7 +153,7 @@ export default buildConfig({
       path: '/revalidate-globals',
     },
   ],
-  globals: [Header, Footer, Sidebar, GetInTouch, Settings],
+  globals: [Header, Footer, SideDrawer, GetInTouch, Settings],
   plugins: [
     uploadthingStorage({
       collections: {
