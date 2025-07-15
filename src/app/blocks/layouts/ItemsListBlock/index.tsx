@@ -10,6 +10,8 @@ import type { Page } from '@payload-types'
 import { Locale } from 'ROOT/locales/locales'
 import { OptionsBar } from '@app/components/OptionsBar'
 
+import { searchParamKeysToFields } from '@app/_Map/searchParamKeysToFields.map'
+
 export type ItemsListBlockProps = Extract<Page['layout'][0], { blockType: 'itemsList' }>
 
 export const ItemsListBlock: React.FC<
@@ -58,6 +60,13 @@ export const ItemsListBlock: React.FC<
             equals: equals,
           },
         }
+      case 'blogs': {
+        return {
+          [`${searchParamKeysToFields[field]}.slug`]: {
+            equals: equals,
+          },
+        }
+      }
       default:
         return {}
     }
@@ -104,24 +113,24 @@ export const ItemsListBlock: React.FC<
     locale: props.params?.locale,
     collection: populateBy === 'collection' ? relationTo : featured.relationTo,
     limit: limit ?? undefined,
-    ...(filterValues && filterValues[0] && filterValues[1] // Used to fetch based on the Url search-param
-      ? {
-          where: getSearchParamWhere(
-            filterValues && filterValues[0],
-            filterValues && filterValues[1],
-          ),
-        }
-      : {}),
-    ...(populateBy === 'featured' && featuredIds // Used to fetch based on the items present in featured
-      ? {
-          where: {
-            _id: {
-              in: featuredIds,
-            },
-          },
-        }
-      : {}),
-    where: getWhere(),
+    // where:{
+    //   'categories.slug':{
+    //     equals:'bouldering'
+    //   }
+    // },
+    where: {
+      and: [
+        getWhere(),
+        filterValues ? getSearchParamWhere(filterValues[0], filterValues[1]) : {},
+        populateBy === 'featured' && featuredIds
+          ? {
+              _id: {
+                in: featuredIds,
+              },
+            }
+          : {},
+      ],
+    },
     page: pageNumber,
   })
 
