@@ -56,7 +56,7 @@ export default async function Page({
   const { hero, layout, hasPrebuiltLayout, prebuiltLayout } = page
 
   return (
-    <article className="pb-24">
+    <article className="pb-24 container">
       <PayloadRedirects disableNotFound url={url} />
       <Hero {...hero} />
       {hasPrebuiltLayout ? (

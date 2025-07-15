@@ -21,7 +21,7 @@ export const ContentBlock: React.FC<
   const {
     columns,
     column,
-    containerClassName = 'container grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16 w-full',
+    containerClassName = 'grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16 w-full',
     bigTitle,
   } = props
 

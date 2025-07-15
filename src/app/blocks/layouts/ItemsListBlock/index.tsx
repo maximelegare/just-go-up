@@ -174,7 +174,7 @@ export const ItemsListBlock: React.FC<
           />
         </div>
       )} */}
-      <div className="container">
+      <div className="">
         <OptionsBar data={optionsBar} locale={props.params.locale} className="mb-4" />
         <ItemsList
           relationTo={populateBy === 'collection' ? relationTo : featured.relationTo}
@@ -184,7 +184,7 @@ export const ItemsListBlock: React.FC<
         />
       </div>
       {hasPagination && fetchedItems.totalPages > 1 && fetchedItems.page && (
-        <div className="container">
+        <div className="">
           <Pagination page={fetchedItems.page} totalPages={fetchedItems.totalPages} />
         </div>
       )}

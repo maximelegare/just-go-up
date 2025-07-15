@@ -13,7 +13,7 @@ export const BigTitle: React.FC<
   if (!enable) return null
 
   return (
-    <div className="container relative">
+    <div className="relative">
       <div className="h-full z-10 mb-6">
         <div className="prose">
           <h1 className="font-bold">{title}</h1>

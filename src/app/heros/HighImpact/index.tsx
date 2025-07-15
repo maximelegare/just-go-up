@@ -22,7 +22,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   const fullPath = useClientSideUrl()
 
   return (
-    <div className="relative lg:h-screen  flex text-white " data-theme="dark">
+    // Removes the Header from the full height.
+    <div className="relative mt-24 lg:h-[calc(100vh-6rem)]  flex text-white " data-theme="dark">
       <div
         className={cn(
           'container mt-[6rem] mb-8 z-10',
@@ -30,8 +31,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
         )}
       >
         <div className={cn('mt-[2rem] relative col-span-8 lg:col-span-7')}>
-          <div className="">
-            <RichText className="" content={richText} enableGutter={false} />
+          <div className="w-full">
+            <RichText content={richText} enableGutter={false} />
             <div className="pt-[5rem] not-prose">
               {Array.isArray(links) && links.length > 0 && (
                 <ul className="flex gap-4">
@@ -57,7 +58,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           </div>
         </div>
         {hasRightSideMedia && (
-          <div className="relative  w-full h-full  justify-end hidden lg:min-h-[80vh] sm:flex col-span-4 lg:col-span-5">
+          <div className="mt-20 relative  w-full h-full  justify-end hidden lg:min-h-[80vh] sm:flex col-span-4 lg:col-span-5">
             <Media
               fill
               imgClassName="-z-10 object-cover sm:object-contain"

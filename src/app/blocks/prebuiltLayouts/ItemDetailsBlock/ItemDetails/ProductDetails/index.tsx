@@ -38,7 +38,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ doc, searchParam
   return (
     <>
       <BigTitle title={title} className="mb-4" enable />
-      <div className="container flex flex-col gap-4 h-full">
+      <div className="flex flex-col gap-4 h-full">
         <div
           className={cn(
             'w-full lg:grid lg:grid-row-1 md:grid grid-cols-1 md:grid-cols-2 h-full lg:grid-cols-3 gap-5',
