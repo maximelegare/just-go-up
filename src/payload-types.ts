@@ -208,6 +208,7 @@ export interface Page {
                   | 'underline'
                   | 'iconOnly'
                   | 'menu'
+                  | 'categoryLabel'
                   | 'richtextLink'
                 )
               | null;
@@ -347,6 +348,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'categoryLabel'
                       | 'richtextLink'
                     )
                   | null;
@@ -422,6 +424,7 @@ export interface Page {
                           | 'underline'
                           | 'iconOnly'
                           | 'menu'
+                          | 'categoryLabel'
                           | 'richtextLink'
                         )
                       | null;
@@ -496,6 +499,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'categoryLabel'
                       | 'richtextLink'
                     )
                   | null;
@@ -575,6 +579,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'categoryLabel'
                       | 'richtextLink'
                     )
                   | null;
@@ -659,6 +664,7 @@ export interface Page {
                       | 'underline'
                       | 'iconOnly'
                       | 'menu'
+                      | 'categoryLabel'
                       | 'richtextLink'
                     )
                   | null;
@@ -897,6 +903,7 @@ export interface Variant {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'categoryLabel'
                 | 'richtextLink'
               )
             | null;
@@ -972,6 +979,7 @@ export interface Variant {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'categoryLabel'
                     | 'richtextLink'
                   )
                 | null;
@@ -1046,6 +1054,7 @@ export interface Variant {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'categoryLabel'
                 | 'richtextLink'
               )
             | null;
@@ -1120,6 +1129,7 @@ export interface Variant {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'categoryLabel'
                         | 'richtextLink'
                       )
                     | null;
@@ -1195,6 +1205,7 @@ export interface Variant {
                             | 'underline'
                             | 'iconOnly'
                             | 'menu'
+                            | 'categoryLabel'
                             | 'richtextLink'
                           )
                         | null;
@@ -1269,6 +1280,7 @@ export interface Variant {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'categoryLabel'
                         | 'richtextLink'
                       )
                     | null;
@@ -1623,6 +1635,7 @@ export interface Link {
           | 'underline'
           | 'iconOnly'
           | 'menu'
+          | 'categoryLabel'
           | 'richtextLink'
         )
       | null;
@@ -1720,6 +1733,7 @@ export interface Blog {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'categoryLabel'
                     | 'richtextLink'
                   )
                 | null;
@@ -1795,6 +1809,7 @@ export interface Blog {
                         | 'underline'
                         | 'iconOnly'
                         | 'menu'
+                        | 'categoryLabel'
                         | 'richtextLink'
                       )
                     | null;
@@ -1869,6 +1884,7 @@ export interface Blog {
                     | 'underline'
                     | 'iconOnly'
                     | 'menu'
+                    | 'categoryLabel'
                     | 'richtextLink'
                   )
                 | null;
@@ -3688,6 +3704,7 @@ export interface Settings {
                 | 'underline'
                 | 'iconOnly'
                 | 'menu'
+                | 'categoryLabel'
                 | 'richtextLink'
               )
             | null;

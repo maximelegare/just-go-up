@@ -84,8 +84,8 @@ export async function OptionsBar({ data }: FilterAndSortBarProps) {
                   <CMSLink
                     key={idx}
                     {...link.link}
-                    appearance="menu"
                     currentUrl={fullPath}
+                    size="sm"
                     // isActive={pathname.includes(link.title.toLowerCase())}
                   />
                 </MenubarMenu>

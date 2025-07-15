@@ -16,6 +16,7 @@ export const buttonVariant = {
   underline: 'text-foreground underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center',
+  categoryLabel: 'text-xs rounded-2xl bg-muted w-fit outline-none',
   richtextLink: 'text-foreground',
 }
 
@@ -30,6 +31,7 @@ export const buttonVariantActif = {
   underline: 'text-foreground  underline',
   iconOnly: 'w-fit h-fit p-0',
   menu: 'bg-muted',
+  categoryLabel: 'text-xs rounded-2xl bg-muted w-fit outline-none',
   richtextLink: 'text-red-400',
 }
 
