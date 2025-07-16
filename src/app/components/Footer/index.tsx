@@ -16,6 +16,7 @@ type FooterProps = {
 }
 
 export async function Footer({ locale, show }: FooterProps) {
+  //@ts-ignore
   const { sections }: Footer = await getCachedGlobal('footer', 2, locale)()
   const getInTouch: GetInTouch = await getCachedGlobal('getInTouch', 2, locale)()
 

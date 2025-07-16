@@ -11,5 +11,9 @@ export const Hero: React.FC<Page['hero']> = (props) => {
 
   if (!HeroToRender) return null
 
-  return <HeroToRender {...props} />
+  return (
+    <div className="pt-24">
+      <HeroToRender {...props} />
+    </div>
+  )
 }
