@@ -256,10 +256,10 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
               const fields = node.fields
               return (
                 <CMSLink
-                  size="xs"
+                  size="sm"
                   currentUrl=""
                   className="p-0 m-0"
-                  appearance="richtextLink"
+                  appearance="underline"
                   key={index}
                   newTab={Boolean(fields?.newTab)}
                   reference={fields.doc as any}

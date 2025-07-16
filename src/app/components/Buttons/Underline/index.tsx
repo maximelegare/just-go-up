@@ -19,18 +19,22 @@ export const UnderlineButton: React.FC<CMSLinkType> = (props) => {
 }
 
 const LineUnderButton = ({
-  baseWidth,
-  isActive,
   className,
 }: {
   baseWidth: string
   isActive?: boolean
   className?: string
 }) => (
+  // <span
+  //   className={cn(
+  //     `absolute  bottom-1 left-0 h-[1px] bg-foreground transition-all duration-300 ${baseWidth}`,
+  //     isActive ? 'w-full' : 'group-hover:w-full',
+  //     className,
+  //   )}
+  // ></span>
   <span
     className={cn(
-      `absolute  bottom-[-3px] left-0 h-[1px] bg-foreground transition-all duration-300 ${baseWidth}`,
-      isActive ? 'w-full' : 'group-hover:w-full',
+      `absolute  bottom-[6px] left-0 h-[1px] bg-accent transition-all duration-300 w-full`,
       className,
     )}
   ></span>

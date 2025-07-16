@@ -189,9 +189,9 @@ export default {
               letterSpacing: "0.15em"
             },
             a: {
-              fontSize: "1.2em",
+              fontSize: "1.8em",
               fontWeight: "400",
-              letterSpacing: "0.15em"
+              letterSpacing: "0.12em"
             },
             p: {
               fontSize: '1rem',
