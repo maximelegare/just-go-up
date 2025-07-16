@@ -13,6 +13,7 @@ import { admins } from '@app/access/admins'
 import { anyone } from '@app/access/anyone'
 import { slugField } from '@app/payload/fields/slug'
 import { DynamicContent } from '@app/blocks/layouts/DynamicContent/config'
+import switchField from '@app/payload/fields/switch/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -64,6 +65,13 @@ export const Pages: CollectionConfig = {
         ],
       },
     },
+    switchField({
+      label: 'Right Sidebar',
+      name: 'showRightSidebar',
+      admin: {
+        position: 'sidebar',
+      },
+    }),
     {
       type: 'tabs',
       tabs: [

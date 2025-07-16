@@ -13,6 +13,7 @@ import { Locale, defaultLocale } from 'ROOT/locales/locales'
 import { generatePageSlug } from '@app/utilities/generatePageSlug'
 import { PrebuiltLayouts } from '@app/components/PrebuiltLayouts'
 import { AppSidebar } from '@app/components/Sidebar'
+import { cn } from '@app/utilities/cn'
 
 export const dynamic = 'force-dynamic'
 
@@ -54,13 +55,13 @@ export default async function Page({
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout, hasPrebuiltLayout, prebuiltLayout } = page
+  const { hero, layout, hasPrebuiltLayout, prebuiltLayout, showRightSidebar } = page
 
   return (
     <article className="pb-24">
       <PayloadRedirects disableNotFound url={url} />
       <Hero {...hero} />
-      <div className="block sm:flex">
+      <div className={cn(showRightSidebar && 'block sm:flex')}>
         <div className="container">
           {hasPrebuiltLayout ? (
             <PrebuiltLayouts
@@ -76,7 +77,7 @@ export default async function Page({
             />
           )}
         </div>
-        <AppSidebar />
+        {showRightSidebar && <AppSidebar />}
       </div>
     </article>
   )

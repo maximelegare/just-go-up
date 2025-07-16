@@ -165,6 +165,7 @@ export interface Page {
   id: string;
   title: string;
   publishedOn?: string | null;
+  showRightSidebar?: boolean | null;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -2119,6 +2120,7 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   publishedOn?: T;
+  showRightSidebar?: T;
   hero?:
     | T
     | {
