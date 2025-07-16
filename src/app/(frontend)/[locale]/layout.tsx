@@ -22,7 +22,7 @@ import { headers } from 'next/headers'
 // import { PreloadResources } from '@app/components/PreloadRessources'
 import { detectLocaleFromPathname } from '@app/utilities/detectLocale'
 import { Prerenderer } from '@app/components/Prerenderer'
-import { AppSidebar } from '@app/components/Sidebar'
+// import { AppSidebar } from '@app/components/Sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -69,10 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {/* <ScrollArea className="h-screen w-screen"> */}
             <LivePreviewListener />
             <Header locale={locale} show={!pathname.includes('under-construction')} />
-            <div className="flex">
-              {children}
-              <AppSidebar />
-            </div>
+            {children}
             {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}
             <Prerenderer numberOfCards={4} />
             {/* </ScrollArea> */}

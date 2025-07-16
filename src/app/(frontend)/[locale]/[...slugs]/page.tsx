@@ -12,6 +12,7 @@ import { generateMeta } from '../../../utilities/generateMeta'
 import { Locale, defaultLocale } from 'ROOT/locales/locales'
 import { generatePageSlug } from '@app/utilities/generatePageSlug'
 import { PrebuiltLayouts } from '@app/components/PrebuiltLayouts'
+import { AppSidebar } from '@app/components/Sidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -56,22 +57,27 @@ export default async function Page({
   const { hero, layout, hasPrebuiltLayout, prebuiltLayout } = page
 
   return (
-    <article className="pb-24 container">
+    <article className="pb-24">
       <PayloadRedirects disableNotFound url={url} />
       <Hero {...hero} />
-      {hasPrebuiltLayout ? (
-        <PrebuiltLayouts
-          blocks={prebuiltLayout}
-          searchParams={await searchParams}
-          params={{ locale, url, slugs }}
-        />
-      ) : (
-        <Blocks
-          blocks={layout}
-          urlSearchParams={await searchParams}
-          params={{ locale, url, slugs }}
-        />
-      )}
+      <div className="block sm:flex">
+        <div className="container">
+          {hasPrebuiltLayout ? (
+            <PrebuiltLayouts
+              blocks={prebuiltLayout}
+              searchParams={await searchParams}
+              params={{ locale, url, slugs }}
+            />
+          ) : (
+            <Blocks
+              blocks={layout}
+              urlSearchParams={await searchParams}
+              params={{ locale, url, slugs }}
+            />
+          )}
+        </div>
+        <AppSidebar />
+      </div>
     </article>
   )
 }
