@@ -5,8 +5,16 @@ import switchField from "@app/payload/fields/switch/config"
 import { capitalize } from "@app/utilities/strings/catpitalize"
 import type { Block } from "payload"
 
-const cardVariants = ["product", "category", "variant", "blog", "blog-sidebar"] as const
-export type CardVariant = (typeof cardVariants)[number]
+import { cardComponentsMap } from "@app/_Map/cards.map"
+
+export type CardVariant = keyof typeof cardComponentsMap
+const cardVariants: Array<CardVariant> = [
+  "product",
+  "category",
+  "variant",
+  "blog",
+  "blog-condensed",
+] as const
 
 export const ItemsListBlock: Block = {
   slug: "itemsList",

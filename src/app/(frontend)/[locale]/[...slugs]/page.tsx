@@ -1,28 +1,28 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next"
 
-import { PayloadRedirects } from '@app/components/PayloadRedirects'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { draftMode, headers } from 'next/headers'
-import React from 'react'
+import { PayloadRedirects } from "@app/components/PayloadRedirects"
+import configPromise from "@payload-config"
+import { getPayload } from "payload"
+import { draftMode, headers } from "next/headers"
+import React from "react"
 
-import { Blocks } from '../../../components/Blocks'
-import { Hero } from '../../../components/Hero'
-import { generateMeta } from '../../../utilities/generateMeta'
-import { Locale, defaultLocale } from 'ROOT/locales/locales'
-import { generatePageSlug } from '@app/utilities/generatePageSlug'
-import { PrebuiltLayouts } from '@app/components/PrebuiltLayouts'
-import { AppSidebar } from '@app/components/Sidebar'
-import { cn } from '@app/utilities/cn'
+import { Blocks } from "../../../components/Blocks"
+import { Hero } from "../../../components/Hero"
+import { generateMeta } from "../../../utilities/generateMeta"
+import { Locale, defaultLocale } from "ROOT/locales/locales"
+import { generatePageSlug } from "@app/utilities/generatePageSlug"
+import { PrebuiltLayouts } from "@app/components/PrebuiltLayouts"
+import { RightSidebar } from "@app/components/Sidebar"
+import { cn } from "@app/utilities/cn"
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
 export async function generateStaticParams({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   const payload = await getPayload({ config: configPromise })
 
   const pages = await payload.find({
-    collection: 'pages',
+    collection: "pages",
     locale,
     draft: false,
     limit: 1000,
@@ -31,7 +31,7 @@ export async function generateStaticParams({ params }: { params: Promise<{ local
 
   return pages.docs
     ?.filter((doc) => {
-      return doc.slug !== 'home'
+      return doc.slug !== "home"
     })
     .map(({ slug }) => ({ slug: slug }))
 }
@@ -43,7 +43,7 @@ export default async function Page({
   searchParams?: Promise<Record<string, string>>
   params: Promise<{ slugs: string[]; locale: Locale }>
 }) {
-  const { slugs = ['home'], locale = defaultLocale } = await params
+  const { slugs = ["home"], locale = defaultLocale } = await params
   const { slug, url } = generatePageSlug(slugs)
 
   const page = await queryPageBySlug({
@@ -61,7 +61,7 @@ export default async function Page({
     <article className="pb-24">
       <PayloadRedirects disableNotFound url={url} />
       <Hero {...hero} />
-      <div className={cn(showRightSidebar && 'block sm:flex')}>
+      <div className={cn(showRightSidebar && "block sm:flex")}>
         <div className="container">
           {hasPrebuiltLayout ? (
             <PrebuiltLayouts
@@ -77,7 +77,13 @@ export default async function Page({
             />
           )}
         </div>
-        {showRightSidebar && <AppSidebar />}
+        <RightSidebar
+          locale={locale}
+          show={showRightSidebar}
+          side="right"
+          searchParams={await searchParams}
+          params={{ locale, url, slugs }}
+        />
       </div>
     </article>
   )
@@ -91,7 +97,7 @@ export async function generateMetadata({
     locale: Locale
   }>
 }): Promise<Metadata> {
-  const { slugs = ['home'], locale } = await params
+  const { slugs = ["home"], locale } = await params
   const { slug } = generatePageSlug(slugs)
 
   const page = await queryPageBySlug({
@@ -114,7 +120,7 @@ const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale 
 
   const result = await payload.find({
     locale,
-    collection: 'pages',
+    collection: "pages",
     draft,
     limit: 1,
     depth: 5,

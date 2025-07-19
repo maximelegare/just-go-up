@@ -10,19 +10,22 @@ import {
   ProductCardProps,
   VariantCardProps,
 } from "@app/components/Card/types"
+import { BlogCardCondensed } from "@app/components/Card/BlogCardCondensed"
 
 export type CardComponentsMap = {
   product: React.FC<ProductCardProps>
-  categorie: React.FC<CategoryCardProps>
+  category: React.FC<CategoryCardProps>
   variant: React.FC<VariantCardProps>
   blog: React.FC<BlogCardProps>
+  "blog-condensed": React.FC<BlogCardProps>
   media: React.FC<MediaCardProps>
 }
 
 export const cardComponentsMap: CardComponentsMap = {
   product: ProductCard,
-  categorie: CategoryCard,
+  category: CategoryCard,
   variant: VariantCard,
   blog: BlogCard,
+  "blog-condensed": BlogCardCondensed,
   media: MediaCard,
 }

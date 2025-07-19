@@ -122,6 +122,7 @@ export interface Config {
     sideDrawer: SideDrawer;
     getInTouch: GetInTouch;
     settings: Settings;
+    sidebars: Sidebars;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -129,6 +130,7 @@ export interface Config {
     sideDrawer: SideDrawerSelect<false> | SideDrawerSelect<true>;
     getInTouch: GetInTouchSelect<false> | GetInTouchSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    sidebars: SidebarsSelect<false> | SidebarsSelect<true>;
   };
   locale: 'fr' | 'en';
   user: User & {
@@ -704,7 +706,7 @@ export interface Page {
             blockTitle: string;
             populateBy: 'collection' | 'featured';
             relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
-            cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-sidebar') | null;
+            cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-condensed') | null;
             featured?: {
               relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
               categories?: (string | Category)[] | null;
@@ -3749,6 +3751,112 @@ export interface Settings {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sidebars".
+ */
+export interface Sidebars {
+  id: string;
+  right?: {
+    sections?:
+      | {
+          bigTitle?: {
+            enable?: boolean | null;
+            title?: string | null;
+            subtitle?: string | null;
+            showMainImage?: boolean | null;
+            image?: (string | null) | Media;
+            enableLink?: boolean | null;
+            link?: {
+              type?: ('reference' | 'custom' | 'current') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'pages';
+                value: string | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+              /**
+               * Dictates how the link should be rendered.
+               */
+              appearance?:
+                | (
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'text'
+                    | 'secondary'
+                    | 'underline'
+                    | 'iconOnly'
+                    | 'menu'
+                    | 'categoryLabel'
+                    | 'richtextLink'
+                  )
+                | null;
+              /**
+               * Highlights the link based on the URL
+               */
+              isActive?: ('default' | 'exact' | 'never') | null;
+              searchParams?: {
+                toggleOnClick?: boolean | null;
+                params?:
+                  | {
+                      key: string | SearchParamKey;
+                      value?: {
+                        valueType?: ('collection' | 'custom') | null;
+                        collectionData?: {
+                          type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                          category?: (string | null) | Category;
+                          product?: (string | null) | Product;
+                          variant?: (string | null) | Variant;
+                          fabric?: (string | null) | Fabric;
+                        };
+                        custom?: {
+                          value?: (string | null) | SearchParamValue;
+                        };
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+            };
+          };
+          optionsBar?: {
+            enable?: boolean | null;
+            data?: (string | null) | OptionsBar;
+          };
+          blockTitle: string;
+          populateBy: 'collection' | 'featured';
+          relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
+          cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-condensed') | null;
+          featured?: {
+            relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
+            categories?: (string | Category)[] | null;
+            products?: (string | Product)[] | null;
+            variants?: (string | Variant)[] | null;
+            blogs?: (string | Variant)[] | null;
+          };
+          layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
+          imageSelector?: ('images' | 'dots') | null;
+          hasLimit?: boolean | null;
+          limit?: number | null;
+          hasPagination?: boolean | null;
+          conditionalRenderer?: {
+            show?: ('always' | 'conditionally') | null;
+            showParams?: (string | SearchParamValue)[] | null;
+            hideParams?: (string | SearchParamValue)[] | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'itemsList';
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3875,6 +3983,111 @@ export interface SettingsSelect<T extends boolean = true> {
                   };
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sidebars_select".
+ */
+export interface SidebarsSelect<T extends boolean = true> {
+  right?:
+    | T
+    | {
+        sections?:
+          | T
+          | {
+              itemsList?:
+                | T
+                | {
+                    bigTitle?:
+                      | T
+                      | {
+                          enable?: T;
+                          title?: T;
+                          subtitle?: T;
+                          showMainImage?: T;
+                          image?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                appearance?: T;
+                                isActive?: T;
+                                searchParams?:
+                                  | T
+                                  | {
+                                      toggleOnClick?: T;
+                                      params?:
+                                        | T
+                                        | {
+                                            key?: T;
+                                            value?:
+                                              | T
+                                              | {
+                                                  valueType?: T;
+                                                  collectionData?:
+                                                    | T
+                                                    | {
+                                                        type?: T;
+                                                        category?: T;
+                                                        product?: T;
+                                                        variant?: T;
+                                                        fabric?: T;
+                                                      };
+                                                  custom?:
+                                                    | T
+                                                    | {
+                                                        value?: T;
+                                                      };
+                                                };
+                                            id?: T;
+                                          };
+                                    };
+                              };
+                        };
+                    optionsBar?:
+                      | T
+                      | {
+                          enable?: T;
+                          data?: T;
+                        };
+                    blockTitle?: T;
+                    populateBy?: T;
+                    relationTo?: T;
+                    cardVariant?: T;
+                    featured?:
+                      | T
+                      | {
+                          relationTo?: T;
+                          categories?: T;
+                          products?: T;
+                          variants?: T;
+                          blogs?: T;
+                        };
+                    layout?: T;
+                    imageSelector?: T;
+                    hasLimit?: T;
+                    limit?: T;
+                    hasPagination?: T;
+                    conditionalRenderer?:
+                      | T
+                      | {
+                          show?: T;
+                          showParams?: T;
+                          hideParams?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
       };
   updatedAt?: T;
   createdAt?: T;

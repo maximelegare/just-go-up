@@ -37,7 +37,7 @@ export const ItemsListBlock: React.FC<
     populateBy,
   } = props
 
-  const pageNumber = urlSearchParams.page ? parseInt(urlSearchParams?.page) : undefined
+  const pageNumber = urlSearchParams?.page ? parseInt(urlSearchParams?.page) : 1
 
   /*
     Used to extract and format the URL search-param

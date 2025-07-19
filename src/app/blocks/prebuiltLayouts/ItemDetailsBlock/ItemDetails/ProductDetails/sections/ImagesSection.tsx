@@ -1,8 +1,8 @@
-import { cn } from '@app/utilities/cn'
-import { Media as MediaType } from '@payload-types'
-import React from 'react'
+import { cn } from "@app/utilities/cn"
+import { Media as MediaType } from "@payload-types"
+import React from "react"
 
-import { ItemsList } from '@app/blocks/layouts/ItemsListBlock/ItemsList'
+import { ItemsList } from "@app/blocks/layouts/ItemsListBlock/ItemsList"
 
 type ImageSectionProps = {
   images: (string | MediaType)[]
@@ -15,10 +15,11 @@ export const ImagesSection: React.FC<ImageSectionProps> = ({ images, containerCl
       <ItemsList
         relationTo="media"
         layout="carousel"
-        items={images.filter((el) => typeof el !== 'string')}
+        items={images.filter((el) => typeof el !== "string")}
         cardClassName="object-fit"
         imageSelector="images"
         isPrerendered={false}
+        cardVariant="media"
       />
     </div>
   )
