@@ -6,6 +6,7 @@ import { slugField } from "@app/payload/fields/slug"
 import switchField from "@app/payload/fields/switch/config"
 import { admins } from "@app/access/admins"
 import { anyone } from "@app/access/anyone"
+import { TitleSectionBlock } from "@app/blocks/layouts/TitleSectionBlock/config"
 // import { beforeChangeVariant } from './hooks/beforeChange'
 // import { checkUserPurchases } from './access/checkUserPurchases'
 // import { beforeProductChange } from './hooks/beforeChange'
@@ -94,7 +95,7 @@ export const Blogs: CollectionConfig = {
               type: "blocks",
               localized: true,
               required: true,
-              blocks: [Content, MediaBlock],
+              blocks: [Content, MediaBlock, TitleSectionBlock],
             },
           ],
         },

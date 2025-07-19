@@ -1,19 +1,19 @@
 //@ts-nocheck
-import React from 'react'
+import React from "react"
 
-import configPromise from '@payload-config'
+import configPromise from "@payload-config"
 
-import type { Blog, Page } from '@payload-types'
-import { CollectionSlug, getPayload } from 'payload'
-import { Locale } from 'ROOT/locales/locales'
-import { getServerSideURL } from '@app/utilities/getServerSideURL'
-import { getUrlData } from '@app/utilities/searchParams'
+import type { Blog, Page } from "@payload-types"
+import { CollectionSlug, getPayload } from "payload"
+import { Locale } from "ROOT/locales/locales"
+import { getServerSideURL } from "@app/utilities/getServerSideURL"
+import { getUrlData } from "@app/utilities/searchParams"
 
-import { toKebabCase } from '@app/utilities/toKebabCase'
-import { blockComponentsMap } from '@app/_Map/blocks.map'
-import { notFound } from 'next/navigation'
+import { toKebabCase } from "@app/utilities/toKebabCase"
+import { blockComponentsMap } from "@app/_Map/blocks.map"
+import { notFound } from "next/navigation"
 
-export type DynamicContentBlockProps = Extract<Page['layout'][0], { blockType: 'dynamicContent' }>
+export type DynamicContentBlockProps = Extract<Page["layout"][0], { blockType: "dynamicContent" }>
 
 export const DynamicContentBlock: React.FC<
   {
@@ -24,7 +24,7 @@ export const DynamicContentBlock: React.FC<
     }
   } & DynamicContentBlockProps
 > = async (props) => {
-  const fullPath = await getServerSideURL('fullpath')
+  const fullPath = await getServerSideURL("fullpath")
   const data = getUrlData(fullPath)
 
   const payload = await getPayload({ config: configPromise })
@@ -37,7 +37,7 @@ export const DynamicContentBlock: React.FC<
     depth: 5,
     limit: 1,
     where: {
-      'breadcrumbs.url': {
+      "breadcrumbs.url": {
         equals: data.pathnameWithoutLocale,
       },
     },
@@ -50,7 +50,7 @@ export const DynamicContentBlock: React.FC<
     return notFound()
   }
 
-  if (blockType !== 'dynamicContent') return null
+  if (blockType !== "dynamicContent") return null
 
   return (
     <>

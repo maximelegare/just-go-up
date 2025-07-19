@@ -1,16 +1,12 @@
 import React from "react"
-import { Page } from "@payload-types"
-import { Media } from "../Media"
-import { MediaCaption } from "../Media/MediaCaption"
+import { TitleSectionBlockProps } from ".."
+import { Media } from "@app/components/Media"
+import { MediaCaption } from "@app/components/Media/MediaCaption"
 
-export type BigTitleProps = Extract<Page["layout"][0], { blockType: "content" }>["bigTitle"]
-
-export const BigTitle: React.FC<
-  BigTitleProps & { className?: string; linkClassName?: string; subtitle?: string }
+export const HighImpactTitle: React.FC<
+  TitleSectionBlockProps & { className?: string; linkClassName?: string; subtitle?: string }
 > = async (props) => {
-  const { title, enable, subtitle, showMainImage, image } = props
-
-  if (!enable) return null
+  const { title, subtitle, showImage, image } = props
 
   return (
     <div className="relative">
@@ -23,7 +19,7 @@ export const BigTitle: React.FC<
         </div>
       </div>
       <div className="mb-8 lg:mb-14">
-        {showMainImage && (
+        {showImage && (
           <div>
             <div className="relative w-full h-full min-h-[40vh] lg:min-h-[60vh]">
               {typeof image !== "string" && (

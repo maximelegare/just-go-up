@@ -3,6 +3,8 @@ import { ProductCard } from "@app/components/Card/ProductCard"
 import { VariantCard } from "@app/components/Card/VariantCard"
 import { MediaCard } from "@app/components/Card/MediaCard"
 import { BlogCard } from "@app/components/Card/BlogCard"
+import { BlogCardCondensed } from "@app/components/Card/BlogCardCondensed"
+
 import {
   BlogCardProps,
   CategoryCardProps,
@@ -10,7 +12,6 @@ import {
   ProductCardProps,
   VariantCardProps,
 } from "@app/components/Card/types"
-import { BlogCardCondensed } from "@app/components/Card/BlogCardCondensed"
 
 export type CardComponentsMap = {
   product: React.FC<ProductCardProps>

@@ -1,28 +1,29 @@
-import type { CollectionConfig } from 'payload'
-import { CallToAction } from '../../../blocks/layouts/CallToAction/config'
-import { Content } from '../../../blocks/layouts/Content/config'
-import { MediaBlock } from '../../../blocks/layouts/MediaBlock/config'
-import { FormBlock } from '../../../blocks/layouts/Form/config'
-import { hero } from '@app/heros/config'
+import type { CollectionConfig } from "payload"
+import { CallToAction } from "../../../blocks/layouts/CallToAction/config"
+import { Content } from "../../../blocks/layouts/Content/config"
+import { MediaBlock } from "../../../blocks/layouts/MediaBlock/config"
+import { FormBlock } from "../../../blocks/layouts/Form/config"
+import { hero } from "@app/heros/config"
 
-import { revalidatePage } from './hooks/revalidatePage'
-import { ItemsListBlock } from '@app/blocks/layouts/ItemsListBlock/config'
-import { ItemDetailsLayout } from '@app/blocks/prebuiltLayouts/ItemDetailsBlock/config'
-import { superUser } from '@app/access/super'
-import { admins } from '@app/access/admins'
-import { anyone } from '@app/access/anyone'
-import { slugField } from '@app/payload/fields/slug'
-import { DynamicContent } from '@app/blocks/layouts/DynamicContent/config'
-import switchField from '@app/payload/fields/switch/config'
+import { revalidatePage } from "./hooks/revalidatePage"
+import { ItemsListBlock } from "@app/blocks/layouts/ItemsListBlock/config"
+import { ItemDetailsLayout } from "@app/blocks/prebuiltLayouts/ItemDetailsBlock/config"
+import { superUser } from "@app/access/super"
+import { admins } from "@app/access/admins"
+import { anyone } from "@app/access/anyone"
+import { slugField } from "@app/payload/fields/slug"
+import { DynamicContent } from "@app/blocks/layouts/DynamicContent/config"
+import switchField from "@app/payload/fields/switch/config"
+import { TitleSectionBlock } from "@app/blocks/layouts/TitleSectionBlock/config"
 
 export const Pages: CollectionConfig = {
-  slug: 'pages',
+  slug: "pages",
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    useAsTitle: "title",
+    defaultColumns: ["title", "slug", "updatedAt"],
     preview: (doc) => {
       return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/next/preview?url=${encodeURIComponent(
-        `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/${doc.slug !== 'home' ? doc.slug : ''}`,
+        `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/${doc.slug !== "home" ? doc.slug : ""}`,
       )}&secret=${process.env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
     },
   },
@@ -40,24 +41,24 @@ export const Pages: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
+      name: "title",
       localized: true,
-      type: 'text',
+      type: "text",
       required: true,
     },
     {
-      name: 'publishedOn',
-      type: 'date',
+      name: "publishedOn",
+      type: "date",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
         date: {
-          pickerAppearance: 'dayAndTime',
+          pickerAppearance: "dayAndTime",
         },
       },
       hooks: {
         beforeChange: [
           ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
+            if (siblingData._status === "published" && !value) {
               return new Date()
             }
             return value
@@ -66,30 +67,30 @@ export const Pages: CollectionConfig = {
       },
     },
     switchField({
-      label: 'Right Sidebar',
-      name: 'showRightSidebar',
+      label: "Right Sidebar",
+      name: "showRightSidebar",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     }),
     {
-      type: 'tabs',
+      type: "tabs",
       tabs: [
         {
-          label: 'Hero',
+          label: "Hero",
           fields: [hero],
         },
         {
-          label: 'Content',
+          label: "Content",
           fields: [
             {
-              name: 'hasPrebuiltLayout',
-              type: 'checkbox',
+              name: "hasPrebuiltLayout",
+              type: "checkbox",
               defaultValue: false,
             },
             {
-              name: 'layout',
-              type: 'blocks',
+              name: "layout",
+              type: "blocks",
               localized: true,
               admin: {
                 condition: (_, siblingData) => {
@@ -103,11 +104,12 @@ export const Pages: CollectionConfig = {
                 FormBlock,
                 ItemsListBlock,
                 DynamicContent,
+                TitleSectionBlock,
               ],
             },
             {
-              name: 'prebuiltLayout',
-              type: 'blocks',
+              name: "prebuiltLayout",
+              type: "blocks",
               admin: {
                 condition: (_, siblingData) => {
                   return siblingData?.hasPrebuiltLayout === true ? true : false

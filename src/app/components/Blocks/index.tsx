@@ -1,16 +1,16 @@
 // @ts-nocheck
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react"
 
-import type { Page } from '@payload-types'
-import { toKebabCase } from '@app/utilities/toKebabCase'
-import { Locale } from 'ROOT/locales/locales'
-import { blockComponentsMap } from '@app/_Map/blocks.map'
-import { cn } from '@app/utilities/cn'
+import type { Page } from "@payload-types"
+import { toKebabCase } from "@app/utilities/toKebabCase"
+import { Locale } from "ROOT/locales/locales"
+import { blockComponentsMap } from "@app/_Map/blocks.map"
+import { cn } from "@app/utilities/cn"
 
 export const Blocks: React.FC<{
   limit?: number
   offset?: number
-  blocks: Page['layout'][0][]
+  blocks: Page["layout"][0][]
   containerClassName?: string
   urlSearchParams?: Record<string, string>
   params?: {
@@ -31,19 +31,19 @@ export const Blocks: React.FC<{
           if (index < offset) return null
 
           const showUrlParam = urlSearchParams?.show
-
+          console.log("block", block)
           const { blockType } = block
 
           /*
             Hides the block based on the conditional searchParams renderer 
           */
 
-          if (block?.conditionalRenderer?.show === 'conditionally') {
+          if (block?.conditionalRenderer?.show === "conditionally") {
             const showParams = block?.conditionalRenderer?.showParams || []
             const hideParams = block?.conditionalRenderer?.hideParams || []
 
             // Check if "none" is included in showParam
-            const hasNone = showParams.some((el) => el.slug === 'none')
+            const hasNone = showParams.some((el) => el.slug === "none")
 
             // If "none" is NOT included, check if showUrlParam is in showParams
             const shouldShow = hasNone || showParams.some((el) => el.slug === showUrlParam)
