@@ -1,32 +1,34 @@
-import { cn } from '@app/utilities/cn'
-import React, { ReactNode } from 'react'
+import { cn } from "@app/utilities/cn"
+import React, { ReactNode } from "react"
 
-import { Item } from '@app/components/types'
+import { Item } from "@app/components/types"
 
-import type { ItemsListBlockProps } from '@app/blocks/layouts/ItemsListBlock'
+import type { ItemsListBlockProps } from "@app/blocks/layouts/ItemsListBlock"
 import {
   Carousel,
   CarouselContent,
   CarouselDots,
   CarouselImages,
   CarouselItem,
-} from '@app/components/ui/Carousel'
+} from "@app/components/ui/Carousel"
 
-import { ScrollArea } from '@app/components/ui/scroll-area'
-import { cardComponentsMap, CardComponentsMap } from '@app/_Map/cards.map'
-import { PrerendedCard } from '@app/components/Prerenderer/Card'
-import { Separator } from '@app/components/ui/separator'
+import { ScrollArea } from "@app/components/ui/scroll-area"
+import { cardComponentsMap, CardComponentsMap } from "@app/_Map/cards.map"
+import { PrerendedCard } from "@app/components/Prerenderer/Card"
+import { Separator } from "@app/components/ui/separator"
+import { CardVariant } from "../config"
 
-export type RelationTo = ItemsListBlockProps['relationTo'] | 'media'
+export type RelationTo = ItemsListBlockProps["relationTo"] | "media"
 
 export type Props<T> = {
   items: T[]
-  layout: ItemsListBlockProps['layout']
+  layout: ItemsListBlockProps["layout"]
   relationTo: RelationTo
   cardClassName?: string
   containerClassName?: string
-  imageSelector?: 'dots' | 'images'
+  imageSelector?: "dots" | "images"
   isPrerendered?: boolean
+  cardVariant: CardVariant
 }
 
 export const ItemsList = <T extends Item>(props: Props<T>) => {
@@ -37,6 +39,7 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
     cardClassName,
     imageSelector,
     containerClassName,
+    cardVariant,
     isPrerendered = true,
   } = props
 
@@ -48,7 +51,7 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
   ) => {
     if (!result) return null
     switch (layout) {
-      case 'carousel': {
+      case "carousel": {
         return (
           <CarouselItem key={idx} isPrerendered={isPrerendered}>
             <PrerendedCard isPrerendered={isPrerendered}>
@@ -57,7 +60,7 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
           </CarouselItem>
         )
       }
-      case 'verticalList': {
+      case "verticalList": {
         return (
           <React.Fragment key={idx}>
             {idx === 0 && <Separator />}
@@ -67,8 +70,8 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
         )
       }
 
-      case 'grid':
-      case 'horizontalScroll':
+      case "grid":
+      case "horizontalScroll":
       default: {
         return (
           <PrerendedCard isPrerendered={isPrerendered} key={idx}>
@@ -79,12 +82,11 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
     }
   }
 
-  const mapCards = (relationTo: RelationTo, cardClassName: string): ReactNode =>
+  const mapCards = (cardVariant: CardVariant, cardClassName: string): ReactNode =>
     items?.map((result, index) => {
-      if (typeof result === 'object' && result !== null) {
-        if (relationTo && relationTo in cardComponentsMap) {
-          const Card = cardComponentsMap[relationTo]
-
+      if (typeof result === "object" && result !== null) {
+        if (cardVariant && cardVariant in cardComponentsMap) {
+          const Card = cardComponentsMap[cardVariant]
           if (Card) {
             return getCard(Card, result, index, cardClassName)
           }
@@ -94,46 +96,46 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
     })
 
   const getContainer = (
-    layout: ItemsListBlockProps['layout'],
+    layout: ItemsListBlockProps["layout"],
     cardClassName?: string,
     containerClassName?: string,
   ) => {
     switch (layout) {
-      case 'carousel': {
+      case "carousel": {
         return (
-          <Carousel className={cn('w-full', containerClassName)}>
+          <Carousel className={cn("w-full", containerClassName)}>
             <CarouselContent isPrerendered={isPrerendered} className="w-full">
-              {mapCards(relationTo, cardClassName)}
+              {mapCards(cardVariant, cardClassName)}
             </CarouselContent>
-            {imageSelector === 'dots' && <CarouselDots />}
-            {imageSelector === 'images' && <CarouselImages images={items as any} />}
+            {imageSelector === "dots" && <CarouselDots />}
+            {imageSelector === "images" && <CarouselImages images={items as any} />}
           </Carousel>
         )
       }
-      case 'horizontalScroll': {
+      case "horizontalScroll": {
         return (
           <ScrollArea
             orientation="horizontal"
-            thumb={{ className: 'bg-accent', width: 'thin', length: '1/2' }}
+            thumb={{ className: "bg-accent", width: "thin", length: "1/2" }}
           >
             <div className="grid grid-flow-col gap-8">
-              {mapCards(relationTo, 'w-[15rem] sm:w-[18rem] lg:w-[21rem]')}{' '}
+              {mapCards(cardVariant, "w-[15rem] sm:w-[18rem] lg:w-[21rem]")}{" "}
             </div>
           </ScrollArea>
         )
       }
-      case 'verticalList': {
-        return <div className="flex flex-col gap-4">{mapCards(relationTo, 'w-full')}</div>
+      case "verticalList": {
+        return <div className="flex flex-col gap-4">{mapCards(cardVariant, "w-full")}</div>
       }
-      case 'grid':
+      case "grid":
       default: {
-        return <div className="flex flex-wrap gap-4">{mapCards(relationTo, 'w-full')}</div>
+        return <div className="flex flex-wrap gap-4">{mapCards(cardVariant, "w-full")}</div>
       }
     }
   }
 
   return (
-    <div className={cn('w-full', layout !== 'grid' && 'pb-[3rem]')}>
+    <div className={cn("w-full", layout !== "grid" && "pb-[3rem]")}>
       {getContainer(layout, cardClassName, containerClassName)}
     </div>
   )

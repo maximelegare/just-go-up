@@ -704,6 +704,7 @@ export interface Page {
             blockTitle: string;
             populateBy: 'collection' | 'featured';
             relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
+            cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-sidebar') | null;
             featured?: {
               relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
               categories?: (string | Category)[] | null;
@@ -713,8 +714,9 @@ export interface Page {
             };
             layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
             imageSelector?: ('images' | 'dots') | null;
-            hasPagination?: boolean | null;
+            hasLimit?: boolean | null;
             limit?: number | null;
+            hasPagination?: boolean | null;
             conditionalRenderer?: {
               show?: ('always' | 'conditionally') | null;
               showParams?: (string | SearchParamValue)[] | null;
@@ -2527,6 +2529,7 @@ export interface PagesSelect<T extends boolean = true> {
               blockTitle?: T;
               populateBy?: T;
               relationTo?: T;
+              cardVariant?: T;
               featured?:
                 | T
                 | {
@@ -2538,8 +2541,9 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               layout?: T;
               imageSelector?: T;
-              hasPagination?: T;
+              hasLimit?: T;
               limit?: T;
+              hasPagination?: T;
               conditionalRenderer?:
                 | T
                 | {
