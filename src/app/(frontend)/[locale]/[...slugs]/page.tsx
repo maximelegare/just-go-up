@@ -81,7 +81,6 @@ export default async function Page({
           locale={locale}
           show={showRightSidebar}
           side="right"
-          searchParams={await searchParams}
           params={{ locale, url, slugs }}
         />
       </div>

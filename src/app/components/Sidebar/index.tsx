@@ -10,7 +10,6 @@ type SidebarProps = {
   locale: Locale
   show: boolean
   side: "right"
-  searchParams: Record<string, string>
   params: {
     locale?: Locale
     url?: string
@@ -18,13 +17,7 @@ type SidebarProps = {
   }
 }
 
-export const RightSidebar: React.FC<SidebarProps> = async ({
-  show,
-  locale,
-  side,
-  params,
-  searchParams,
-}) => {
+export const RightSidebar: React.FC<SidebarProps> = async ({ show, locale, side, params }) => {
   const sidebar: Sidebars = await getGlobal("sidebars", 2, locale)
 
   if (!show) return null
@@ -32,7 +25,7 @@ export const RightSidebar: React.FC<SidebarProps> = async ({
   return (
     <Sidebar side="right">
       <div className="pl-5 pr-5  h-ful pt-[90px] flex flex-col gap-4">
-        <Blocks blocks={sidebar[side].sections} urlSearchParams={searchParams} params={params} />
+        <Blocks blocks={sidebar[side].sections} params={params} />
       </div>
     </Sidebar>
   )
