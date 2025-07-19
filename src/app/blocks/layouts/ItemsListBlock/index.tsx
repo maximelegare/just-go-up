@@ -98,6 +98,11 @@ export const ItemsListBlock: React.FC<
           isActive: {
             equals: true,
           },
+          ...(populateBy === "featured" && {
+            isFeatured: {
+              equals: true,
+            },
+          }),
         }
       }
       default:
@@ -105,27 +110,12 @@ export const ItemsListBlock: React.FC<
     }
   }
 
-  /*
-    Used to get only an Array of Ids of all the products
-  */
-  const featuredIds = featured[featured.relationTo]?.map((el) => el.id) || []
-
   const fetchedItems = await payload.find({
     locale: props.params?.locale,
     collection: populateBy === "collection" ? relationTo : featured.relationTo,
     limit: limit ?? undefined,
     where: {
-      and: [
-        getWhere(),
-        filterValues ? getSearchParamWhere(filterValues[0], filterValues[1]) : {},
-        populateBy === "featured" && featuredIds
-          ? {
-              _id: {
-                in: featuredIds,
-              },
-            }
-          : {},
-      ],
+      and: [getWhere(), filterValues ? getSearchParamWhere(filterValues[0], filterValues[1]) : {}],
     },
     page: pageNumber,
   })

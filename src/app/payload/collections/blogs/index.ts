@@ -1,11 +1,11 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload"
 
-import { Content } from '../../../blocks/layouts/Content/config'
-import { MediaBlock } from '../../../blocks/layouts/MediaBlock/config'
-import { slugField } from '@app/payload/fields/slug'
-import switchField from '@app/payload/fields/switch/config'
-import { admins } from '@app/access/admins'
-import { anyone } from '@app/access/anyone'
+import { Content } from "../../../blocks/layouts/Content/config"
+import { MediaBlock } from "../../../blocks/layouts/MediaBlock/config"
+import { slugField } from "@app/payload/fields/slug"
+import switchField from "@app/payload/fields/switch/config"
+import { admins } from "@app/access/admins"
+import { anyone } from "@app/access/anyone"
 // import { beforeChangeVariant } from './hooks/beforeChange'
 // import { checkUserPurchases } from './access/checkUserPurchases'
 // import { beforeProductChange } from './hooks/beforeChange'
@@ -14,12 +14,12 @@ import { anyone } from '@app/access/anyone'
 // import { ProductSelect } from './ui/ProductSelect'
 
 export const Blogs: CollectionConfig = {
-  slug: 'blogs',
+  slug: "blogs",
   // hooks: {
   //   beforeChange: [beforeChangeVariant]
   // },
   admin: {
-    useAsTitle: 'slug',
+    useAsTitle: "slug",
     // preview: (doc) => {
     //   return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/next/preview?url=${encodeURIComponent(
     //     `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/products/${doc.slug}`,
@@ -42,18 +42,18 @@ export const Blogs: CollectionConfig = {
   },
   fields: [
     {
-      name: 'publishedOn',
-      type: 'date',
+      name: "publishedOn",
+      type: "date",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
         date: {
-          pickerAppearance: 'dayAndTime',
+          pickerAppearance: "dayAndTime",
         },
       },
       hooks: {
         beforeChange: [
           ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
+            if (siblingData._status === "published" && !value) {
               return new Date()
             }
             return value
@@ -62,36 +62,36 @@ export const Blogs: CollectionConfig = {
       },
     },
     {
-      type: 'tabs',
+      type: "tabs",
       tabs: [
         {
-          label: 'General',
+          label: "General",
           fields: [
             {
-              name: 'title',
+              name: "title",
               localized: true,
-              type: 'text',
+              type: "text",
             },
             {
-              name: 'subtitle',
-              type: 'text',
+              name: "subtitle",
+              type: "text",
               localized: true,
             },
             {
-              name: 'categories',
-              type: 'relationship',
-              relationTo: 'categories',
+              name: "categories",
+              type: "relationship",
+              relationTo: "categories",
               hasMany: true,
             },
           ],
         },
         {
-          name: 'content',
-          label: 'Content',
+          name: "content",
+          label: "Content",
           fields: [
             {
-              name: 'content',
-              type: 'blocks',
+              name: "content",
+              type: "blocks",
               localized: true,
               required: true,
               blocks: [Content, MediaBlock],
@@ -99,27 +99,35 @@ export const Blogs: CollectionConfig = {
           ],
         },
         {
-          name: 'medias',
-          label: 'Images',
-          fields: [{ name: 'mainImage', type: 'upload', relationTo: 'media' }],
+          name: "medias",
+          label: "Images",
+          fields: [{ name: "mainImage", type: "upload", relationTo: "media" }],
         },
       ],
     },
     switchField({
-      label: 'Is Active',
-      name: 'isActive',
-      defaultValue: true,
+      label: "Is featured",
+      name: "isFeatured",
+      defaultValue: false,
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     }),
-    slugField('title', { admin: { position: 'sidebar' } }),
-    {
-      name: 'skipSync',
-      label: 'Skip Sync',
-      type: 'checkbox',
+    switchField({
+      label: "Is Active",
+      name: "isActive",
+      defaultValue: true,
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
+      },
+    }),
+    slugField("title", { admin: { position: "sidebar" } }),
+    {
+      name: "skipSync",
+      label: "Skip Sync",
+      type: "checkbox",
+      admin: {
+        position: "sidebar",
         readOnly: true,
         hidden: true,
       },

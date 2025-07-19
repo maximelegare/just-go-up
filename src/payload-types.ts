@@ -1942,6 +1942,7 @@ export interface Blog {
   medias?: {
     mainImage?: (string | null) | Media;
   };
+  isFeatured?: boolean | null;
   isActive?: boolean | null;
   slug: string;
   skipSync?: boolean | null;
@@ -3259,6 +3260,7 @@ export interface BlogsSelect<T extends boolean = true> {
     | {
         mainImage?: T;
       };
+  isFeatured?: T;
   isActive?: T;
   slug?: T;
   skipSync?: T;
