@@ -24,7 +24,7 @@ export const RightSidebar: React.FC<SidebarProps> = async ({ show, locale, side,
 
   return (
     <Sidebar side="right">
-      <div className="pl-5 pr-5  h-ful pt-[112px] flex flex-col gap-4">
+      <div className="pl-5 pr-8  h-ful pt-[112px] flex flex-col gap-4">
         <Blocks blocks={sidebar[side].sections} params={params} />
       </div>
     </Sidebar>

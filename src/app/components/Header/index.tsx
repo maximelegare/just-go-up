@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import { Logo } from '@app/components/Logo/Official'
-import type { Header } from '@payload-types'
-import { Locale } from 'ROOT/locales/locales'
-import Link from 'next/link'
-import { NavigationMenu } from '@app/components/HeaderNavigationMenu'
-import { AdminBar } from '../AdminBar'
-import { Separator } from '../ui/separator'
-import { LocaleSelector } from '@app/providers/Locale/LocaleSelector'
+import { Logo } from "@app/components/Logo/Official"
+import type { Header } from "@payload-types"
+import { Locale } from "ROOT/locales/locales"
+import Link from "next/link"
+import { NavigationMenu } from "@app/components/HeaderNavigationMenu"
+import { AdminBar } from "../AdminBar"
+import { Separator } from "../ui/separator"
+import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 
 type HeaderProps = {
   locale: Locale
@@ -20,7 +20,7 @@ export async function Header({ locale, show }: HeaderProps) {
     <header className="fixed z-20 w-screen bg-background" id="header">
       <AdminBar />
       <div className="relative h-16 items-center flex justify-between">
-        <div className="flex container px-[1rem] items-center gap-6 w-full justify-between">
+        <div className="flex px-4 sm:px-8 items-center gap-6 w-full justify-between">
           <div className="flex items-center">
             <Link href="/" className="z-50">
               <Logo />
