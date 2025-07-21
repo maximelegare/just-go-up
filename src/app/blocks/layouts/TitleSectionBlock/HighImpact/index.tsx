@@ -1,5 +1,5 @@
 import React from "react"
-import { TitleSectionBlockProps } from ".."
+import { TitleSectionBlockProps } from "@app/blocks/layouts/TitleSectionBlock"
 import { Media } from "@app/components/Media"
 import { MediaCaption } from "@app/components/Media/MediaCaption"
 

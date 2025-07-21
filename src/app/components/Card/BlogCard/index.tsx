@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import React from 'react'
-import { Card } from '../Base'
-import { BlogCardProps } from '../types'
-import { Media } from '@app/components/Media'
-import { DisplayDate } from '@app/components/Date'
-import { CategoryLabel } from '@app/components/CategoryLabel'
+import React from "react"
+import { Card } from "../Base"
+import { BlogCardProps } from "../types"
+import { Media } from "@app/components/Media"
+import { DisplayDate } from "@app/components/Date"
+import { CategoryLabel } from "@app/components/CategoryLabel"
 
 export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
   const {
@@ -29,16 +29,16 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
             </div>
             <div className="flex w-full justify-end">
               <div className="w-32 lg:w-52 xl:60">
-                {mainImage && typeof mainImage !== 'string' && (
+                {mainImage && typeof mainImage !== "string" && (
                   <Media resource={mainImage} imgClassName="rounded-[0.5rem]" />
                 )}
               </div>
             </div>
           </div>
-          <div className="flex gap-1 mt-3  ">
+          <div className="flex gap-1 mt-3 h-fit ">
             {categories &&
               categories.map((el, idx) => {
-                return typeof el !== 'string' && <CategoryLabel text={el.title} key={idx} />
+                return typeof el !== "string" && <CategoryLabel text={el.title} key={idx} />
               })}
           </div>
         </div>

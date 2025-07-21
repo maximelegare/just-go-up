@@ -1,4 +1,5 @@
 import { ItemsListBlock } from "@app/blocks/layouts/ItemsListBlock/config"
+import { TitleSectionBlock } from "@app/blocks/layouts/TitleSectionBlock/config"
 import type { GlobalConfig } from "payload"
 
 export const Sidebars: GlobalConfig = {
@@ -17,7 +18,7 @@ export const Sidebars: GlobalConfig = {
         {
           name: "sections",
           type: "blocks",
-          blocks: [ItemsListBlock],
+          blocks: [ItemsListBlock, TitleSectionBlock],
         },
       ],
     },
