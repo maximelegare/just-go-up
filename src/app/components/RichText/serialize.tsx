@@ -1,9 +1,8 @@
-import { CallToActionBlock } from '@app/blocks/layouts/CallToAction'
-import { CodeBlock, CodeBlockProps } from '@app/blocks/layouts/Code'
-import { MediaBlock } from '@app/blocks/layouts/MediaBlock'
-import React, { Fragment, JSX } from 'react'
-import { CMSLink } from 'src/app/components/Link'
-import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
+import { CallToActionBlock } from "@app/blocks/layouts/CallToAction"
+import { CodeBlock } from "@app/blocks/layouts/Code"
+import { MediaBlock } from "@app/blocks/layouts/MediaBlock"
+import React, { Fragment, JSX } from "react"
+import { CMSLink } from "src/app/components/Link"
 
 import {
   IS_BOLD,
@@ -15,24 +14,16 @@ import {
   IS_UNDERLINE,
   ELEMENT_FORMAT_TO_TYPE,
   ELEMENT_FORMAT_TYPE,
-} from './nodeFormat'
+} from "./nodeFormat"
 
-import type { Media, Page } from '../../../payload-types'
-import { parseCSSStylesString } from '@app/utilities/parseCSSStylesString'
-import { ImageMedia } from '../Media/ImageMedia'
-import { cn } from '@app/utilities/cn'
-import { Separator } from '../ui/separator'
-import { MediaCaption } from '../Media/MediaCaption'
+import type { Media } from "../../../payload-types"
+import { parseCSSStylesString } from "@app/utilities/parseCSSStylesString"
+import { ImageMedia } from "../Media/ImageMedia"
+import { cn } from "@app/utilities/cn"
+import { Separator } from "../ui/separator"
+import { MediaCaption } from "../Media/MediaCaption"
 
-// type WithStyle<T> = T & { style?: React.CSSProperties }
-
-export type NodeTypes =
-  | DefaultNodeTypes
-  | SerializedBlockNode<
-      | Extract<Page['layout'][0], { blockType: 'cta' }>
-      | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
-      | CodeBlockProps
-    >
+import { NodeTypes } from "./types"
 
 type Props = {
   nodes: NodeTypes[]
@@ -43,38 +34,39 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
   const getAlignmentClass = (format: ELEMENT_FORMAT_TYPE | number | undefined): string => {
     let alignType: ELEMENT_FORMAT_TYPE
 
-    if (typeof format === 'number') {
+    if (typeof format === "number") {
       alignType = ELEMENT_FORMAT_TO_TYPE[format]
     } else {
       alignType = format
     }
 
     switch (alignType) {
-      case 'center':
-        return 'text-center'
-      case 'end':
-        return 'text-end'
-      case 'justify':
-        return 'text-justify'
-      case 'left':
-        return 'text-left'
-      case 'right':
-        return 'text-right'
-      case 'start':
-        return 'text-start'
+      case "center":
+        return "text-center"
+      case "end":
+        return "text-end"
+      case "justify":
+        return "text-justify"
+      case "left":
+        return "text-left"
+      case "right":
+        return "text-right"
+      case "start":
+        return "text-start"
       default:
-        return ''
+        return ""
     }
   }
 
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
+        console.log("NODE:", node)
         if (node == null) {
           return null
         }
 
-        if (node.type === 'text') {
+        if (node.type === "text") {
           let text = <React.Fragment key={index}>{node.text}</React.Fragment>
           if (node.format & IS_BOLD) {
             text = (
@@ -88,14 +80,14 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           }
           if (node.format & IS_STRIKETHROUGH) {
             text = (
-              <span key={index} style={{ textDecoration: 'line-through' }}>
+              <span key={index} style={{ textDecoration: "line-through" }}>
                 {text}
               </span>
             )
           }
           if (node.format & IS_UNDERLINE) {
             text = (
-              <span key={index} style={{ textDecoration: 'underline' }}>
+              <span key={index} style={{ textDecoration: "underline" }}>
                 {text}
               </span>
             )
@@ -128,9 +120,9 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           if (node.children == null) {
             return null
           } else {
-            if (node?.type === 'list' && node?.listType === 'check') {
+            if (node?.type === "list" && node?.listType === "check") {
               for (const item of node.children) {
-                if ('checked' in item) {
+                if ("checked" in item) {
                   if (!item?.checked) {
                     item.checked = false
                   }
@@ -141,9 +133,9 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           }
         }
 
-        const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
+        const serializedChildren = "children" in node ? serializedChildrenFn(node) : ""
 
-        if (node.type === 'upload') {
+        if (node.type === "upload") {
           const value = node.value as Media
 
           return (
@@ -158,7 +150,8 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           )
         }
 
-        if (node.type === 'block') {
+        if (node.type === "block") {
+          console.log("NODE IN BLOCK", node)
           const block = node.fields
 
           const blockType = block?.blockType
@@ -168,9 +161,9 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
           }
 
           switch (blockType) {
-            case 'cta':
+            case "cta":
               return <CallToActionBlock key={index} {...block} />
-            case 'mediaBlock':
+            case "mediaBlock":
               return (
                 <MediaBlock
                   className="col-start-1 col-span-3 "
@@ -181,51 +174,51 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                   enableGutter={false}
                 />
               )
-            case 'code':
+            case "code":
               return <CodeBlock className="col-start-2" key={index} {...block} />
             default:
               return null
           }
         } else {
           switch (node.type) {
-            case 'linebreak': {
+            case "linebreak": {
               return <br className="col-start-2" key={index} />
             }
-            case 'paragraph': {
+            case "paragraph": {
               const alignClass = getAlignmentClass(node.format)
               return (
-                <p className={cn('col-start-2', alignClass, textClassName)} key={index}>
+                <p className={cn("col-start-2", alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </p>
               )
             }
-            case 'heading': {
+            case "heading": {
               const Tag = node?.tag
               const alignClass = getAlignmentClass(node.format)
 
               return (
-                <Tag className={cn('col-start-2', alignClass, textClassName)} key={index}>
+                <Tag className={cn("col-start-2", alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </Tag>
               )
             }
-            case 'list': {
+            case "list": {
               const Tag = node?.tag
               const alignClass = getAlignmentClass(node.format)
               return (
-                <Tag className={cn('list col-start-2', alignClass, textClassName)} key={index}>
+                <Tag className={cn("list col-start-2", alignClass, textClassName)} key={index}>
                   {serializedChildren}
                 </Tag>
               )
             }
-            case 'listitem': {
+            case "listitem": {
               const alignClass = getAlignmentClass(node.format)
 
               if (node?.checked != null) {
                 return (
                   <li
-                    aria-checked={node.checked ? 'true' : 'false'}
-                    className={cn(`${node.checked ? '' : ''}`, alignClass, textClassName)}
+                    aria-checked={node.checked ? "true" : "false"}
+                    className={cn(`${node.checked ? "" : ""}`, alignClass, textClassName)}
                     key={index}
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="checkbox"
@@ -243,16 +236,16 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                 )
               }
             }
-            case 'quote': {
+            case "quote": {
               const alignClass = getAlignmentClass(node.format)
 
               return (
-                <blockquote className={cn('col-start-2', alignClass)} key={index}>
+                <blockquote className={cn("col-start-2", alignClass)} key={index}>
                   {serializedChildren}
                 </blockquote>
               )
             }
-            case 'link': {
+            case "link": {
               const fields = node.fields
               return (
                 <CMSLink
@@ -263,17 +256,47 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
                   key={index}
                   newTab={Boolean(fields?.newTab)}
                   reference={fields.doc as any}
-                  type={fields.linkType === 'internal' ? 'reference' : 'custom'}
+                  type={fields.linkType === "internal" ? "reference" : "custom"}
                   url={fields.url}
                 >
                   {serializedChildren}
                 </CMSLink>
               )
             }
-            case 'horizontalrule': {
+            case "horizontalrule": {
               return <Separator type="dots" key={index} />
             }
+            case "table": {
+              return (
+                <table
+                  className="table-auto border-collapse border border-gray-300 my-6"
+                  key={index}
+                >
+                  <tbody>{serializedChildren}</tbody>
+                </table>
+              )
+            }
 
+            case "tablerow": {
+              return <tr key={index}>{serializedChildren}</tr>
+            }
+
+            case "tablecell": {
+              const isHeader = node.headerState > 0
+              const CellTag = isHeader ? "th" : "td"
+              const cellContent = serializeLexical({ nodes: node.children as NodeTypes[] })
+
+              return (
+                <CellTag
+                  key={index}
+                  colSpan={node.colSpan}
+                  rowSpan={node.rowSpan}
+                  className="border border-gray-300 px-4 py-2 text-left align-top"
+                >
+                  {cellContent}
+                </CellTag>
+              )
+            }
             default:
               return null
           }

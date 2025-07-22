@@ -10,6 +10,7 @@ import { uploadthingStorage } from "@payloadcms/storage-uploadthing"
 // import { resendAdapter } from '@payloadcms/email-resend'
 
 import {
+  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -99,6 +100,7 @@ export default buildConfig({
         // FixedToolbarFeature(),
         InlineToolbarFeature(),
         FontColorFeature(),
+        EXPERIMENTAL_TableFeature(),
         // EmbedFeature(),
         LinkFeature({
           enabledCollections: ["pages"],

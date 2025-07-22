@@ -31,7 +31,6 @@ export const Blocks: React.FC<{
           if (index < offset) return null
 
           const showUrlParam = urlSearchParams?.show
-          console.log("block", block)
           const { blockType } = block
 
           /*
