@@ -1,24 +1,24 @@
-'use client'
+"use client"
 
-import type { PayloadAdminBarProps, PayloadMeUser } from 'payload-admin-bar'
+import type { PayloadAdminBarProps, PayloadMeUser } from "payload-admin-bar"
 
-import { cn } from '@app/utilities/cn'
-import { useSelectedLayoutSegments } from 'next/navigation'
-import { PayloadAdminBar } from '@payloadcms/admin-bar'
-import React, { useState } from 'react'
+import { cn } from "@app/utilities/cn"
+import { useSelectedLayoutSegments } from "next/navigation"
+import { PayloadAdminBar } from "@payloadcms/admin-bar"
+import React, { useState } from "react"
 
 const collectionLabels = {
   pages: {
-    plural: 'Pages',
-    singular: 'Page',
+    plural: "Pages",
+    singular: "Page",
   },
   posts: {
-    plural: 'Posts',
-    singular: 'Post',
+    plural: "Posts",
+    singular: "Post",
   },
   projects: {
-    plural: 'Projects',
-    singular: 'Project',
+    plural: "Projects",
+    singular: "Project",
   },
 }
 
@@ -33,44 +33,52 @@ export const AdminBar: React.FC<{
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
 
-  const collection = collectionLabels?.[segments?.[1]] ? segments?.[1] : 'pages'
+  const collection = collectionLabels?.[segments?.[1]] ? segments?.[1] : "pages"
 
   const onAuthChange = React.useCallback((user: PayloadMeUser) => {
     setShow(Boolean(user?.id))
   }, [])
 
   return (
-    <div
-      className={cn('py-1 bg-black text-white not-prose z-[100] relative', {
-        block: show,
-        hidden: !show,
-      })}
-    >
-      <div className="container px-[1rem]">
-        <PayloadAdminBar
-          {...adminBarProps}
-          className="py-2 text-white"
-          classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
-          }}
-          cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
-          collectionSlug={collection}
-          collectionLabels={{
-            plural: collectionLabels[collection]?.plural || 'Pages',
-            singular: collectionLabels[collection]?.singular || 'Page',
-          }}
-          logo={<Title />}
-          onAuthChange={onAuthChange}
-          style={{
-            backgroundColor: 'transparent',
-            padding: 0,
-            position: 'relative',
-            zIndex: 'unset',
-          }}
-        />
+    <React.Fragment>
+      <div
+        className={cn("py-1 bg-black text-white not-prose z-[100] fixed w-screen", {
+          block: show,
+          hidden: !show,
+        })}
+      >
+        <div className="container px-[1rem]">
+          <PayloadAdminBar
+            {...adminBarProps}
+            className="py-2 text-white"
+            classNames={{
+              controls: "font-medium text-white",
+              logo: "text-white",
+              user: "text-white",
+            }}
+            cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
+            collectionSlug={collection}
+            collectionLabels={{
+              plural: collectionLabels[collection]?.plural || "Pages",
+              singular: collectionLabels[collection]?.singular || "Page",
+            }}
+            logo={<Title />}
+            onAuthChange={onAuthChange}
+            style={{
+              backgroundColor: "transparent",
+              padding: 0,
+              position: "relative",
+              zIndex: "unset",
+            }}
+          />
+        </div>
       </div>
-    </div>
+      <div
+        className={cn("h-7", {
+          block: show,
+          hidden: !show,
+        })}
+      ></div>
+    </React.Fragment>
   )
 }

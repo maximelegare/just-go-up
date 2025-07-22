@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react"
 
-import type { Page } from '@payload-types'
+import type { Page } from "@payload-types"
 
-import { heroesComponentsMap } from '@app/_Map/heros.map'
+import { heroesComponentsMap } from "@app/_Map/heros.map"
 
-export const Hero: React.FC<Page['hero']> = (props) => {
+export const Hero: React.FC<Page["hero"]> = (props) => {
   const { type } = props || {}
 
   const HeroToRender = heroesComponentsMap[type]
@@ -12,7 +12,7 @@ export const Hero: React.FC<Page['hero']> = (props) => {
   if (!HeroToRender) return null
 
   return (
-    <div className="pt-24">
+    <div className="mt-4">
       <HeroToRender {...props} />
     </div>
   )

@@ -1,44 +1,45 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next"
 // import "ROOT/i18nInit"
 
-import { cn } from '@app/utilities/cn'
+import { cn } from "@app/utilities/cn"
 
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google"
 
-import React from 'react'
+import React from "react"
 
 // import { Footer } from '../../components/Footer'
-import { Header } from '../../components/Header'
-import { LivePreviewListener } from '../../components/LivePreviewListener'
-import { Providers } from '@app/providers'
-import { mergeOpenGraph } from '@app/utilities/mergeOpenGraph'
-import './styles/globals.css'
+import { Header } from "../../components/Header"
+import { LivePreviewListener } from "../../components/LivePreviewListener"
+import { Providers } from "@app/providers"
+import { mergeOpenGraph } from "@app/utilities/mergeOpenGraph"
+import "./styles/globals.css"
 // import { ScrollArea } from '@app/components/ui/scroll-area'
-import { getGlobal } from '@app/utilities/getGlobals'
-import { Settings } from '@payload-types'
-import { getMeUser } from '@app/utilities/getMeUser'
-import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
+import { getGlobal } from "@app/utilities/getGlobals"
+import { Settings } from "@payload-types"
+import { getMeUser } from "@app/utilities/getMeUser"
+import { redirect } from "next/navigation"
+import { headers } from "next/headers"
 // import { PreloadResources } from '@app/components/PreloadRessources'
-import { detectLocaleFromPathname } from '@app/utilities/detectLocale'
-import { Prerenderer } from '@app/components/Prerenderer'
+import { detectLocaleFromPathname } from "@app/utilities/detectLocale"
+import { Prerenderer } from "@app/components/Prerenderer"
+import { AdminBar } from "@app/components/AdminBar"
 // import { AppSidebar } from '@app/components/Sidebar'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const settings: Settings = await getGlobal('settings')
+  const settings: Settings = await getGlobal("settings")
   const meUser = await getMeUser()
 
   const headersList = await headers()
-  const pathname = headersList.get('x-pathname') || ''
+  const pathname = headersList.get("x-pathname") || ""
   const locale = detectLocaleFromPathname(pathname)
 
   if (
     settings.underConstruction &&
-    (!meUser.user || !meUser.user.roles.includes('admin') || !meUser.user.roles.includes('super'))
+    (!meUser.user || !meUser.user.roles.includes("admin") || !meUser.user.roles.includes("super"))
   ) {
-    if (!pathname.includes('under-construction')) redirect('/under-construction')
+    if (!pathname.includes("under-construction")) redirect("/under-construction")
   }
 
   return (
@@ -68,7 +69,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className="prose">
             {/* <ScrollArea className="h-screen w-screen"> */}
             <LivePreviewListener />
-            <Header locale={locale} show={!pathname.includes('under-construction')} />
+            <AdminBar />
+            <Header locale={locale} show={!pathname.includes("under-construction")} />
             {children}
             {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}
             <Prerenderer numberOfCards={4} />
@@ -81,10 +83,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://payloadcms.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || "https://payloadcms.com"),
   openGraph: mergeOpenGraph(),
   twitter: {
-    card: 'summary_large_image',
-    creator: '@payloadcms',
+    card: "summary_large_image",
+    creator: "@payloadcms",
   },
 }

@@ -5,6 +5,8 @@ import { Locale } from "ROOT/locales/locales"
 import { Sidebars } from "@payload-types"
 import { getGlobal } from "@app/utilities/getGlobals"
 import { Blocks } from "../Blocks"
+import { getMeUser } from "@app/utilities/getMeUser"
+import { cn } from "@app/utilities/cn"
 
 type SidebarProps = {
   locale: Locale
@@ -17,14 +19,23 @@ type SidebarProps = {
   }
 }
 
-export const RightSidebar: React.FC<SidebarProps> = async ({ show, locale, side, params }) => {
+export const RightSidebar: React.FC<SidebarProps> = async ({
+  show: showFromProps,
+  locale,
+  side,
+  params,
+}) => {
   const sidebar: Sidebars = await getGlobal("sidebars", 2, locale)
+  const meUser = await getMeUser()
 
-  if (!show) return null
+  if (!showFromProps) return null
 
   return (
     <Sidebar side="right">
-      <div className="pl-5 pr-8  h-ful pt-[112px] flex flex-col gap-4">
+      <div
+        className={cn("pl-5 pr-8  h-ful flex flex-col gap-4", {})}
+        style={{ marginTop: meUser.user ? 107 + 16 : 78 + 16 }}
+      >
         <Blocks blocks={sidebar[side].sections} params={params} />
       </div>
     </Sidebar>

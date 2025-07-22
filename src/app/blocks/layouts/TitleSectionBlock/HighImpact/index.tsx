@@ -9,7 +9,7 @@ export const HighImpactTitle: React.FC<
   const { title, subtitle, showImage, image } = props
 
   return (
-    <div className="relative">
+    <div className="relative mt-4">
       <div className="h-full z-10 mb-6">
         <div className="prose">
           <h1 className="font-bold">{title}</h1>
