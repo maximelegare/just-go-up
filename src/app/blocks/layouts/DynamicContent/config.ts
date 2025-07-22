@@ -1,8 +1,8 @@
-import { Block } from 'payload'
+import { Block } from "payload"
 
-import { blockComponentsMap } from '@app/_Map/blocks.map'
+import { blockComponentsMap } from "@app/_Map/blocks.map"
 
-const SLUG = 'dynamicContent'
+const SLUG = "dynamicContent"
 
 export const options = Object.keys(blockComponentsMap).reduce<{ label: string; value: string }[]>(
   (acc, val) => {
@@ -19,28 +19,28 @@ export const options = Object.keys(blockComponentsMap).reduce<{ label: string; v
 // const optionsToUse = options.filter((option) => option.value !== SLUG )
 
 // Temporary option, the other ones will be available eventually.
-const optionsToUse = options.filter((option) => option.value === 'content')
+const optionsToUse = options.filter(({ value }) => value === "content" || value === "titleSection")
 
 export const DynamicContent: Block = {
   slug: SLUG,
   fields: [
     {
-      name: 'relationTo',
-      type: 'select',
+      name: "relationTo",
+      type: "select",
       options: [
         {
-          label: 'Blogs',
-          value: 'blogs',
+          label: "Blogs",
+          value: "blogs",
         },
       ],
     },
     {
-      name: 'layout',
-      type: 'array',
+      name: "layout",
+      type: "array",
       fields: [
         {
-          name: 'blockType',
-          type: 'select',
+          name: "blockType",
+          type: "select",
           options: optionsToUse,
         },
       ],

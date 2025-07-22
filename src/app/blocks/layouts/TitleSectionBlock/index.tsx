@@ -13,9 +13,5 @@ export const TitleSectionBlock: React.FC<TitleSectionBlockProps> = (props) => {
 
   if (!TitleToRender) return null
 
-  return (
-    <div className="">
-      <TitleToRender {...props} />
-    </div>
-  )
+  return <TitleToRender {...props} />
 }

@@ -56,6 +56,11 @@ export const DynamicContentBlock: React.FC<
     <>
       {layout.map((layoutBlock, layoutIndex) => {
         const contentBlocks = doc?.content?.content
+        const {
+          title: docTitle,
+          subtitle: docSubtitle,
+          medias: { mainImage: docImage },
+        } = doc
         if (!Array.isArray(contentBlocks)) return null
 
         return contentBlocks?.map((innerBlock, innerIndex) => {
@@ -63,12 +68,28 @@ export const DynamicContentBlock: React.FC<
 
           if (!Block) return null
 
+          // Overights the titleSection's fields to use document's specific fields
+          let innerBlockProp
+          if (innerBlock.blockType === "titleSection" && innerBlock.useDocuementFields) {
+            innerBlockProp = {
+              ...innerBlock,
+              title: docTitle ?? innerBlock.title,
+              subtitle: docSubtitle ?? innerBlock.subtitle,
+              image: docImage ?? innerBlock.image,
+              showImage: innerBlock.showImage,
+            }
+          } else {
+            innerBlockProp = {
+              ...innerBlock,
+            }
+          }
+
           return (
             <div key={innerBlock.id ?? `${layoutIndex}-${innerIndex}`}>
               <Block
                 id={toKebabCase(innerBlock.blockType)}
                 blockType={innerBlock.blockType}
-                {...innerBlock}
+                {...innerBlockProp}
                 params={props.params}
                 urlSearchParams={props.urlSearchParams}
               />
