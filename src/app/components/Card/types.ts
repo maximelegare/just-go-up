@@ -1,6 +1,6 @@
-import { RelationTo } from '../../blocks/layouts/ItemsListBlock/ItemsList'
-import { Blog, Category, Media, Product, Variant } from '@payload-types'
-import { CSSProperties } from 'react'
+import { RelationTo } from "../../blocks/layouts/ItemsListBlock/ItemsList"
+import { Blog, Category, Media } from "@payload-types"
+import { CSSProperties } from "react"
 
 export type BaseCard = {
   className?: string
@@ -10,11 +10,6 @@ export type BaseCard = {
 
   // Used to have consistent width for cards in carousels
   // It uses the width of a card in a grid
-}
-
-export type ProductCardProps = BaseCard & {
-  doc?: Product
-  groupByProducts?: boolean
 }
 
 export type BlogCardProps = BaseCard & {
@@ -27,8 +22,4 @@ export type CategoryCardProps = BaseCard & {
 
 export type MediaCardProps = BaseCard & {
   doc?: Media
-}
-
-export type VariantCardProps = BaseCard & {
-  doc?: Variant
 }

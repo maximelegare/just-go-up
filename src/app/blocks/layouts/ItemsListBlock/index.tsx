@@ -47,18 +47,6 @@ export const ItemsListBlock: React.FC<
   const payload = await getPayload({ config: configPromise })
   const getSearchParamWhere = (field: string, equals: string) => {
     switch (relationTo) {
-      case "variants":
-        return {
-          [`${field}.slug`]: {
-            equals: equals,
-          },
-        }
-      case "products":
-        return {
-          [`variants.${field}.slug`]: {
-            equals: equals,
-          },
-        }
       case "blogs": {
         return {
           [`${searchParamKeysToFields[field]}.slug`]: {
@@ -73,24 +61,6 @@ export const ItemsListBlock: React.FC<
 
   const getWhere = () => {
     switch (relationTo) {
-      case "variants": // Checks if the variant and the products are actives
-        return {
-          isActive: {
-            equals: true,
-          },
-          "products.isActive": {
-            equals: true,
-          },
-        }
-      case "products": // Checks if the products and the variants are actives
-        return {
-          isActive: {
-            equals: true,
-          },
-          "variants.isActive": {
-            equals: true,
-          },
-        }
       case "blogs": {
         return {
           isActive: {

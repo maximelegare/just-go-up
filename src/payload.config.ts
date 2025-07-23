@@ -25,9 +25,7 @@ import { fileURLToPath } from "url"
 import { Categories } from "./app/payload/collections/Categories"
 import { Media } from "./app/payload/collections/Media"
 import { Pages } from "./app/payload/collections/Pages"
-import { Products } from "./app/payload/collections/Products"
 import { Users } from "./app/payload/collections/Users"
-import { SleeveLengths } from "@app/payload/collections/SleeveLengths"
 import { Footer } from "./app/payload/globals/Footer/config"
 import { Header } from "./app/payload/globals/Header/config"
 import { SideDrawer } from "./app/payload/globals/SideDrawer/config"
@@ -39,10 +37,8 @@ import { en } from "payload/i18n/en"
 import { fr } from "payload/i18n/fr"
 import { FontColorFeature } from "@app/payload/lexical/features/fontColorFeature/feature.server"
 import { GetInTouch } from "@app/payload/globals/GetInTouch"
-import { Variants } from "@app/payload/collections/Variants"
 import { revalidateGlobalsHandler } from "@app/endpoints/revalidate"
 import { Links } from "@app/payload/collections/Links"
-import { Fabrics } from "@app/payload/collections/Fabrics"
 import { SearchParamValues } from "@app/payload/collections/SearchParams/values"
 import { SearchParamKeys } from "@app/payload/collections/SearchParams/keys"
 import { OptionsBars } from "@app/payload/collections/OptionsBars"
@@ -137,12 +133,8 @@ export default buildConfig({
     Media,
     Categories,
     Users,
-    Products,
-    SleeveLengths,
-    Variants,
     Blogs,
     Links,
-    Fabrics,
     SearchParamKeys,
     SearchParamValues,
     OptionsBars,
@@ -193,11 +185,6 @@ export default buildConfig({
       collections: ["categories"],
       generateLabel: (_, doc) => doc.title as string,
       generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ""),
-    }),
-    nestedDocsPlugin({
-      collections: ["products"],
-      generateLabel: (_, doc) => doc.title as string,
-      generateURL: (docs) => docs.reduce((url, doc) => `/products/${doc.slug}`, ""),
     }),
     nestedDocsPlugin({
       collections: ["blogs"],

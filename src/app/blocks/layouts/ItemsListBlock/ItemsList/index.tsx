@@ -1,8 +1,6 @@
 import { cn } from "@app/utilities/cn"
 import React, { ReactNode } from "react"
 
-import { Item } from "@app/components/types"
-
 import type { ItemsListBlockProps } from "@app/blocks/layouts/ItemsListBlock"
 import {
   Carousel,
@@ -17,8 +15,10 @@ import { cardComponentsMap, CardComponentsMap } from "@app/_Map/cards.map"
 import { PrerendedCard } from "@app/components/Prerenderer/Card"
 import { Separator } from "@app/components/ui/separator"
 import { CardVariant } from "../config"
+import { Category, Media } from "@payload-types"
 
 export type RelationTo = ItemsListBlockProps["relationTo"] | "media"
+export type Item = Category | Media
 
 export type Props<T> = {
   items: T[]

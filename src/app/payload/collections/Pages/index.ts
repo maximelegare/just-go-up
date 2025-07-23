@@ -7,7 +7,6 @@ import { hero } from "@app/heros/config"
 
 import { revalidatePage } from "./hooks/revalidatePage"
 import { ItemsListBlock } from "@app/blocks/layouts/ItemsListBlock/config"
-import { ItemDetailsLayout } from "@app/blocks/prebuiltLayouts/ItemDetailsBlock/config"
 import { superUser } from "@app/access/super"
 import { admins } from "@app/access/admins"
 import { anyone } from "@app/access/anyone"
@@ -84,19 +83,9 @@ export const Pages: CollectionConfig = {
           label: "Content",
           fields: [
             {
-              name: "hasPrebuiltLayout",
-              type: "checkbox",
-              defaultValue: false,
-            },
-            {
               name: "layout",
               type: "blocks",
               localized: true,
-              admin: {
-                condition: (_, siblingData) => {
-                  return siblingData?.hasPrebuiltLayout === false ? true : false
-                },
-              },
               blocks: [
                 CallToAction,
                 Content,
@@ -106,17 +95,6 @@ export const Pages: CollectionConfig = {
                 DynamicContent,
                 TitleSectionBlock,
               ],
-            },
-            {
-              name: "prebuiltLayout",
-              type: "blocks",
-              admin: {
-                condition: (_, siblingData) => {
-                  return siblingData?.hasPrebuiltLayout === true ? true : false
-                },
-              },
-              maxRows: 1,
-              blocks: [ItemDetailsLayout],
             },
           ],
         },

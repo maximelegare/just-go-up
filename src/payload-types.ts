@@ -71,12 +71,8 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
-    products: Product;
-    'sleeve-lengths': SleeveLength;
-    variants: Variant;
     blogs: Blog;
     links: Link;
-    fabrics: Fabric;
     'search-param-keys': SearchParamKey;
     'search-param-values': SearchParamValue;
     optionsBars: OptionsBar;
@@ -87,22 +83,14 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    variants: {
-      products: 'products';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    products: ProductsSelect<false> | ProductsSelect<true>;
-    'sleeve-lengths': SleeveLengthsSelect<false> | SleeveLengthsSelect<true>;
-    variants: VariantsSelect<false> | VariantsSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     links: LinksSelect<false> | LinksSelect<true>;
-    fabrics: FabricsSelect<false> | FabricsSelect<true>;
     'search-param-keys': SearchParamKeysSelect<false> | SearchParamKeysSelect<true>;
     'search-param-values': SearchParamValuesSelect<false> | SearchParamValuesSelect<true>;
     optionsBars: OptionsBarsSelect<false> | OptionsBarsSelect<true>;
@@ -227,11 +215,9 @@ export interface Page {
                     value?: {
                       valueType?: ('collection' | 'custom') | null;
                       collectionData?: {
-                        type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                        type?: ('category' | 'blog') | null;
                         category?: (string | null) | Category;
-                        product?: (string | null) | Product;
-                        variant?: (string | null) | Variant;
-                        fabric?: (string | null) | Fabric;
+                        blog?: (string | null) | Blog;
                       };
                       custom?: {
                         value?: (string | null) | SearchParamValue;
@@ -251,7 +237,6 @@ export interface Page {
     backgroundTextOverlay?: string | null;
     media?: (string | null) | Media;
   };
-  hasPrebuiltLayout?: boolean | null;
   layout?:
     | (
         | {
@@ -297,11 +282,9 @@ export interface Page {
                             value?: {
                               valueType?: ('collection' | 'custom') | null;
                               collectionData?: {
-                                type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                                type?: ('category' | 'blog') | null;
                                 category?: (string | null) | Category;
-                                product?: (string | null) | Product;
-                                variant?: (string | null) | Variant;
-                                fabric?: (string | null) | Fabric;
+                                blog?: (string | null) | Blog;
                               };
                               custom?: {
                                 value?: (string | null) | SearchParamValue;
@@ -380,11 +363,9 @@ export interface Page {
                             value?: {
                               valueType?: ('collection' | 'custom') | null;
                               collectionData?: {
-                                type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                                type?: ('category' | 'blog') | null;
                                 category?: (string | null) | Category;
-                                product?: (string | null) | Product;
-                                variant?: (string | null) | Variant;
-                                fabric?: (string | null) | Fabric;
+                                blog?: (string | null) | Blog;
                               };
                               custom?: {
                                 value?: (string | null) | SearchParamValue;
@@ -455,11 +436,9 @@ export interface Page {
                         value?: {
                           valueType?: ('collection' | 'custom') | null;
                           collectionData?: {
-                            type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                            type?: ('category' | 'blog') | null;
                             category?: (string | null) | Category;
-                            product?: (string | null) | Product;
-                            variant?: (string | null) | Variant;
-                            fabric?: (string | null) | Fabric;
+                            blog?: (string | null) | Blog;
                           };
                           custom?: {
                             value?: (string | null) | SearchParamValue;
@@ -516,14 +495,11 @@ export interface Page {
             };
             blockTitle: string;
             populateBy: 'collection' | 'featured';
-            relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
-            cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-condensed') | null;
+            relationTo?: ('categories' | 'blogs') | null;
+            cardVariant?: ('category' | 'blog' | 'blog-condensed') | null;
             featured?: {
-              relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
+              relationTo?: ('categories' | 'blogs') | null;
               categories?: (string | Category)[] | null;
-              products?: (string | Product)[] | null;
-              variants?: (string | Variant)[] | null;
-              blogs?: (string | Variant)[] | null;
             };
             layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
             imageSelector?: ('images' | 'dots') | null;
@@ -566,17 +542,6 @@ export interface Page {
             blockType: 'titleSection';
           }
       )[]
-    | null;
-  prebuiltLayout?:
-    | {
-        blockTitle: string;
-        relationTo?: ('products' | 'categories') | null;
-        categories?: (string | Category)[] | null;
-        products?: (string | Product)[] | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'itemDetails';
-      }[]
     | null;
   slug: string;
   meta?: {
@@ -659,291 +624,21 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
+ * via the `definition` "blogs".
  */
-export interface Product {
-  id: string;
-  title: string;
-  variants?: (string | Variant)[] | null;
-  defaultVariant?: (string | null) | Variant;
-  publishedOn?: string | null;
-  isActive?: boolean | null;
-  slug: string;
-  skipSync?: boolean | null;
-  parent?: (string | null) | Product;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Product;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "variants".
- */
-export interface Variant {
+export interface Blog {
   id: string;
   publishedOn?: string | null;
-  products?: {
-    docs?: (string | Product)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
   title?: string | null;
-  category?: (string | null) | Category;
-  fabric?: (string | Fabric)[] | null;
-  length?: (string | null) | SleeveLength;
-  price__temporary?: number | null;
-  details: {
-    details: {
-      hasMultipleColumns?: boolean | null;
-      columns?:
-        | {
-            size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-            richText?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            enableLink?: boolean | null;
-            link?: {
-              type?: ('reference' | 'custom' | 'current') | null;
-              newTab?: boolean | null;
-              reference?: {
-                relationTo: 'pages';
-                value: string | Page;
-              } | null;
-              url?: string | null;
-              label: string;
-              /**
-               * Dictates how the link should be rendered.
-               */
-              appearance?:
-                | (
-                    | 'default'
-                    | 'destructive'
-                    | 'ghost'
-                    | 'link'
-                    | 'outline'
-                    | 'text'
-                    | 'secondary'
-                    | 'underline'
-                    | 'iconOnly'
-                    | 'menu'
-                    | 'categoryLabel'
-                    | 'richtextLink'
-                  )
-                | null;
-              /**
-               * Highlights the link based on the URL
-               */
-              isActive?: ('default' | 'exact' | 'never') | null;
-              searchParams?: {
-                toggleOnClick?: boolean | null;
-                params?:
-                  | {
-                      key: string | SearchParamKey;
-                      value?: {
-                        valueType?: ('collection' | 'custom') | null;
-                        collectionData?: {
-                          type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                          category?: (string | null) | Category;
-                          product?: (string | null) | Product;
-                          variant?: (string | null) | Variant;
-                          fabric?: (string | null) | Fabric;
-                        };
-                        custom?: {
-                          value?: (string | null) | SearchParamValue;
-                        };
-                      };
-                      id?: string | null;
-                    }[]
-                  | null;
-              };
-            };
-            id?: string | null;
-          }[]
-        | null;
-      column?: {
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom' | 'current') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Dictates how the link should be rendered.
-           */
-          appearance?:
-            | (
-                | 'default'
-                | 'destructive'
-                | 'ghost'
-                | 'link'
-                | 'outline'
-                | 'text'
-                | 'secondary'
-                | 'underline'
-                | 'iconOnly'
-                | 'menu'
-                | 'categoryLabel'
-                | 'richtextLink'
-              )
-            | null;
-          /**
-           * Highlights the link based on the URL
-           */
-          isActive?: ('default' | 'exact' | 'never') | null;
-          searchParams?: {
-            toggleOnClick?: boolean | null;
-            params?:
-              | {
-                  key: string | SearchParamKey;
-                  value?: {
-                    valueType?: ('collection' | 'custom') | null;
-                    collectionData?: {
-                      type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                      category?: (string | null) | Category;
-                      product?: (string | null) | Product;
-                      variant?: (string | null) | Variant;
-                      fabric?: (string | null) | Fabric;
-                    };
-                    custom?: {
-                      value?: (string | null) | SearchParamValue;
-                    };
-                  };
-                  id?: string | null;
-                }[]
-              | null;
-          };
-        };
-      };
-      conditionalRenderer?: {
-        show?: ('always' | 'conditionally') | null;
-        showParams?: (string | SearchParamValue)[] | null;
-        hideParams?: (string | SearchParamValue)[] | null;
-      };
-      id?: string | null;
-      blockName?: string | null;
-      blockType: 'content';
-    }[];
-    moreDetails?:
-      | (
-          | {
-              hasMultipleColumns?: boolean | null;
-              columns?:
-                | {
-                    size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-                    richText?: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    } | null;
-                    enableLink?: boolean | null;
-                    link?: {
-                      type?: ('reference' | 'custom' | 'current') | null;
-                      newTab?: boolean | null;
-                      reference?: {
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null;
-                      url?: string | null;
-                      label: string;
-                      /**
-                       * Dictates how the link should be rendered.
-                       */
-                      appearance?:
-                        | (
-                            | 'default'
-                            | 'destructive'
-                            | 'ghost'
-                            | 'link'
-                            | 'outline'
-                            | 'text'
-                            | 'secondary'
-                            | 'underline'
-                            | 'iconOnly'
-                            | 'menu'
-                            | 'categoryLabel'
-                            | 'richtextLink'
-                          )
-                        | null;
-                      /**
-                       * Highlights the link based on the URL
-                       */
-                      isActive?: ('default' | 'exact' | 'never') | null;
-                      searchParams?: {
-                        toggleOnClick?: boolean | null;
-                        params?:
-                          | {
-                              key: string | SearchParamKey;
-                              value?: {
-                                valueType?: ('collection' | 'custom') | null;
-                                collectionData?: {
-                                  type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                                  category?: (string | null) | Category;
-                                  product?: (string | null) | Product;
-                                  variant?: (string | null) | Variant;
-                                  fabric?: (string | null) | Fabric;
-                                };
-                                custom?: {
-                                  value?: (string | null) | SearchParamValue;
-                                };
-                              };
-                              id?: string | null;
-                            }[]
-                          | null;
-                      };
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              column?: {
+  subtitle?: string | null;
+  categories?: (string | Category)[] | null;
+  content: {
+    content: (
+      | {
+          hasMultipleColumns?: boolean | null;
+          columns?:
+            | {
+                size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
                 richText?: {
                   root: {
                     type: string;
@@ -1000,11 +695,9 @@ export interface Variant {
                           value?: {
                             valueType?: ('collection' | 'custom') | null;
                             collectionData?: {
-                              type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                              type?: ('category' | 'blog') | null;
                               category?: (string | null) | Category;
-                              product?: (string | null) | Product;
-                              variant?: (string | null) | Variant;
-                              fabric?: (string | null) | Fabric;
+                              blog?: (string | null) | Blog;
                             };
                             custom?: {
                               value?: (string | null) | SearchParamValue;
@@ -1015,71 +708,139 @@ export interface Variant {
                       | null;
                   };
                 };
+                id?: string | null;
+              }[]
+            | null;
+          column?: {
+            richText?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
               };
-              conditionalRenderer?: {
-                show?: ('always' | 'conditionally') | null;
-                showParams?: (string | SearchParamValue)[] | null;
-                hideParams?: (string | SearchParamValue)[] | null;
+              [k: string]: unknown;
+            } | null;
+            enableLink?: boolean | null;
+            link?: {
+              type?: ('reference' | 'custom' | 'current') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'pages';
+                value: string | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+              /**
+               * Dictates how the link should be rendered.
+               */
+              appearance?:
+                | (
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'text'
+                    | 'secondary'
+                    | 'underline'
+                    | 'iconOnly'
+                    | 'menu'
+                    | 'categoryLabel'
+                    | 'richtextLink'
+                  )
+                | null;
+              /**
+               * Highlights the link based on the URL
+               */
+              isActive?: ('default' | 'exact' | 'never') | null;
+              searchParams?: {
+                toggleOnClick?: boolean | null;
+                params?:
+                  | {
+                      key: string | SearchParamKey;
+                      value?: {
+                        valueType?: ('collection' | 'custom') | null;
+                        collectionData?: {
+                          type?: ('category' | 'blog') | null;
+                          category?: (string | null) | Category;
+                          blog?: (string | null) | Blog;
+                        };
+                        custom?: {
+                          value?: (string | null) | SearchParamValue;
+                        };
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
               };
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'content';
-            }
-          | {
-              position?: ('default' | 'fullscreen') | null;
-              media: string | Media;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'mediaBlock';
-            }
-        )[]
-      | null;
+            };
+          };
+          conditionalRenderer?: {
+            show?: ('always' | 'conditionally') | null;
+            showParams?: (string | SearchParamValue)[] | null;
+            hideParams?: (string | SearchParamValue)[] | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'content';
+        }
+      | {
+          position?: ('default' | 'fullscreen') | null;
+          media: string | Media;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'mediaBlock';
+        }
+      | {
+          type?: ('highImpact' | 'lowImpact') | null;
+          /**
+           * Only available for dynamic-content
+           */
+          useDocuementFields?: boolean | null;
+          title?: string | null;
+          subtitle?: string | null;
+          showImage?: boolean | null;
+          image?: (string | null) | Media;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'titleSection';
+        }
+    )[];
   };
   medias?: {
     mainImage?: (string | null) | Media;
-    images?:
-      | {
-          image?: (string | null) | Media;
-          id?: string | null;
-        }[]
-      | null;
   };
-  sku: string;
+  isFeatured?: boolean | null;
   isActive?: boolean | null;
-  isLimitedEdition?: boolean | null;
   slug: string;
-  availability?: {
-    availabilityType?: ('boolean' | 'stock') | null;
-    isAvailable?: boolean | null;
-    stock?: number | null;
-  };
   skipSync?: boolean | null;
+  parent?: (string | null) | Blog;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Blog;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "fabrics".
- */
-export interface Fabric {
-  id: string;
-  title: string;
-  SKU?: string | null;
-  mainImage: string | Media;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sleeve-lengths".
- */
-export interface SleeveLength {
-  id: string;
-  title?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1355,11 +1116,9 @@ export interface Link {
             value?: {
               valueType?: ('collection' | 'custom') | null;
               collectionData?: {
-                type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                type?: ('category' | 'blog') | null;
                 category?: (string | null) | Category;
-                product?: (string | null) | Product;
-                variant?: (string | null) | Variant;
-                fabric?: (string | null) | Fabric;
+                blog?: (string | null) | Blog;
               };
               custom?: {
                 value?: (string | null) | SearchParamValue;
@@ -1392,230 +1151,6 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogs".
- */
-export interface Blog {
-  id: string;
-  publishedOn?: string | null;
-  title?: string | null;
-  subtitle?: string | null;
-  categories?: (string | Category)[] | null;
-  content: {
-    content: (
-      | {
-          hasMultipleColumns?: boolean | null;
-          columns?:
-            | {
-                size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-                richText?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
-                    version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom' | 'current') | null;
-                  newTab?: boolean | null;
-                  reference?: {
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null;
-                  url?: string | null;
-                  label: string;
-                  /**
-                   * Dictates how the link should be rendered.
-                   */
-                  appearance?:
-                    | (
-                        | 'default'
-                        | 'destructive'
-                        | 'ghost'
-                        | 'link'
-                        | 'outline'
-                        | 'text'
-                        | 'secondary'
-                        | 'underline'
-                        | 'iconOnly'
-                        | 'menu'
-                        | 'categoryLabel'
-                        | 'richtextLink'
-                      )
-                    | null;
-                  /**
-                   * Highlights the link based on the URL
-                   */
-                  isActive?: ('default' | 'exact' | 'never') | null;
-                  searchParams?: {
-                    toggleOnClick?: boolean | null;
-                    params?:
-                      | {
-                          key: string | SearchParamKey;
-                          value?: {
-                            valueType?: ('collection' | 'custom') | null;
-                            collectionData?: {
-                              type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                              category?: (string | null) | Category;
-                              product?: (string | null) | Product;
-                              variant?: (string | null) | Variant;
-                              fabric?: (string | null) | Fabric;
-                            };
-                            custom?: {
-                              value?: (string | null) | SearchParamValue;
-                            };
-                          };
-                          id?: string | null;
-                        }[]
-                      | null;
-                  };
-                };
-                id?: string | null;
-              }[]
-            | null;
-          column?: {
-            richText?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            enableLink?: boolean | null;
-            link?: {
-              type?: ('reference' | 'custom' | 'current') | null;
-              newTab?: boolean | null;
-              reference?: {
-                relationTo: 'pages';
-                value: string | Page;
-              } | null;
-              url?: string | null;
-              label: string;
-              /**
-               * Dictates how the link should be rendered.
-               */
-              appearance?:
-                | (
-                    | 'default'
-                    | 'destructive'
-                    | 'ghost'
-                    | 'link'
-                    | 'outline'
-                    | 'text'
-                    | 'secondary'
-                    | 'underline'
-                    | 'iconOnly'
-                    | 'menu'
-                    | 'categoryLabel'
-                    | 'richtextLink'
-                  )
-                | null;
-              /**
-               * Highlights the link based on the URL
-               */
-              isActive?: ('default' | 'exact' | 'never') | null;
-              searchParams?: {
-                toggleOnClick?: boolean | null;
-                params?:
-                  | {
-                      key: string | SearchParamKey;
-                      value?: {
-                        valueType?: ('collection' | 'custom') | null;
-                        collectionData?: {
-                          type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                          category?: (string | null) | Category;
-                          product?: (string | null) | Product;
-                          variant?: (string | null) | Variant;
-                          fabric?: (string | null) | Fabric;
-                        };
-                        custom?: {
-                          value?: (string | null) | SearchParamValue;
-                        };
-                      };
-                      id?: string | null;
-                    }[]
-                  | null;
-              };
-            };
-          };
-          conditionalRenderer?: {
-            show?: ('always' | 'conditionally') | null;
-            showParams?: (string | SearchParamValue)[] | null;
-            hideParams?: (string | SearchParamValue)[] | null;
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'content';
-        }
-      | {
-          position?: ('default' | 'fullscreen') | null;
-          media: string | Media;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'mediaBlock';
-        }
-      | {
-          type?: ('highImpact' | 'lowImpact') | null;
-          /**
-           * Only available for dynamic-content
-           */
-          useDocuementFields?: boolean | null;
-          title?: string | null;
-          subtitle?: string | null;
-          showImage?: boolean | null;
-          image?: (string | null) | Media;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'titleSection';
-        }
-    )[];
-  };
-  medias?: {
-    mainImage?: (string | null) | Media;
-  };
-  isFeatured?: boolean | null;
-  isActive?: boolean | null;
-  slug: string;
-  skipSync?: boolean | null;
-  parent?: (string | null) | Blog;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Blog;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1679,28 +1214,12 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'products';
-        value: string | Product;
-      } | null)
-    | ({
-        relationTo: 'sleeve-lengths';
-        value: string | SleeveLength;
-      } | null)
-    | ({
-        relationTo: 'variants';
-        value: string | Variant;
-      } | null)
-    | ({
         relationTo: 'blogs';
         value: string | Blog;
       } | null)
     | ({
         relationTo: 'links';
         value: string | Link;
-      } | null)
-    | ({
-        relationTo: 'fabrics';
-        value: string | Fabric;
       } | null)
     | ({
         relationTo: 'search-param-keys';
@@ -1811,9 +1330,7 @@ export interface PagesSelect<T extends boolean = true> {
                                         | {
                                             type?: T;
                                             category?: T;
-                                            product?: T;
-                                            variant?: T;
-                                            fabric?: T;
+                                            blog?: T;
                                           };
                                       custom?:
                                         | T
@@ -1833,7 +1350,6 @@ export interface PagesSelect<T extends boolean = true> {
         backgroundTextOverlay?: T;
         media?: T;
       };
-  hasPrebuiltLayout?: T;
   layout?:
     | T
     | {
@@ -1871,9 +1387,7 @@ export interface PagesSelect<T extends boolean = true> {
                                               | {
                                                   type?: T;
                                                   category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
+                                                  blog?: T;
                                                 };
                                             custom?:
                                               | T
@@ -1927,9 +1441,7 @@ export interface PagesSelect<T extends boolean = true> {
                                               | {
                                                   type?: T;
                                                   category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
+                                                  blog?: T;
                                                 };
                                             custom?:
                                               | T
@@ -1975,9 +1487,7 @@ export interface PagesSelect<T extends boolean = true> {
                                               | {
                                                   type?: T;
                                                   category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
+                                                  blog?: T;
                                                 };
                                             custom?:
                                               | T
@@ -2035,9 +1545,6 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     relationTo?: T;
                     categories?: T;
-                    products?: T;
-                    variants?: T;
-                    blogs?: T;
                   };
               layout?: T;
               imageSelector?: T;
@@ -2076,20 +1583,6 @@ export interface PagesSelect<T extends boolean = true> {
               subtitle?: T;
               showImage?: T;
               image?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  prebuiltLayout?:
-    | T
-    | {
-        itemDetails?:
-          | T
-          | {
-              blockTitle?: T;
-              relationTo?: T;
-              categories?: T;
-              products?: T;
               id?: T;
               blockName?: T;
             };
@@ -2165,319 +1658,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products_select".
- */
-export interface ProductsSelect<T extends boolean = true> {
-  title?: T;
-  variants?: T;
-  defaultVariant?: T;
-  publishedOn?: T;
-  isActive?: T;
-  slug?: T;
-  skipSync?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sleeve-lengths_select".
- */
-export interface SleeveLengthsSelect<T extends boolean = true> {
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "variants_select".
- */
-export interface VariantsSelect<T extends boolean = true> {
-  publishedOn?: T;
-  products?: T;
-  title?: T;
-  category?: T;
-  fabric?: T;
-  length?: T;
-  price__temporary?: T;
-  details?:
-    | T
-    | {
-        details?:
-          | T
-          | {
-              content?:
-                | T
-                | {
-                    hasMultipleColumns?: T;
-                    columns?:
-                      | T
-                      | {
-                          size?: T;
-                          richText?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                          id?: T;
-                        };
-                    column?:
-                      | T
-                      | {
-                          richText?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
-                    conditionalRenderer?:
-                      | T
-                      | {
-                          show?: T;
-                          showParams?: T;
-                          hideParams?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-        moreDetails?:
-          | T
-          | {
-              content?:
-                | T
-                | {
-                    hasMultipleColumns?: T;
-                    columns?:
-                      | T
-                      | {
-                          size?: T;
-                          richText?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                          id?: T;
-                        };
-                    column?:
-                      | T
-                      | {
-                          richText?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
-                    conditionalRenderer?:
-                      | T
-                      | {
-                          show?: T;
-                          showParams?: T;
-                          hideParams?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              mediaBlock?:
-                | T
-                | {
-                    position?: T;
-                    media?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  medias?:
-    | T
-    | {
-        mainImage?: T;
-        images?:
-          | T
-          | {
-              image?: T;
-              id?: T;
-            };
-      };
-  sku?: T;
-  isActive?: T;
-  isLimitedEdition?: T;
-  slug?: T;
-  availability?:
-    | T
-    | {
-        availabilityType?: T;
-        isAvailable?: T;
-        stock?: T;
-      };
-  skipSync?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs_select".
  */
 export interface BlogsSelect<T extends boolean = true> {
@@ -2528,9 +1708,7 @@ export interface BlogsSelect<T extends boolean = true> {
                                                     | {
                                                         type?: T;
                                                         category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
+                                                        blog?: T;
                                                       };
                                                   custom?:
                                                     | T
@@ -2576,9 +1754,7 @@ export interface BlogsSelect<T extends boolean = true> {
                                                     | {
                                                         type?: T;
                                                         category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
+                                                        blog?: T;
                                                       };
                                                   custom?:
                                                     | T
@@ -2685,9 +1861,7 @@ export interface LinksSelect<T extends boolean = true> {
                             | {
                                 type?: T;
                                 category?: T;
-                                product?: T;
-                                variant?: T;
-                                fabric?: T;
+                                blog?: T;
                               };
                           custom?:
                             | T
@@ -2700,18 +1874,6 @@ export interface LinksSelect<T extends boolean = true> {
             };
       };
   logo?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "fabrics_select".
- */
-export interface FabricsSelect<T extends boolean = true> {
-  title?: T;
-  SKU?: T;
-  mainImage?: T;
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3098,11 +2260,9 @@ export interface Settings {
                   value?: {
                     valueType?: ('collection' | 'custom') | null;
                     collectionData?: {
-                      type?: ('category' | 'product' | 'variant' | 'fabric') | null;
+                      type?: ('category' | 'blog') | null;
                       category?: (string | null) | Category;
-                      product?: (string | null) | Product;
-                      variant?: (string | null) | Variant;
-                      fabric?: (string | null) | Fabric;
+                      blog?: (string | null) | Blog;
                     };
                     custom?: {
                       value?: (string | null) | SearchParamValue;
@@ -3135,14 +2295,11 @@ export interface Sidebars {
               };
               blockTitle: string;
               populateBy: 'collection' | 'featured';
-              relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
-              cardVariant?: ('product' | 'category' | 'variant' | 'blog' | 'blog-condensed') | null;
+              relationTo?: ('categories' | 'blogs') | null;
+              cardVariant?: ('category' | 'blog' | 'blog-condensed') | null;
               featured?: {
-                relationTo?: ('products' | 'categories' | 'variants' | 'blogs') | null;
+                relationTo?: ('categories' | 'blogs') | null;
                 categories?: (string | Category)[] | null;
-                products?: (string | Product)[] | null;
-                variants?: (string | Variant)[] | null;
-                blogs?: (string | Variant)[] | null;
               };
               layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
               imageSelector?: ('images' | 'dots') | null;
@@ -3291,9 +2448,7 @@ export interface SettingsSelect<T extends boolean = true> {
                                   | {
                                       type?: T;
                                       category?: T;
-                                      product?: T;
-                                      variant?: T;
-                                      fabric?: T;
+                                      blog?: T;
                                     };
                                 custom?:
                                   | T
@@ -3340,9 +2495,6 @@ export interface SidebarsSelect<T extends boolean = true> {
                       | {
                           relationTo?: T;
                           categories?: T;
-                          products?: T;
-                          variants?: T;
-                          blogs?: T;
                         };
                     layout?: T;
                     imageSelector?: T;

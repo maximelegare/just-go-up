@@ -7,13 +7,7 @@ import type { Block } from "payload"
 import { cardComponentsMap } from "@app/_Map/cards.map"
 
 export type CardVariant = keyof typeof cardComponentsMap
-const cardVariants: Array<CardVariant> = [
-  "product",
-  "category",
-  "variant",
-  "blog",
-  "blog-condensed",
-] as const
+const cardVariants: Array<CardVariant> = ["category", "blog", "blog-condensed"] as const
 
 export const ItemsListBlock: Block = {
   slug: "itemsList",
@@ -49,20 +43,12 @@ export const ItemsListBlock: Block = {
         condition: (_, siblingData) => siblingData.populateBy === "collection",
       },
       type: "select",
-      defaultValue: "products",
+      defaultValue: "blogs",
       label: "Collection to Show",
       options: [
         {
-          label: "Products",
-          value: "products",
-        },
-        {
           label: "Categories",
           value: "categories",
-        },
-        {
-          label: "Variants",
-          value: "variants",
         },
         {
           label: "Blogs",
@@ -90,17 +76,10 @@ export const ItemsListBlock: Block = {
           label: "Collection to Show",
           options: [
             {
-              label: "Products",
-              value: "products",
-            },
-            {
               label: "Categories",
               value: "categories",
             },
-            {
-              label: "Variants",
-              value: "variants",
-            },
+
             {
               label: "Blogs",
               value: "blogs",
@@ -117,38 +96,9 @@ export const ItemsListBlock: Block = {
           label: "Categories to show",
           relationTo: "categories",
         },
-        {
-          name: "products",
-          type: "relationship",
-          admin: {
-            condition: (_, siblingData) => siblingData.relationTo === "products",
-          },
-          hasMany: true,
-          label: "Products To Show",
-          relationTo: "products",
-        },
-        {
-          name: "variants",
-          type: "relationship",
-          admin: {
-            condition: (_, siblingData) => siblingData.relationTo === "variants",
-          },
-          hasMany: true,
-          label: "Variants to Show",
-          relationTo: "variants",
-        },
-        {
-          name: "blogs",
-          type: "relationship",
-          admin: {
-            condition: (_, siblingData) => siblingData.relationTo === "variants",
-          },
-          hasMany: true,
-          label: "Variants to Show",
-          relationTo: "variants",
-        },
       ],
     },
+
     {
       name: "layout",
       type: "radio",

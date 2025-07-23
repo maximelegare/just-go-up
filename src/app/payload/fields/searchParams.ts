@@ -1,109 +1,89 @@
-import type { Field } from 'payload'
-import deepMerge from '@app/utilities/deepMerge'
+import type { Field } from "payload"
+import deepMerge from "@app/utilities/deepMerge"
 
 type RenderBlockConditionally = (overrides?: Partial<Field>) => Field
 
 export const searchParams: RenderBlockConditionally = (overrides = {}) => {
   const result: Field = {
-    name: 'searchParams',
-    label: 'Search params',
-    type: 'group',
+    name: "searchParams",
+    label: "Search params",
+    type: "group",
     fields: [
       {
-        name: 'toggleOnClick',
-        type: 'checkbox',
+        name: "toggleOnClick",
+        type: "checkbox",
         defaultValue: false,
       },
       {
-        name: 'params',
-        type: 'array',
+        name: "params",
+        type: "array",
         fields: [
           {
-            name: 'key',
-            type: 'relationship',
-            relationTo: 'search-param-keys',
+            name: "key",
+            type: "relationship",
+            relationTo: "search-param-keys",
             required: true,
           },
           {
-            name: 'value',
-            type: 'group',
+            name: "value",
+            type: "group",
             fields: [
               {
-                name: 'valueType',
-                defaultValue: 'collection',
-                type: 'radio',
+                name: "valueType",
+                defaultValue: "collection",
+                type: "radio",
                 options: [
-                  { label: 'Collection', value: 'collection' },
-                  { label: 'Custom', value: 'custom' },
+                  { label: "Collection", value: "collection" },
+                  { label: "Custom", value: "custom" },
                 ],
               },
               {
-                name: 'collectionData',
-                type: 'group',
+                name: "collectionData",
+                type: "group",
                 admin: {
-                  condition: (_, siblingData) => siblingData.valueType === 'collection',
+                  condition: (_, siblingData) => siblingData.valueType === "collection",
                 },
                 fields: [
                   {
-                    name: 'type',
-                    type: 'select',
+                    name: "type",
+                    type: "select",
                     options: [
-                      { label: 'Category', value: 'category' },
-                      { label: 'Product', value: 'product' },
-                      { label: 'Variant', value: 'variant' },
-                      { label: 'Fabric', value: 'fabric' },
+                      { label: "Category", value: "category" },
+                      { label: "Blog", value: "blog" },
                     ],
                   },
                   {
-                    name: 'category',
-                    type: 'relationship',
-                    relationTo: 'categories',
+                    name: "category",
+                    type: "relationship",
+                    relationTo: "categories",
                     admin: {
-                      condition: (_, siblingData) => siblingData?.type === 'category',
+                      condition: (_, siblingData) => siblingData?.type === "category",
                     },
                     required: true,
                   },
                   {
-                    name: 'product',
-                    type: 'relationship',
-                    relationTo: 'products',
+                    name: "blog",
+                    type: "relationship",
+                    relationTo: "blogs",
                     admin: {
-                      condition: (_, siblingData) => siblingData?.type === 'product',
-                    },
-                    required: true,
-                  },
-                  {
-                    name: 'variant',
-                    type: 'relationship',
-                    relationTo: 'variants',
-                    admin: {
-                      condition: (_, siblingData) => siblingData?.type === 'variant',
-                    },
-                    required: true,
-                  },
-                  {
-                    name: 'fabric',
-                    type: 'relationship',
-                    relationTo: 'fabrics',
-                    admin: {
-                      condition: (_, siblingData) => siblingData?.type === 'fabric',
+                      condition: (_, siblingData) => siblingData?.type === "fabric",
                     },
                     required: true,
                   },
                 ],
               },
               {
-                name: 'custom',
-                type: 'group',
+                name: "custom",
+                type: "group",
                 fields: [
                   {
-                    name: 'value',
-                    type: 'relationship',
-                    relationTo: 'search-param-values',
+                    name: "value",
+                    type: "relationship",
+                    relationTo: "search-param-values",
                   },
                 ],
                 admin: {
-                  condition: (_, siblingData) => siblingData?.valueType === 'custom',
+                  condition: (_, siblingData) => siblingData?.valueType === "custom",
                 },
               },
             ],
