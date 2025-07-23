@@ -267,31 +267,65 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
               return <Separator type="dots" key={index} />
             }
             case "table": {
+              const headRows = node.children.filter((row) =>
+                row.children?.every(
+                  (cell: any) => cell.type === "tablecell" && cell.headerState > 0,
+                ),
+              )
+              const bodyRows = node.children.filter((row) => !headRows.includes(row))
+
               return (
-                <table
-                  className="table-auto border-collapse border border-gray-300 my-6"
+                <div
+                  className="overflow-auto border-2 border-solid border-border rounded-xl"
                   key={index}
                 >
-                  <tbody>{serializedChildren}</tbody>
-                </table>
+                  <table className="w-full table-auto border-hidden border-spacing-0 border-collapse text-sm text-left shadow-sm not-prose">
+                    {headRows.length > 0 && (
+                      <thead className="bg-muted">
+                        {headRows.map((row, i) => (
+                          <React.Fragment key={`thead-${i}`}>
+                            {serializeLexical({ nodes: [row] })}
+                          </React.Fragment>
+                        ))}
+                      </thead>
+                    )}
+                    <tbody>
+                      {bodyRows.map((row, i) => (
+                        <React.Fragment key={`tbody-${i}`}>
+                          {serializeLexical({ nodes: [row] })}
+                        </React.Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )
             }
 
             case "tablerow": {
-              return <tr key={index}>{serializedChildren}</tr>
+              return (
+                <tr
+                  className="even:bg-muted/30 px-4 py-3 border-b border-border  text-foreground"
+                  key={index}
+                >
+                  {serializedChildren}
+                </tr>
+              )
             }
 
             case "tablecell": {
               const isHeader = node.headerState > 0
               const CellTag = isHeader ? "th" : "td"
               const cellContent = serializeLexical({ nodes: node.children as NodeTypes[] })
-
+              const getClassName =
+                CellTag === "td"
+                  ? "px-4 py-3 border-b border-gray-200 text-gray-800"
+                  : "px-4 py-3 border-b border-gray-300 font-semibold text-gray-700"
               return (
                 <CellTag
                   key={index}
                   colSpan={node.colSpan}
                   rowSpan={node.rowSpan}
-                  className="border border-gray-300 px-4 py-2 text-left align-top"
+                  className={getClassName}
                 >
                   {cellContent}
                 </CellTag>
