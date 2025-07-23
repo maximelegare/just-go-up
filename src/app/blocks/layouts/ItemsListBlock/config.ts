@@ -1,4 +1,3 @@
-import { bigTitle } from "@app/payload/fields/bigTitle"
 import { conditionalRenderer } from "@app/payload/fields/conditionalBlockRenderer"
 import { optionsBar } from "@app/payload/fields/optionsBar"
 import switchField from "@app/payload/fields/switch/config"
@@ -19,7 +18,6 @@ const cardVariants: Array<CardVariant> = [
 export const ItemsListBlock: Block = {
   slug: "itemsList",
   fields: [
-    bigTitle(),
     optionsBar(),
     {
       name: "blockTitle",

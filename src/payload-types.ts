@@ -320,69 +320,6 @@ export interface Page {
             blockType: 'cta';
           }
         | {
-            bigTitle?: {
-              enable?: boolean | null;
-              title?: string | null;
-              subtitle?: string | null;
-              showMainImage?: boolean | null;
-              image?: (string | null) | Media;
-              enableLink?: boolean | null;
-              link?: {
-                type?: ('reference' | 'custom' | 'current') | null;
-                newTab?: boolean | null;
-                reference?: {
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null;
-                url?: string | null;
-                label: string;
-                /**
-                 * Dictates how the link should be rendered.
-                 */
-                appearance?:
-                  | (
-                      | 'default'
-                      | 'destructive'
-                      | 'ghost'
-                      | 'link'
-                      | 'outline'
-                      | 'text'
-                      | 'secondary'
-                      | 'underline'
-                      | 'iconOnly'
-                      | 'menu'
-                      | 'categoryLabel'
-                      | 'richtextLink'
-                    )
-                  | null;
-                /**
-                 * Highlights the link based on the URL
-                 */
-                isActive?: ('default' | 'exact' | 'never') | null;
-                searchParams?: {
-                  toggleOnClick?: boolean | null;
-                  params?:
-                    | {
-                        key: string | SearchParamKey;
-                        value?: {
-                          valueType?: ('collection' | 'custom') | null;
-                          collectionData?: {
-                            type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                            category?: (string | null) | Category;
-                            product?: (string | null) | Product;
-                            variant?: (string | null) | Variant;
-                            fabric?: (string | null) | Fabric;
-                          };
-                          custom?: {
-                            value?: (string | null) | SearchParamValue;
-                          };
-                        };
-                        id?: string | null;
-                      }[]
-                    | null;
-                };
-              };
-            };
             hasMultipleColumns?: boolean | null;
             columns?:
               | {
@@ -551,69 +488,6 @@ export interface Page {
             blockType: 'mediaBlock';
           }
         | {
-            bigTitle?: {
-              enable?: boolean | null;
-              title?: string | null;
-              subtitle?: string | null;
-              showMainImage?: boolean | null;
-              image?: (string | null) | Media;
-              enableLink?: boolean | null;
-              link?: {
-                type?: ('reference' | 'custom' | 'current') | null;
-                newTab?: boolean | null;
-                reference?: {
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null;
-                url?: string | null;
-                label: string;
-                /**
-                 * Dictates how the link should be rendered.
-                 */
-                appearance?:
-                  | (
-                      | 'default'
-                      | 'destructive'
-                      | 'ghost'
-                      | 'link'
-                      | 'outline'
-                      | 'text'
-                      | 'secondary'
-                      | 'underline'
-                      | 'iconOnly'
-                      | 'menu'
-                      | 'categoryLabel'
-                      | 'richtextLink'
-                    )
-                  | null;
-                /**
-                 * Highlights the link based on the URL
-                 */
-                isActive?: ('default' | 'exact' | 'never') | null;
-                searchParams?: {
-                  toggleOnClick?: boolean | null;
-                  params?:
-                    | {
-                        key: string | SearchParamKey;
-                        value?: {
-                          valueType?: ('collection' | 'custom') | null;
-                          collectionData?: {
-                            type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                            category?: (string | null) | Category;
-                            product?: (string | null) | Product;
-                            variant?: (string | null) | Variant;
-                            fabric?: (string | null) | Fabric;
-                          };
-                          custom?: {
-                            value?: (string | null) | SearchParamValue;
-                          };
-                        };
-                        id?: string | null;
-                      }[]
-                    | null;
-                };
-              };
-            };
             form: string | Form;
             enableIntro?: boolean | null;
             introContent?: {
@@ -636,69 +510,6 @@ export interface Page {
             blockType: 'formBlock';
           }
         | {
-            bigTitle?: {
-              enable?: boolean | null;
-              title?: string | null;
-              subtitle?: string | null;
-              showMainImage?: boolean | null;
-              image?: (string | null) | Media;
-              enableLink?: boolean | null;
-              link?: {
-                type?: ('reference' | 'custom' | 'current') | null;
-                newTab?: boolean | null;
-                reference?: {
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null;
-                url?: string | null;
-                label: string;
-                /**
-                 * Dictates how the link should be rendered.
-                 */
-                appearance?:
-                  | (
-                      | 'default'
-                      | 'destructive'
-                      | 'ghost'
-                      | 'link'
-                      | 'outline'
-                      | 'text'
-                      | 'secondary'
-                      | 'underline'
-                      | 'iconOnly'
-                      | 'menu'
-                      | 'categoryLabel'
-                      | 'richtextLink'
-                    )
-                  | null;
-                /**
-                 * Highlights the link based on the URL
-                 */
-                isActive?: ('default' | 'exact' | 'never') | null;
-                searchParams?: {
-                  toggleOnClick?: boolean | null;
-                  params?:
-                    | {
-                        key: string | SearchParamKey;
-                        value?: {
-                          valueType?: ('collection' | 'custom') | null;
-                          collectionData?: {
-                            type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                            category?: (string | null) | Category;
-                            product?: (string | null) | Product;
-                            variant?: (string | null) | Variant;
-                            fabric?: (string | null) | Fabric;
-                          };
-                          custom?: {
-                            value?: (string | null) | SearchParamValue;
-                          };
-                        };
-                        id?: string | null;
-                      }[]
-                    | null;
-                };
-              };
-            };
             optionsBar?: {
               enable?: boolean | null;
               data?: (string | null) | OptionsBar;
@@ -891,69 +702,6 @@ export interface Variant {
   price__temporary?: number | null;
   details: {
     details: {
-      bigTitle?: {
-        enable?: boolean | null;
-        title?: string | null;
-        subtitle?: string | null;
-        showMainImage?: boolean | null;
-        image?: (string | null) | Media;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom' | 'current') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Dictates how the link should be rendered.
-           */
-          appearance?:
-            | (
-                | 'default'
-                | 'destructive'
-                | 'ghost'
-                | 'link'
-                | 'outline'
-                | 'text'
-                | 'secondary'
-                | 'underline'
-                | 'iconOnly'
-                | 'menu'
-                | 'categoryLabel'
-                | 'richtextLink'
-              )
-            | null;
-          /**
-           * Highlights the link based on the URL
-           */
-          isActive?: ('default' | 'exact' | 'never') | null;
-          searchParams?: {
-            toggleOnClick?: boolean | null;
-            params?:
-              | {
-                  key: string | SearchParamKey;
-                  value?: {
-                    valueType?: ('collection' | 'custom') | null;
-                    collectionData?: {
-                      type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                      category?: (string | null) | Category;
-                      product?: (string | null) | Product;
-                      variant?: (string | null) | Variant;
-                      fabric?: (string | null) | Fabric;
-                    };
-                    custom?: {
-                      value?: (string | null) | SearchParamValue;
-                    };
-                  };
-                  id?: string | null;
-                }[]
-              | null;
-          };
-        };
-      };
       hasMultipleColumns?: boolean | null;
       columns?:
         | {
@@ -1117,69 +865,6 @@ export interface Variant {
     moreDetails?:
       | (
           | {
-              bigTitle?: {
-                enable?: boolean | null;
-                title?: string | null;
-                subtitle?: string | null;
-                showMainImage?: boolean | null;
-                image?: (string | null) | Media;
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom' | 'current') | null;
-                  newTab?: boolean | null;
-                  reference?: {
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null;
-                  url?: string | null;
-                  label: string;
-                  /**
-                   * Dictates how the link should be rendered.
-                   */
-                  appearance?:
-                    | (
-                        | 'default'
-                        | 'destructive'
-                        | 'ghost'
-                        | 'link'
-                        | 'outline'
-                        | 'text'
-                        | 'secondary'
-                        | 'underline'
-                        | 'iconOnly'
-                        | 'menu'
-                        | 'categoryLabel'
-                        | 'richtextLink'
-                      )
-                    | null;
-                  /**
-                   * Highlights the link based on the URL
-                   */
-                  isActive?: ('default' | 'exact' | 'never') | null;
-                  searchParams?: {
-                    toggleOnClick?: boolean | null;
-                    params?:
-                      | {
-                          key: string | SearchParamKey;
-                          value?: {
-                            valueType?: ('collection' | 'custom') | null;
-                            collectionData?: {
-                              type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                              category?: (string | null) | Category;
-                              product?: (string | null) | Product;
-                              variant?: (string | null) | Variant;
-                              fabric?: (string | null) | Fabric;
-                            };
-                            custom?: {
-                              value?: (string | null) | SearchParamValue;
-                            };
-                          };
-                          id?: string | null;
-                        }[]
-                      | null;
-                  };
-                };
-              };
               hasMultipleColumns?: boolean | null;
               columns?:
                 | {
@@ -1721,69 +1406,6 @@ export interface Blog {
   content: {
     content: (
       | {
-          bigTitle?: {
-            enable?: boolean | null;
-            title?: string | null;
-            subtitle?: string | null;
-            showMainImage?: boolean | null;
-            image?: (string | null) | Media;
-            enableLink?: boolean | null;
-            link?: {
-              type?: ('reference' | 'custom' | 'current') | null;
-              newTab?: boolean | null;
-              reference?: {
-                relationTo: 'pages';
-                value: string | Page;
-              } | null;
-              url?: string | null;
-              label: string;
-              /**
-               * Dictates how the link should be rendered.
-               */
-              appearance?:
-                | (
-                    | 'default'
-                    | 'destructive'
-                    | 'ghost'
-                    | 'link'
-                    | 'outline'
-                    | 'text'
-                    | 'secondary'
-                    | 'underline'
-                    | 'iconOnly'
-                    | 'menu'
-                    | 'categoryLabel'
-                    | 'richtextLink'
-                  )
-                | null;
-              /**
-               * Highlights the link based on the URL
-               */
-              isActive?: ('default' | 'exact' | 'never') | null;
-              searchParams?: {
-                toggleOnClick?: boolean | null;
-                params?:
-                  | {
-                      key: string | SearchParamKey;
-                      value?: {
-                        valueType?: ('collection' | 'custom') | null;
-                        collectionData?: {
-                          type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                          category?: (string | null) | Category;
-                          product?: (string | null) | Product;
-                          variant?: (string | null) | Variant;
-                          fabric?: (string | null) | Fabric;
-                        };
-                        custom?: {
-                          value?: (string | null) | SearchParamValue;
-                        };
-                      };
-                      id?: string | null;
-                    }[]
-                  | null;
-              };
-            };
-          };
           hasMultipleColumns?: boolean | null;
           columns?:
             | {
@@ -2271,57 +1893,6 @@ export interface PagesSelect<T extends boolean = true> {
         content?:
           | T
           | {
-              bigTitle?:
-                | T
-                | {
-                    enable?: T;
-                    title?: T;
-                    subtitle?: T;
-                    showMainImage?: T;
-                    image?: T;
-                    enableLink?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                          isActive?: T;
-                          searchParams?:
-                            | T
-                            | {
-                                toggleOnClick?: T;
-                                params?:
-                                  | T
-                                  | {
-                                      key?: T;
-                                      value?:
-                                        | T
-                                        | {
-                                            valueType?: T;
-                                            collectionData?:
-                                              | T
-                                              | {
-                                                  type?: T;
-                                                  category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
-                                                };
-                                            custom?:
-                                              | T
-                                              | {
-                                                  value?: T;
-                                                };
-                                          };
-                                      id?: T;
-                                    };
-                              };
-                        };
-                  };
               hasMultipleColumns?: T;
               columns?:
                 | T
@@ -2440,57 +2011,6 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?:
           | T
           | {
-              bigTitle?:
-                | T
-                | {
-                    enable?: T;
-                    title?: T;
-                    subtitle?: T;
-                    showMainImage?: T;
-                    image?: T;
-                    enableLink?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                          isActive?: T;
-                          searchParams?:
-                            | T
-                            | {
-                                toggleOnClick?: T;
-                                params?:
-                                  | T
-                                  | {
-                                      key?: T;
-                                      value?:
-                                        | T
-                                        | {
-                                            valueType?: T;
-                                            collectionData?:
-                                              | T
-                                              | {
-                                                  type?: T;
-                                                  category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
-                                                };
-                                            custom?:
-                                              | T
-                                              | {
-                                                  value?: T;
-                                                };
-                                          };
-                                      id?: T;
-                                    };
-                              };
-                        };
-                  };
               form?: T;
               enableIntro?: T;
               introContent?: T;
@@ -2500,57 +2020,6 @@ export interface PagesSelect<T extends boolean = true> {
         itemsList?:
           | T
           | {
-              bigTitle?:
-                | T
-                | {
-                    enable?: T;
-                    title?: T;
-                    subtitle?: T;
-                    showMainImage?: T;
-                    image?: T;
-                    enableLink?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                          isActive?: T;
-                          searchParams?:
-                            | T
-                            | {
-                                toggleOnClick?: T;
-                                params?:
-                                  | T
-                                  | {
-                                      key?: T;
-                                      value?:
-                                        | T
-                                        | {
-                                            valueType?: T;
-                                            collectionData?:
-                                              | T
-                                              | {
-                                                  type?: T;
-                                                  category?: T;
-                                                  product?: T;
-                                                  variant?: T;
-                                                  fabric?: T;
-                                                };
-                                            custom?:
-                                              | T
-                                              | {
-                                                  value?: T;
-                                                };
-                                          };
-                                      id?: T;
-                                    };
-                              };
-                        };
-                  };
               optionsBar?:
                 | T
                 | {
@@ -2749,57 +2218,6 @@ export interface VariantsSelect<T extends boolean = true> {
               content?:
                 | T
                 | {
-                    bigTitle?:
-                      | T
-                      | {
-                          enable?: T;
-                          title?: T;
-                          subtitle?: T;
-                          showMainImage?: T;
-                          image?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
                     hasMultipleColumns?: T;
                     columns?:
                       | T
@@ -2914,57 +2332,6 @@ export interface VariantsSelect<T extends boolean = true> {
               content?:
                 | T
                 | {
-                    bigTitle?:
-                      | T
-                      | {
-                          enable?: T;
-                          title?: T;
-                          subtitle?: T;
-                          showMainImage?: T;
-                          image?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
                     hasMultipleColumns?: T;
                     columns?:
                       | T
@@ -3127,57 +2494,6 @@ export interface BlogsSelect<T extends boolean = true> {
               content?:
                 | T
                 | {
-                    bigTitle?:
-                      | T
-                      | {
-                          enable?: T;
-                          title?: T;
-                          subtitle?: T;
-                          showMainImage?: T;
-                          image?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
                     hasMultipleColumns?: T;
                     columns?:
                       | T
@@ -3813,69 +3129,6 @@ export interface Sidebars {
     sections?:
       | (
           | {
-              bigTitle?: {
-                enable?: boolean | null;
-                title?: string | null;
-                subtitle?: string | null;
-                showMainImage?: boolean | null;
-                image?: (string | null) | Media;
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom' | 'current') | null;
-                  newTab?: boolean | null;
-                  reference?: {
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null;
-                  url?: string | null;
-                  label: string;
-                  /**
-                   * Dictates how the link should be rendered.
-                   */
-                  appearance?:
-                    | (
-                        | 'default'
-                        | 'destructive'
-                        | 'ghost'
-                        | 'link'
-                        | 'outline'
-                        | 'text'
-                        | 'secondary'
-                        | 'underline'
-                        | 'iconOnly'
-                        | 'menu'
-                        | 'categoryLabel'
-                        | 'richtextLink'
-                      )
-                    | null;
-                  /**
-                   * Highlights the link based on the URL
-                   */
-                  isActive?: ('default' | 'exact' | 'never') | null;
-                  searchParams?: {
-                    toggleOnClick?: boolean | null;
-                    params?:
-                      | {
-                          key: string | SearchParamKey;
-                          value?: {
-                            valueType?: ('collection' | 'custom') | null;
-                            collectionData?: {
-                              type?: ('category' | 'product' | 'variant' | 'fabric') | null;
-                              category?: (string | null) | Category;
-                              product?: (string | null) | Product;
-                              variant?: (string | null) | Variant;
-                              fabric?: (string | null) | Fabric;
-                            };
-                            custom?: {
-                              value?: (string | null) | SearchParamValue;
-                            };
-                          };
-                          id?: string | null;
-                        }[]
-                      | null;
-                  };
-                };
-              };
               optionsBar?: {
                 enable?: boolean | null;
                 data?: (string | null) | OptionsBar;
@@ -4072,57 +3325,6 @@ export interface SidebarsSelect<T extends boolean = true> {
               itemsList?:
                 | T
                 | {
-                    bigTitle?:
-                      | T
-                      | {
-                          enable?: T;
-                          title?: T;
-                          subtitle?: T;
-                          showMainImage?: T;
-                          image?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                                isActive?: T;
-                                searchParams?:
-                                  | T
-                                  | {
-                                      toggleOnClick?: T;
-                                      params?:
-                                        | T
-                                        | {
-                                            key?: T;
-                                            value?:
-                                              | T
-                                              | {
-                                                  valueType?: T;
-                                                  collectionData?:
-                                                    | T
-                                                    | {
-                                                        type?: T;
-                                                        category?: T;
-                                                        product?: T;
-                                                        variant?: T;
-                                                        fabric?: T;
-                                                      };
-                                                  custom?:
-                                                    | T
-                                                    | {
-                                                        value?: T;
-                                                      };
-                                                };
-                                            id?: T;
-                                          };
-                                    };
-                              };
-                        };
                     optionsBar?:
                       | T
                       | {

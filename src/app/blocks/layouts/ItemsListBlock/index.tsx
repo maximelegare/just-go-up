@@ -3,7 +3,6 @@ import { getPayload } from "payload"
 import React from "react"
 
 import { ItemsList } from "@app/blocks/layouts/ItemsListBlock/ItemsList"
-import { BigTitle } from "@app/components/BigTitle"
 import { Pagination } from "@app/components/Pagination"
 
 import type { Page } from "@payload-types"
@@ -30,7 +29,6 @@ export const ItemsListBlock: React.FC<
     layout,
     hasPagination,
     urlSearchParams,
-    bigTitle,
     imageSelector,
     optionsBar,
     featured,
@@ -120,11 +118,8 @@ export const ItemsListBlock: React.FC<
     page: pageNumber,
   })
 
-  let bigTitleSub: string | undefined
-
   return (
     <div className="mb-12">
-      <BigTitle subtitle={bigTitleSub} {...bigTitle} className="mb-[2rem]" />
       {/* {hasPagination && (
         <div className="container mb-8">
           <PageRange

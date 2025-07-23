@@ -1,31 +1,31 @@
-import { cn } from '@app/utilities/cn'
-import { Product, Variant } from '@payload-types'
-import React from 'react'
-import { DetailsSection } from './sections/DetailsSection'
-import { BigTitle } from '@app/components/BigTitle'
-import { MoreDetailsSection } from './sections/MoreDetailsSection'
-import { Separator } from '@app/components/ui/separator'
-import { PayloadRedirects } from '@app/components/PayloadRedirects'
-import { ImagesSection } from './sections/ImagesSection'
+import { cn } from "@app/utilities/cn"
+import { Product, Variant } from "@payload-types"
+import React from "react"
+import { DetailsSection } from "./sections/DetailsSection"
+
+import { MoreDetailsSection } from "./sections/MoreDetailsSection"
+import { Separator } from "@app/components/ui/separator"
+import { PayloadRedirects } from "@app/components/PayloadRedirects"
+import { ImagesSection } from "./sections/ImagesSection"
 
 export type ProductDetailsProps = {
   doc: Product
   searchParams: Record<string, string>
 }
 export const ProductDetails: React.FC<ProductDetailsProps> = ({ doc, searchParams }) => {
-  const { title } = doc
+  // const { title } = doc
 
   let variantToRender: Variant | null = null
 
   if (searchParams?.variant) {
     variantToRender = doc.variants.find(
-      (variant) => typeof variant !== 'string' && variant.slug === searchParams.variant,
+      (variant) => typeof variant !== "string" && variant.slug === searchParams.variant,
     ) as Variant
   } else {
     variantToRender = doc.variants.find(
       (variant) =>
-        typeof variant !== 'string' &&
-        typeof doc.defaultVariant !== 'string' &&
+        typeof variant !== "string" &&
+        typeof doc.defaultVariant !== "string" &&
         doc.defaultVariant.id === variant.id,
     ) as Variant
   }
@@ -37,11 +37,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ doc, searchParam
 
   return (
     <>
-      <BigTitle title={title} className="mb-4" enable />
       <div className="flex flex-col gap-4 h-full">
         <div
           className={cn(
-            'w-full lg:grid lg:grid-row-1 md:grid grid-cols-1 md:grid-cols-2 h-full lg:grid-cols-3 gap-5',
+            "w-full lg:grid lg:grid-row-1 md:grid grid-cols-1 md:grid-cols-2 h-full lg:grid-cols-3 gap-5",
           )}
         >
           <ImagesSection
