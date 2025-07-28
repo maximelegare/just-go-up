@@ -46,7 +46,7 @@ export const DynamicContentBlock: React.FC<
   const doc = fetchedItem.docs[0] as Blog
 
   // Redirects to not found if item not active
-  if (!doc.isActive) {
+  if (!doc?.isActive) {
     return notFound()
   }
 
