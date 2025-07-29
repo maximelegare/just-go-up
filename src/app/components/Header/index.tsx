@@ -15,6 +15,7 @@ type HeaderProps = {
 }
 
 export async function Header({ locale, show }: HeaderProps) {
+  // @ts-ignore
   const header: Header = await getCachedGlobal("header", 2, locale)()
   const { showLocaleSwitcher } = header
 

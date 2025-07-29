@@ -2169,13 +2169,7 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  sections?:
-    | {
-        section: string;
-        links?: (string | Link)[] | null;
-        id?: string | null;
-      }[]
-    | null;
+  links?: (string | Link)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2370,13 +2364,7 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        section?: T;
-        links?: T;
-        id?: T;
-      };
+  links?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

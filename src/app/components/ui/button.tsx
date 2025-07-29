@@ -1,55 +1,56 @@
-import { cn } from '@app/utilities/cn'
-import { Slot } from '@radix-ui/react-slot'
-import { type VariantProps, cva } from 'class-variance-authority'
-import * as React from 'react'
+import { cn } from "@app/utilities/cn"
+import { Slot } from "@radix-ui/react-slot"
+import { type VariantProps, cva } from "class-variance-authority"
+import * as React from "react"
 
-const textTransitions = 'text-foreground transition-all ease-in-out duration-300'
+const textTransitions = "text-foreground transition-all ease-in-out duration-300"
 
 export const buttonVariant = {
-  default: 'bg-primary hover:bg-primary/90 hover:text-primary-foreground',
-  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-  ghost: 'hover:bg-card text-foreground',
-  link: '',
-  outline: 'border border-border bg-background hover:bg-card text-foreground',
-  text: 'px-0 py-0 h-8',
-  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-  underline: 'text-foreground underline',
-  iconOnly: 'w-fit h-fit p-0',
-  menu: 'tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center',
-  categoryLabel: 'text-xs rounded-2xl bg-muted w-fit outline-none',
-  richtextLink: 'text-foreground',
+  default: "bg-primary hover:bg-primary/90 hover:text-primary-foreground",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  ghost: "hover:bg-card text-foreground",
+  link: "",
+  outline: "border border-border bg-background hover:bg-card text-foreground",
+  text: "px-0 py-0 h-8",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  underline: "text-foreground underline",
+  iconOnly: "w-fit h-fit p-0",
+  menu: "tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center",
+  categoryLabel: "text-xs rounded-2xl bg-muted w-fit outline-none",
+  richtextLink: "text-foreground",
 }
 
 export const buttonVariantActif = {
-  default: 'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground',
-  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-  ghost: 'hover:bg-card text-foreground',
-  link: 'text-foreground',
-  text: 'text-foreground',
-  outline: 'border border-border bg-background hover:bg-card text-foreground',
-  secondary: 'bg-secondary hover:bg-secondary/80',
-  underline: 'text-foreground  underline',
-  iconOnly: 'w-fit h-fit p-0',
-  menu: 'bg-muted',
-  categoryLabel: 'text-xs rounded-2xl bg-muted w-fit outline-none',
-  richtextLink: 'text-red-400',
+  default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  ghost: "hover:bg-card text-foreground",
+  link: "text-foreground",
+  text: "text-foreground",
+  outline: "border border-border bg-background hover:bg-card text-foreground",
+  secondary: "bg-secondary hover:bg-secondary/80",
+  underline: "text-foreground  underline",
+  iconOnly: "w-fit h-fit p-0",
+  menu: "bg-muted",
+  categoryLabel: "text-xs rounded-2xl bg-muted w-fit outline-none",
+  richtextLink: "text-red-400",
 }
 
 const buttonVariants = cva(
   `inline-flex items-center justify-center whitespace-nowrap rounded  font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${textTransitions}`,
   {
     defaultVariants: {
-      size: 'default',
-      variant: 'default',
+      size: "default",
+      variant: "default",
     },
     variants: {
       size: {
-        clear: '',
-        default: 'h-10 px-4 py-2',
-        icon: 'h-10 w-10',
-        lg: 'h-11 rounded px-8',
-        sm: 'h-9 rounded px-3 text-sm',
-        xs: 'h-6 rounded px-3 text-xs',
+        clear: "",
+        default: "h-10 px-4 py-2",
+        icon: "h-10 w-10",
+        lg: "h-11 rounded px-8",
+        sm: "h-9 rounded px-3 text-sm",
+        xs: "h-6 rounded px-3 text-xs",
+        "xs-noPadding": "text-xs h-6",
       },
       variant: buttonVariant,
       variantActif: buttonVariantActif,
@@ -66,7 +67,7 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ asChild = false, className, size, variant, isActive, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
+    const Comp = asChild ? Slot : "button"
 
     return (
       <Comp
@@ -84,6 +85,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   },
 )
-Button.displayName = 'Button'
+Button.displayName = "Button"
 
 export { Button, buttonVariants }
