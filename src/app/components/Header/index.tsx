@@ -6,6 +6,7 @@ import { Locale } from "ROOT/locales/locales"
 import Link from "next/link"
 import { NavigationMenu } from "@app/components/HeaderNavigationMenu"
 import { Separator } from "../ui/separator"
+import { getCachedGlobal } from "@app/utilities/getGlobals"
 import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 
 type HeaderProps = {
@@ -14,7 +15,11 @@ type HeaderProps = {
 }
 
 export async function Header({ locale, show }: HeaderProps) {
+  const header: Header = await getCachedGlobal("header", 2, locale)()
+  const { showLocaleSwitcher } = header
+
   if (!show) return null
+
   return (
     <header id="header">
       <div className="fixed z-20 w-screen bg-background">
@@ -25,19 +30,19 @@ export async function Header({ locale, show }: HeaderProps) {
                 <Logo />
               </Link>
               <div className="hidden md:block">
-                <NavigationMenu locale={locale} />
+                <NavigationMenu locale={locale} header={header} />
               </div>
             </div>
-            <div className="relative z-30">
-              <LocaleSelector triggerClassName="justify-center" />
-            </div>
+            {showLocaleSwitcher && (
+              <div className="relative z-30">
+                <LocaleSelector triggerClassName="justify-center" />
+              </div>
+            )}
           </div>
         </div>
         <Separator />
       </div>
       <div className="h-16"></div>
-      {/* used only for the mobile sizes. The other sizes are using the background located in NavigationMenu */}
-      {/* <Background className="block md:hidden" /> */}
     </header>
   )
 }
