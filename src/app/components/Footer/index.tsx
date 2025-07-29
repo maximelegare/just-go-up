@@ -21,7 +21,7 @@ export async function Footer({ locale, show }: FooterProps) {
   if (!show) return null
 
   return (
-    <footer className="fixed bottom-0 border-t border-border bg-muted text-white  w-full">
+    <footer className="fixed bottom-0 bg-muted/40 text-white  w-full">
       <div className="w-[17rem] xl:w-[26rem] pl-5 pr-8">
         <div className="w-full flex items-center h-full gap-x-3 py-2 flex-wrap">
           {links.map(({ link }, idx: number) => {
