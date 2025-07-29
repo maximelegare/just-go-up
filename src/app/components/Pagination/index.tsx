@@ -1,16 +1,16 @@
-'use client'
+"use client"
 import {
   Pagination as PaginationComponent,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
+  PaginationPageOne,
   PaginationPrevious,
-} from '@app/components/ui/pagination'
-import { cn } from '@app/utilities/cn'
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import React from 'react'
+} from "@app/components/ui/pagination"
+import { cn } from "@app/utilities/cn"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import React from "react"
+import { PaginationSelectPageFromInput } from "../ui/paginationSelectPageWithInput"
 
 export const Pagination: React.FC<{
   className?: string
@@ -24,7 +24,7 @@ export const Pagination: React.FC<{
   const createQueryString = (page: number) => {
     const currentParams = searchParams.toString()
     const params = new URLSearchParams(currentParams)
-    params.set('page', page.toString())
+    params.set("page", page.toString())
 
     // If there are existing params, append the new page param
     if (currentParams) {
@@ -38,76 +38,44 @@ export const Pagination: React.FC<{
   const hasNextPage = page < totalPages
   const hasPrevPage = page > 1
 
-  const hasExtraPrevPages = page - 1 > 1
-  const hasExtraNextPages = page + 1 < totalPages
-
   return (
-    <div className={cn('my-12 not-prose', className)}>
+    <div className={cn("my-12 not-prose", className)}>
       <PaginationComponent>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              disabled={!hasPrevPage}
-              onClick={() => {
-                router.push(createQueryString(page - 1))
-              }}
+            <PaginationPageOne
+              disabled={page === 1}
+              onClick={() => router.push(createQueryString(1))}
             />
           </PaginationItem>
 
-          {hasExtraPrevPages && (
+          <div className="flex items-center">
             <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
-          {hasPrevPage && (
-            <PaginationItem>
-              <PaginationLink
+              <PaginationPrevious
+                disabled={!hasPrevPage}
                 onClick={() => {
                   router.push(createQueryString(page - 1))
                 }}
-              >
-                {page - 1}
-              </PaginationLink>
+              />
             </PaginationItem>
-          )}
 
-          <PaginationItem>
-            <PaginationLink
-              isActive
-              onClick={() => {
-                router.push(createQueryString(page))
-              }}
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-
-          {hasNextPage && (
             <PaginationItem>
-              <PaginationLink
+              <PaginationNext
+                disabled={!hasNextPage}
                 onClick={() => {
                   router.push(createQueryString(page + 1))
                 }}
-              >
-                {page + 1}
-              </PaginationLink>
+              />
             </PaginationItem>
-          )}
-
-          {hasExtraNextPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
+          </div>
           <PaginationItem>
-            <PaginationNext
+            {/* <PaginationNext
               disabled={!hasNextPage}
               onClick={() => {
                 router.push(createQueryString(page + 1))
               }}
-            />
+            /> */}
+            <PaginationSelectPageFromInput page={page} totalPages={totalPages} />
           </PaginationItem>
         </PaginationContent>
       </PaginationComponent>
