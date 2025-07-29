@@ -77,7 +77,7 @@ export const ItemsListBlock: Block = {
         {
           name: "relationTo",
           type: "select",
-          defaultValue: "products",
+          defaultValue: "blogs",
           label: "Collection to Show",
           options: [
             {
@@ -145,7 +145,8 @@ export const ItemsListBlock: Block = {
       name: "hasPagination",
       defaultValue: false,
       admin: {
-        condition: (_, siblingData) => siblingData.layout === "grid",
+        condition: (_, siblingData) =>
+          siblingData.layout === "grid" || siblingData.layout === "verticalList",
       },
     }),
     conditionalRenderer(),
