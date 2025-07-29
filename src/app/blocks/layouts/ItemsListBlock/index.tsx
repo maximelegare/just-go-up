@@ -10,6 +10,7 @@ import { Locale } from "ROOT/locales/locales"
 import { OptionsBar } from "@app/components/OptionsBar"
 
 import { searchParamKeysToFields } from "@app/_Map/searchParamKeysToFields.map"
+import { PageRange } from "@app/components/PageRange"
 
 export type ItemsListBlockProps = Extract<Page["layout"][0], { blockType: "itemsList" }>
 
@@ -90,18 +91,18 @@ export const ItemsListBlock: React.FC<
 
   return (
     <div className="mb-12">
-      {/* {hasPagination && (
-        <div className="container mb-8">
-          <PageRange
-            collection={relationTo}
-            currentPage={fetchedItems.page}
-            limit={limit}
-            totalDocs={fetchedItems.totalDocs}
-          />
-        </div>
-      )} */}
       <div className="">
         <OptionsBar data={optionsBar} locale={props.params.locale} className="mb-4" />
+        {hasPagination && (
+          <div className="my-2">
+            <PageRange
+              collection={relationTo}
+              currentPage={fetchedItems.page}
+              limit={limit}
+              totalDocs={fetchedItems.totalDocs}
+            />
+          </div>
+        )}
         <ItemsList
           relationTo={populateBy === "collection" ? relationTo : featured.relationTo}
           items={fetchedItems.docs as any}
