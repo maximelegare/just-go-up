@@ -64,10 +64,13 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
         return (
           <React.Fragment key={idx}>
             {idx === 0 && <Separator />}
-            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result as any} />
+            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
             <Separator />
           </React.Fragment>
         )
+      }
+      case "horizontalWrap": {
+        return <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
       }
 
       case "grid":
@@ -75,7 +78,7 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
       default: {
         return (
           <PrerendedCard isPrerendered={isPrerendered} key={idx}>
-            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result as any} />
+            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
           </PrerendedCard>
         )
       }
@@ -127,6 +130,14 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
       case "verticalList": {
         return <div className="flex flex-col gap-4">{mapCards(cardVariant, "w-full")}</div>
       }
+      case "horizontalWrap": {
+        return (
+          <React.Fragment>
+            <Separator className="mb-3" />
+            <div className="flex flex-wrap gap-2">{mapCards(cardVariant, "")}</div>
+          </React.Fragment>
+        )
+      }
       case "grid":
       default: {
         return <div className="flex flex-wrap gap-4">{mapCards(cardVariant, "w-full")}</div>
@@ -135,8 +146,6 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
   }
 
   return (
-    <div className={cn("w-full", layout !== "grid" && "pb-[3rem]")}>
-      {getContainer(layout, cardClassName, containerClassName)}
-    </div>
+    <div className={cn("w-full")}>{getContainer(layout, cardClassName, containerClassName)}</div>
   )
 }

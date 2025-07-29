@@ -496,12 +496,12 @@ export interface Page {
             blockTitle: string;
             populateBy: 'collection' | 'featured';
             relationTo?: ('categories' | 'blogs') | null;
-            cardVariant?: ('category' | 'blog' | 'blog-condensed') | null;
+            cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label') | null;
             featured?: {
               relationTo?: ('categories' | 'blogs') | null;
               categories?: (string | Category)[] | null;
             };
-            layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
+            layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList' | 'horizontalWrap') | null;
             imageSelector?: ('images' | 'dots') | null;
             hasLimit?: boolean | null;
             limit?: number | null;
@@ -2296,12 +2296,12 @@ export interface Sidebars {
               blockTitle: string;
               populateBy: 'collection' | 'featured';
               relationTo?: ('categories' | 'blogs') | null;
-              cardVariant?: ('category' | 'blog' | 'blog-condensed') | null;
+              cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label') | null;
               featured?: {
                 relationTo?: ('categories' | 'blogs') | null;
                 categories?: (string | Category)[] | null;
               };
-              layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList') | null;
+              layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList' | 'horizontalWrap') | null;
               imageSelector?: ('images' | 'dots') | null;
               hasLimit?: boolean | null;
               limit?: number | null;

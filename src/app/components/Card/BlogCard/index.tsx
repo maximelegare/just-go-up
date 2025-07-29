@@ -5,7 +5,7 @@ import { Card } from "../Base"
 import { BlogCardProps } from "../types"
 import { Media } from "@app/components/Media"
 import { DisplayDate } from "@app/components/Date"
-import { CategoryLabel } from "@app/components/CategoryLabel"
+import { CategoryLabel } from "@app/components/Card/CategoryLabel"
 
 export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
   const {
@@ -37,8 +37,8 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
           </div>
           <div className="flex gap-1 mt-3 h-fit ">
             {categories &&
-              categories.map((el, idx) => {
-                return typeof el !== "string" && <CategoryLabel text={el.title} key={idx} />
+              categories.map((category, idx) => {
+                return typeof category !== "string" && <CategoryLabel doc={category} key={idx} />
               })}
           </div>
         </div>

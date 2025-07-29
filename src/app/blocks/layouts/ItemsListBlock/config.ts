@@ -7,7 +7,12 @@ import type { Block } from "payload"
 import { cardComponentsMap } from "@app/_Map/cards.map"
 
 export type CardVariant = keyof typeof cardComponentsMap
-const cardVariants: Array<CardVariant> = ["category", "blog", "blog-condensed"] as const
+const cardVariants: Array<CardVariant> = [
+  "category",
+  "blog",
+  "blog-condensed",
+  "category-label",
+] as const
 
 export const ItemsListBlock: Block = {
   slug: "itemsList",
@@ -108,6 +113,7 @@ export const ItemsListBlock: Block = {
         { label: "Carousel", value: "carousel" },
         { label: "Horizontal Scroll", value: "horizontalScroll" },
         { label: "Vertical list", value: "verticalList" },
+        { label: "Horizontal Wrap", value: "horizontalWrap" },
       ],
     },
     {

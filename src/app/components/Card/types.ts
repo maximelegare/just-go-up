@@ -20,6 +20,11 @@ export type CategoryCardProps = BaseCard & {
   doc?: Category
 }
 
+export type CategoryLabelprops = {
+  doc?: Category & { size?: "sm" | "lg" }
+  className?: string
+}
+
 export type MediaCardProps = BaseCard & {
   doc?: Media
 }
