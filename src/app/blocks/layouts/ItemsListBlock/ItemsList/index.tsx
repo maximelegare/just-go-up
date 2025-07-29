@@ -70,7 +70,7 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
         )
       }
       case "horizontalWrap": {
-        return <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
+        return <Card key={idx} className={cn(cardClassName)} relationTo={relationTo} doc={result} />
       }
 
       case "grid":
