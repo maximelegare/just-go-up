@@ -14,7 +14,10 @@ export const CategoryLabel: React.FC<CategoryLabelprops> = ({ doc, className }) 
 
   return (
     <p
-      onClick={() => push(url)}
+      onClick={(e) => {
+        e.stopPropagation()
+        push(url)
+      }}
       className={cn(
         "cursor-pointer font-light text-xs rounded-2xl bg-muted w-fit not-prose",
         size === "sm" ? "p-1" : "p-3",
