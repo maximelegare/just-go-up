@@ -1,15 +1,9 @@
+import { capitalize } from "@app/utilities/strings/catpitalize"
 import React from "react"
 
 const defaultLabels = {
   plural: "Results",
   singular: "Result",
-}
-
-const defaultCollectionLabels = {
-  posts: {
-    plural: "Posts",
-    singular: "Post",
-  },
 }
 
 type CollectionLabels = {
@@ -18,6 +12,7 @@ type CollectionLabels = {
 }
 
 export const PageRange: React.FC<{
+  category: string
   className?: string
   collection?: string
   collectionLabels?: CollectionLabels
@@ -25,14 +20,7 @@ export const PageRange: React.FC<{
   limit?: number
   totalDocs?: number
 }> = (props) => {
-  const {
-    className,
-    collection,
-    collectionLabels: collectionLabelsFromProps,
-    currentPage,
-    limit,
-    totalDocs,
-  } = props
+  const { className, currentPage, limit, totalDocs, category } = props
 
   let indexStart = (currentPage ? currentPage - 1 : 1) * (limit || 1) + 1
   if (totalDocs && indexStart > totalDocs) indexStart = 0
@@ -40,17 +28,19 @@ export const PageRange: React.FC<{
   let indexEnd = (currentPage || 1) * (limit || 1)
   if (totalDocs && indexEnd > totalDocs) indexEnd = totalDocs
 
-  const { plural, singular } =
-    collectionLabelsFromProps || defaultCollectionLabels[collection || ""] || defaultLabels || {}
+  const { plural, singular } = defaultLabels || {}
 
   return (
-    <h5 className={[className, "!font-normal"].filter(Boolean).join(" ")}>
+    <h5 className={[className, "!font-normal flex items-center gap-2"].filter(Boolean).join(" ")}>
       {(typeof totalDocs === "undefined" || totalDocs === 0) && "Search produced no results."}
-      {typeof totalDocs !== "undefined" &&
-        totalDocs > 0 &&
-        `${totalDocs} ${totalDocs > 1 ? plural : singular} - Page ${currentPage}`}
+      {typeof totalDocs !== "undefined" && totalDocs > 0 && (
+        <React.Fragment>
+          <span className="font-bold">{capitalize(category)}</span>
+          <span>
+            {totalDocs} {totalDocs > 1 ? plural : singular} - Page {currentPage}
+          </span>
+        </React.Fragment>
+      )}
     </h5>
   )
 }
-
-// 127.1k results - Page 2

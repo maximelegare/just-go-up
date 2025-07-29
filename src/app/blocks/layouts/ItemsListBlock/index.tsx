@@ -96,6 +96,9 @@ export const ItemsListBlock: React.FC<
         {hasPagination && (
           <div className="my-2">
             <PageRange
+              category={
+                filterValues && typeof filterValues[1] === "string" ? filterValues[1] : "All"
+              }
               collection={relationTo}
               currentPage={fetchedItems.page}
               limit={limit}
