@@ -14,11 +14,15 @@ export const BlogCard: React.FC<BlogCardProps> = ({ doc }) => {
     medias: { mainImage },
     publishedOn,
     categories,
-    breadcrumbs,
+    breadcrumbs: propsBreadcrumbs,
+    slug,
   } = doc
 
+  const breadcrumbs = typeof propsBreadcrumbs[0] === "object" && propsBreadcrumbs[0]?.url
+  const url = breadcrumbs || `/blogs/${slug}`
+
   return (
-    <Card className="px-2" href={breadcrumbs[0].url}>
+    <Card className="px-2" href={url}>
       <div className="flex justify-between">
         <div>
           <DisplayDate date={publishedOn} className="opacity-60" />

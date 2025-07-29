@@ -4,19 +4,17 @@ import React from "react"
 
 import { CategoryLabelprops } from "../types"
 import { useRouter } from "next/navigation"
-import { useClientSideUrl } from "@app/utilities/useClientSideUrl"
 
 export const CategoryLabel: React.FC<CategoryLabelprops> = ({ doc, className }) => {
-  const { size = "sm", title, breadcrumbs } = doc
+  const { size = "sm", title, breadcrumbs: propsBreadcrumbs, slug } = doc
   const { push } = useRouter()
 
-  const currentUrl = useClientSideUrl()
-
-  const url = breadcrumbs[0] && breadcrumbs[0]?.url
+  const breadcrumbs = typeof propsBreadcrumbs[0] === "object" && propsBreadcrumbs[0]?.url?.slice(1)
+  const url = encodeURI(`/home?filter=category:${breadcrumbs || slug}`)
 
   return (
     <p
-      onClick={() => push(url || currentUrl)}
+      onClick={() => push(url)}
       className={cn(
         "cursor-pointer font-light text-xs rounded-2xl bg-muted w-fit not-prose",
         size === "sm" ? "p-1" : "p-3",
