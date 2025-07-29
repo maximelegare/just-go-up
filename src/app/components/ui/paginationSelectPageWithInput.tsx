@@ -48,7 +48,7 @@ export const PaginationSelectPageFromInput = ({
       <span>Page</span>
       <input
         type="number"
-        className="w-14 px-1 py-0.5 border rounded text-center"
+        className="w-14 px-1 py-0.5 border rounded text-center focus:border-accent focus:border-2  outline-none"
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value) // Allow "" (clearing the field)
