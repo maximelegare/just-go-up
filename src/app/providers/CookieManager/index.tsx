@@ -1,0 +1,34 @@
+"use client"
+import dynamic from "next/dynamic"
+
+const CookieManager = dynamic(
+  () => import("react-cookie-manager").then((mod) => mod.CookieManager),
+  { ssr: false, loading: () => null },
+)
+
+export const CookieMangerProvider = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <CookieManager
+      classNames={{
+        popupContainer:
+          "shadow-lg fixed z-[200] w-64 ml-2 mb-2 bottom-0 bg-background border-border rounded-xl border-2",
+        manageButton: "hidden",
+        // acceptButton:"bg-accent"
+      }}
+      translations={{
+        title: "Would You Like A Cookie? 🍪",
+        message:
+          "We value your privacy. You can either accept all cookies or decline them all. Essential cookies are always enabled as they are necessary for the website to function properly.",
+        buttonText: "Accept All",
+        declineButtonText: "Decline All",
+        privacyPolicyText: "Privacy Policy",
+      }}
+      privacyPolicyUrl="https://example.com/privacy"
+      theme="light"
+      displayType="popup"
+      cookieKitId="" // Optional: Enable CookieKit.io integration
+    >
+      {children}
+    </CookieManager>
+  )
+}

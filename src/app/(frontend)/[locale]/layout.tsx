@@ -23,6 +23,7 @@ import { headers } from "next/headers"
 import { detectLocaleFromPathname } from "@app/utilities/detectLocale"
 import { Prerenderer } from "@app/components/Prerenderer"
 import { AdminBar } from "@app/components/AdminBar"
+import CookieManager from "@app/components/CookieManager"
 // import { AppSidebar } from '@app/components/Sidebar'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -68,6 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           <div className="prose">
             {/* <ScrollArea className="h-screen w-screen"> */}
+            <CookieManager />
             <LivePreviewListener />
             <AdminBar />
             <Header locale={locale} show={!pathname.includes("under-construction")} />
