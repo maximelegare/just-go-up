@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useCookieConsent } from "react-cookie-manager"
 import { doesCookieExist } from "@app/utilities/checkCookie"
 
-export default function CookieManager() {
+export const CookieManager = () => {
   const { showConsentBanner } = useCookieConsent()
 
   const checkMyCookie = async () => {

@@ -2159,7 +2159,6 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
-  showLocaleSwitcher?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2213,64 +2212,8 @@ export interface GetInTouch {
 export interface Settings {
   id: string;
   underConstruction?: boolean | null;
-  sidebarLinks?:
-    | {
-        link: {
-          type?: ('reference' | 'custom' | 'current') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Dictates how the link should be rendered.
-           */
-          appearance?:
-            | (
-                | 'default'
-                | 'destructive'
-                | 'ghost'
-                | 'link'
-                | 'outline'
-                | 'text'
-                | 'secondary'
-                | 'underline'
-                | 'iconOnly'
-                | 'menu'
-                | 'categoryLabel'
-                | 'richtextLink'
-              )
-            | null;
-          /**
-           * Highlights the link based on the URL
-           */
-          isActive?: ('default' | 'exact' | 'never') | null;
-          searchParams?: {
-            toggleOnClick?: boolean | null;
-            params?:
-              | {
-                  key: string | SearchParamKey;
-                  value?: {
-                    valueType?: ('collection' | 'custom') | null;
-                    collectionData?: {
-                      type?: ('category' | 'blog') | null;
-                      category?: (string | null) | Category;
-                      blog?: (string | null) | Blog;
-                    };
-                    custom?: {
-                      value?: (string | null) | SearchParamValue;
-                    };
-                  };
-                  id?: string | null;
-                }[]
-              | null;
-          };
-        };
-        id?: string | null;
-      }[]
-    | null;
+  showCookieManager?: boolean | null;
+  showLocaleSwitcher?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2354,7 +2297,6 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  showLocaleSwitcher?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2408,50 +2350,8 @@ export interface GetInTouchSelect<T extends boolean = true> {
  */
 export interface SettingsSelect<T extends boolean = true> {
   underConstruction?: T;
-  sidebarLinks?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-              isActive?: T;
-              searchParams?:
-                | T
-                | {
-                    toggleOnClick?: T;
-                    params?:
-                      | T
-                      | {
-                          key?: T;
-                          value?:
-                            | T
-                            | {
-                                valueType?: T;
-                                collectionData?:
-                                  | T
-                                  | {
-                                      type?: T;
-                                      category?: T;
-                                      blog?: T;
-                                    };
-                                custom?:
-                                  | T
-                                  | {
-                                      value?: T;
-                                    };
-                              };
-                          id?: T;
-                        };
-                  };
-            };
-        id?: T;
-      };
+  showCookieManager?: T;
+  showLocaleSwitcher?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

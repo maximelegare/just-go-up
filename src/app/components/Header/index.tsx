@@ -12,12 +12,12 @@ import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 type HeaderProps = {
   locale: Locale
   show: boolean
+  showLocaleSwitcher: boolean
 }
 
-export async function Header({ locale, show }: HeaderProps) {
+export async function Header({ locale, show, showLocaleSwitcher }: HeaderProps) {
   // @ts-ignore
   const header: Header = await getCachedGlobal("header", 2, locale)()
-  const { showLocaleSwitcher } = header
 
   if (!show) return null
 

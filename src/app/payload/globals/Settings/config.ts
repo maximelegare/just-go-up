@@ -1,15 +1,14 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from "payload"
 
-import switchField from '@app/payload/fields/switch/config'
-import { link } from '@app/payload/fields/link'
+import switchField from "@app/payload/fields/switch/config"
 
 export const Settings: GlobalConfig = {
-  slug: 'settings',
+  slug: "settings",
   typescript: {
-    interface: 'Settings',
+    interface: "Settings",
   },
   graphQL: {
-    name: 'Settings',
+    name: "Settings",
   },
   access: {
     read: () => true,
@@ -17,22 +16,16 @@ export const Settings: GlobalConfig = {
   },
   fields: [
     switchField({
-      label: 'Under Construction',
-      name: 'underConstruction',
+      label: "Under Construction",
+      name: "underConstruction",
     }),
-    {
-      name: 'sidebarLinks',
-      label: '',
-      type: 'array',
-      fields: [
-        link({
-          overrides: {
-            admins: {
-              require: true,
-            },
-          },
-        }),
-      ],
-    },
+    switchField({
+      label: "Cookie Manager",
+      name: "showCookieManager",
+    }),
+    switchField({
+      label: "Locale Switcher",
+      name: "showLocaleSwitcher",
+    }),
   ],
 }

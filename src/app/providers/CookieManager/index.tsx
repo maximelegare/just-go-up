@@ -3,12 +3,21 @@ import dynamic from "next/dynamic"
 
 const CookieManager = dynamic(
   () => import("react-cookie-manager").then((mod) => mod.CookieManager),
-  { ssr: false, loading: () => null },
+  { ssr: true, loading: () => null },
 )
 
-export const CookieMangerProvider = ({ children }: { children: React.ReactNode }) => {
+export const CookieMangerProvider = ({
+  children,
+  showCookieManager,
+}: {
+  children: React.ReactNode
+  showCookieManager: boolean
+}) => {
+  if (!showCookieManager) return children
+
   return (
     <CookieManager
+      disableAutomaticBlocking
       classNames={{
         popupContainer:
           "shadow-lg fixed z-[200] w-64 ml-2 mb-2 bottom-0 bg-background border-border rounded-xl border-2",

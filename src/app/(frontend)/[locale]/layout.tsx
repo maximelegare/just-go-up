@@ -23,7 +23,7 @@ import { headers } from "next/headers"
 import { detectLocaleFromPathname } from "@app/utilities/detectLocale"
 import { Prerenderer } from "@app/components/Prerenderer"
 import { AdminBar } from "@app/components/AdminBar"
-import CookieManager from "@app/components/CookieManager"
+import { CookieManager } from "@app/components/CookieManager"
 // import { AppSidebar } from '@app/components/Sidebar'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -42,6 +42,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   ) {
     if (!pathname.includes("under-construction")) redirect("/under-construction")
   }
+
+  console.log(settings.showCookieManager)
 
   return (
     <html data-theme="light" className={cn(inter.className)} lang="en" suppressHydrationWarning>
@@ -66,13 +68,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body>
-        <Providers>
+        <Providers showCookieManager={settings?.showCookieManager || false}>
           <div className="prose">
             {/* <ScrollArea className="h-screen w-screen"> */}
-            <CookieManager />
+            {settings.showCookieManager && <CookieManager />}
             <LivePreviewListener />
             <AdminBar />
-            <Header locale={locale} show={!pathname.includes("under-construction")} />
+            <Header
+              locale={locale}
+              show={!pathname.includes("under-construction")}
+              showLocaleSwitcher={settings?.showLocaleSwitcher || false}
+            />
             {children}
             {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}
             <Prerenderer numberOfCards={4} />

@@ -5,9 +5,10 @@ import { CookieMangerProvider } from "./CookieManager"
 
 export const Providers: React.FC<{
   children: React.ReactNode
-}> = ({ children }) => {
+  showCookieManager: boolean
+}> = ({ children, showCookieManager }) => {
   return (
-    <CookieMangerProvider>
+    <CookieMangerProvider showCookieManager={showCookieManager}>
       <PrerendererProvider>{children}</PrerendererProvider>
     </CookieMangerProvider>
   )
