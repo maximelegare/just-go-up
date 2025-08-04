@@ -2,13 +2,13 @@
 // The config you add here will be used whenever the server handles a request.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs'
+import * as Sentry from "@sentry/nextjs"
 
 let DNS: string | undefined
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   DNS =
-    'https://d799cd370ea8641c9709129b3fdb12c7@o4508508818374656.ingest.us.sentry.io/4508508820013056'
+    "https://e0d61b91a8c9909da1e7418a36fa2b27@o4508508818374656.ingest.us.sentry.io/4509787420229632"
 }
 
 Sentry.init({

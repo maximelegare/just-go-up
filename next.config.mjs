@@ -3,7 +3,7 @@ import redirects from './redirects.js'
 import ContentSecurityPolicy from './csp.js'
 
 import withSvgr from 'next-plugin-svgr'
-// import { withSentryConfig } from '@sentry/nextjs'
+import { withSentryConfig } from '@sentry/nextjs'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
@@ -77,16 +77,12 @@ const nextConfig = {
 }
 
 // Make sure adding Sentry options is the last code to run before exporting
-export default withSvgr(
-  // withSentryConfig(
-    withPayload(nextConfig)
-  // )
-  , {
+export default withSvgr(withSentryConfig(withPayload(nextConfig)), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
   org: 'maxime-legare',
-  project: 'bikanky',
+  project: 'just-go-up',
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
@@ -96,7 +92,6 @@ export default withSvgr(
 
   // Upload a larger set of source maps for prettier stack traces (increases build time)
   widenClientFileUpload: true,
-
   // Automatically annotate React components to show their full name in breadcrumbs and session replay
   reactComponentAnnotation: {
     enabled: true,
@@ -110,7 +105,7 @@ export default withSvgr(
 
   // Hides source maps from generated client bundles
   hideSourceMaps: true,
-
+  
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
 
