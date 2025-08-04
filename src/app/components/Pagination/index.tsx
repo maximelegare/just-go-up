@@ -42,41 +42,42 @@ export const Pagination: React.FC<{
     <div className={cn("my-12 not-prose", className)}>
       <PaginationComponent>
         <PaginationContent>
-          <PaginationItem>
-            <PaginationPageOne
-              disabled={page === 1}
-              onClick={() => router.push(createQueryString(1))}
-            />
-          </PaginationItem>
-
-          <div className="flex items-center">
+          <div className="flex items-center justify-between w-full gap-2 flex-row">
             <PaginationItem>
-              <PaginationPrevious
-                disabled={!hasPrevPage}
-                onClick={() => {
-                  router.push(createQueryString(page - 1))
-                }}
+              <PaginationPageOne
+                disabled={page === 1}
+                onClick={() => router.push(createQueryString(1))}
               />
             </PaginationItem>
 
-            <PaginationItem>
-              <PaginationNext
-                disabled={!hasNextPage}
-                onClick={() => {
-                  router.push(createQueryString(page + 1))
-                }}
-              />
+            <div className="flex items-center">
+              <PaginationItem>
+                <PaginationPrevious
+                  disabled={!hasPrevPage}
+                  onClick={() => {
+                    router.push(createQueryString(page - 1))
+                  }}
+                />
+              </PaginationItem>
+
+              <PaginationItem>
+                <PaginationNext
+                  disabled={!hasNextPage}
+                  onClick={() => {
+                    router.push(createQueryString(page + 1))
+                  }}
+                />
+              </PaginationItem>
+            </div>
+            <PaginationItem className="hidden sm:block">
+              <PaginationSelectPageFromInput page={page} totalPages={totalPages} />
             </PaginationItem>
           </div>
-          <PaginationItem>
-            {/* <PaginationNext
-              disabled={!hasNextPage}
-              onClick={() => {
-                router.push(createQueryString(page + 1))
-              }}
-            /> */}
-            <PaginationSelectPageFromInput page={page} totalPages={totalPages} />
-          </PaginationItem>
+          <div className="flex sm:hidden w-full justify-end mt-4 pr-[15px]">
+            <PaginationItem>
+              <PaginationSelectPageFromInput page={page} totalPages={totalPages} />
+            </PaginationItem>
+          </div>
         </PaginationContent>
       </PaginationComponent>
     </div>

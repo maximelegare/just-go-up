@@ -12,13 +12,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
 Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<"ul">>(
-  ({ className, ...props }, ref) => (
-    <ul
-      className={cn("flex flex-row justify-between items-center gap-1", className)}
-      ref={ref}
-      {...props}
-    />
-  ),
+  ({ className, ...props }, ref) => <ul className={cn("w-full", className)} ref={ref} {...props} />,
 )
 PaginationContent.displayName = "PaginationContent"
 
