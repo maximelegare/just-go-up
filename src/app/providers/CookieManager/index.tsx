@@ -1,4 +1,5 @@
 "use client"
+import { useGoogleAnalytics } from "@app/utilities/googleAnalytics"
 import dynamic from "next/dynamic"
 
 const CookieManager = dynamic(
@@ -13,6 +14,8 @@ export const CookieMangerProvider = ({
   children: React.ReactNode
   showCookieManager: boolean
 }) => {
+  const { enableAnalytics } = useGoogleAnalytics()
+
   if (!showCookieManager) return children
 
   return (
@@ -35,11 +38,7 @@ export const CookieMangerProvider = ({
       privacyPolicyUrl="https://example.com/privacy"
       theme="light"
       displayType="popup"
-      onAccept={() => {
-        // Initialize GA after consent
-        // @ts-ignore
-        window.gtag?.("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)
-      }}
+      onAccept={enableAnalytics}
     >
       {children}
     </CookieManager>

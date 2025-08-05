@@ -24,7 +24,6 @@ import { detectLocaleFromPathname } from "@app/utilities/detectLocale"
 import { Prerenderer } from "@app/components/Prerenderer"
 import { AdminBar } from "@app/components/AdminBar"
 import { CookieManager } from "@app/components/CookieManager"
-import Script from "next/script"
 // import { AppSidebar } from '@app/components/Sidebar'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -60,18 +59,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         /> */}
       </head>
 
-      {/* Google Analytics */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga-setup" strategy="afterInteractive">
-        {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        `}
-      </Script>
       <body>
         <Providers showCookieManager={settings?.showCookieManager || false}>
           <div className="prose">

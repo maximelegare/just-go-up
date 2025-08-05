@@ -14,6 +14,7 @@ import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
 import { draftMode, headers } from "next/headers"
 import { Page as PageType } from "@payload-types"
+import { GoogleAnalytics } from "@app/components/GoogleAnalytics"
 
 export const dynamic = "force-dynamic"
 
@@ -59,25 +60,28 @@ export default async function Page({
   const { hero, layout, showRightSidebar } = page
 
   return (
-    <article className="pb-24">
-      <PayloadRedirects disableNotFound url={url} locale={locale} />
-      <Hero {...hero} />
-      <div className={cn(showRightSidebar && "block sm:flex")}>
-        <div className="container">
-          <Blocks
-            blocks={layout}
-            urlSearchParams={await searchParams}
+    <>
+      <GoogleAnalytics />
+      <article className="pb-24">
+        <PayloadRedirects disableNotFound url={url} locale={locale} />
+        <Hero {...hero} />
+        <div className={cn(showRightSidebar && "block sm:flex")}>
+          <div className="container">
+            <Blocks
+              blocks={layout}
+              urlSearchParams={await searchParams}
+              params={{ locale, url, slugs }}
+            />
+          </div>
+          <RightSidebar
+            locale={locale}
+            show={showRightSidebar}
+            side="right"
             params={{ locale, url, slugs }}
           />
         </div>
-        <RightSidebar
-          locale={locale}
-          show={showRightSidebar}
-          side="right"
-          params={{ locale, url, slugs }}
-        />
-      </div>
-    </article>
+      </article>
+    </>
   )
 }
 
