@@ -14,9 +14,7 @@ import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
 import { draftMode, headers } from "next/headers"
 import { Page as PageType } from "@payload-types"
-// import { GoogleAnalytics } from "@app/components/GoogleAnalytics"
-
-import { GoogleAnalytics } from "@next/third-parties/google"
+import { GoogleAnalytics } from "@app/components/GoogleAnalytics"
 
 export const dynamic = "force-dynamic"
 
@@ -63,7 +61,7 @@ export default async function Page({
 
   return (
     <>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+      <GoogleAnalytics />
       <article className="pb-24">
         <PayloadRedirects disableNotFound url={url} locale={locale} />
         <Hero {...hero} />
