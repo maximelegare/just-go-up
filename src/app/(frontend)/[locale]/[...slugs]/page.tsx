@@ -12,8 +12,8 @@ import { Locale, defaultLocale } from "ROOT/locales/locales"
 import { generatePageSlug } from "@app/utilities/generatePageSlug"
 import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
-import { getDocument } from "@app/utilities/getDocument"
 import { draftMode, headers } from "next/headers"
+import { Page as PageType } from "@payload-types"
 
 export const dynamic = "force-dynamic"
 
@@ -46,10 +46,11 @@ export default async function Page({
   const { slugs = ["home"], locale = defaultLocale } = await params
   const { slug, url } = generatePageSlug(slugs)
 
-  const page = await queryPageBySlug({
+  const page = (await queryPageBySlug({
+    collection: "pages",
     slug,
     locale: locale as Locale,
-  })
+  })) as PageType
 
   if (!page) {
     return <PayloadRedirects url={url} locale={locale} />
@@ -97,11 +98,11 @@ export async function generateMetadata({
   const collectionSlug = urlSlugs[0]
   const collection = collectionSlug === "blogs" ? "blogs" : "pages"
 
-  const page = await getDocument(
+  const page = await queryPageBySlug({
     collection,
-    collection === "blogs" && urlSlugs && urlSlugs[1] ? urlSlugs[1] : slug,
     locale,
-  )
+    slug: collection === "blogs" && urlSlugs && urlSlugs[1] ? urlSlugs[1] : slug,
+  })
   return generateMeta({ doc: page })
 }
 
@@ -124,7 +125,15 @@ export async function generateMetadata({
 //   return generateMeta({ doc: page })
 // }
 
-const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
+const queryPageBySlug = async ({
+  slug,
+  locale,
+  collection,
+}: {
+  slug: string
+  locale: Locale
+  collection: "pages" | "blogs"
+}) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -136,7 +145,7 @@ const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale 
 
   const result = await payload.find({
     locale,
-    collection: "pages",
+    collection,
     draft,
     limit: 1,
     depth: 5,
