@@ -105,13 +105,34 @@ export async function generateMetadata({
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
-  const payload = await getPayload({ config: configPromise })
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{
+//     slugs: string[]
+//     locale: Locale
+//   }>
+// }): Promise<Metadata> {
+//   const { slugs = ["home"], locale } = await params
+//   const { slug } = generatePageSlug(slugs)
 
+//   const page = await queryPageBySlug({
+//     slug,
+//     locale,
+//   })
+
+//   return generateMeta({ doc: page })
+// }
+
+const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
   const { isEnabled: draft } = await draftMode()
+
+  const payload = await getPayload({ config: configPromise })
   const authResult = draft ? await payload.auth({ headers: await headers() }) : undefined
 
   const user = authResult?.user
+
+  //  const res =  (await getCachedDocument("pages", slug)()) as PageType
 
   const result = await payload.find({
     locale,
@@ -128,5 +149,5 @@ const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale 
     },
   })
 
-  return result.docs[0]
+  return result.docs[0] || null
 }
