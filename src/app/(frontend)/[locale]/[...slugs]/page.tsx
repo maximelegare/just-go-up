@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { PayloadRedirects } from "@app/components/PayloadRedirects"
 import configPromise from "@payload-config"
 import { getPayload } from "payload"
-import { draftMode, headers } from "next/headers"
 import React from "react"
 
 import { Blocks } from "../../../components/Blocks"
@@ -13,6 +12,8 @@ import { Locale, defaultLocale } from "ROOT/locales/locales"
 import { generatePageSlug } from "@app/utilities/generatePageSlug"
 import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
+import { getCachedDocument, getDocument } from "@app/utilities/getDocument"
+import { Page as PageType } from "@payload-types"
 
 export const dynamic = "force-dynamic"
 
@@ -45,20 +46,20 @@ export default async function Page({
   const { slugs = ["home"], locale = defaultLocale } = await params
   const { slug, url } = generatePageSlug(slugs)
 
-  const page = await queryPageBySlug({
+  const page = await queryPageContentBySlug({
     slug,
     locale: locale as Locale,
   })
 
   if (!page) {
-    return <PayloadRedirects url={url} />
+    return <PayloadRedirects url={url} locale={locale} />
   }
 
   const { hero, layout, showRightSidebar } = page
 
   return (
     <article className="pb-24">
-      <PayloadRedirects disableNotFound url={url} />
+      <PayloadRedirects disableNotFound url={url} locale={locale} />
       <Hero {...hero} />
       <div className={cn(showRightSidebar && "block sm:flex")}>
         <div className="container">
@@ -88,40 +89,24 @@ export async function generateMetadata({
   }>
 }): Promise<Metadata> {
   const { slugs = ["home"], locale } = await params
-  const { slug } = generatePageSlug(slugs)
+  const { slug, urlSlugs } = generatePageSlug(slugs)
 
-  const page = await queryPageBySlug({
-    slug,
+  const payload = await getPayload({ config: configPromise })
+
+  // Gets either the first argument of the url (checks if it is a collection)
+  // Or uses Pages
+  // Meant to render
+  const collection = (payload.collections[urlSlugs[0]] ? urlSlugs[0] : "pages") as "pages" | "blogs"
+
+  const page = await getDocument(
+    collection,
+    collection === "blogs" && urlSlugs && urlSlugs[1] ? urlSlugs[1] : slug,
     locale,
-  })
-
+  )
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
-  const { isEnabled: draft } = await draftMode()
-
-  const payload = await getPayload({ config: configPromise })
-  const authResult = draft ? await payload.auth({ headers: await headers() }) : undefined
-
-  const user = authResult?.user
-
-  //  const res =  (await getCachedDocument("pages", slug)()) as PageType
-
-  const result = await payload.find({
-    locale,
-    collection: "pages",
-    draft,
-    limit: 1,
-    depth: 5,
-    overrideAccess: false,
-    user,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-  })
-
-  return result.docs[0] || null
+const queryPageContentBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
+  const result = (await getCachedDocument("pages", slug, locale)()) as PageType
+  return result || null
 }
