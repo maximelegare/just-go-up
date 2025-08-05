@@ -31,7 +31,7 @@ export const env = createEnv({
     NEXT_PUBLIC_IS_LIVE: z.string().optional(),
     NEXT_PRIVATE_REVALIDATION_KEY: z.string(),
     NEXT_PRIVATE_DRAFT_SECRET: z.string(),
-    NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL:z.string().optional()
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID:z.string()
   }, 
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -49,6 +49,7 @@ export const env = createEnv({
     NEXT_PUBLIC_IS_LIVE: process.env.NEXT_PUBLIC_IS_LIVE,
     NEXT_PRIVATE_REVALIDATION_KEY: process.env.NEXT_PRIVATE_REVALIDATION_KEY,
     NEXT_PRIVATE_DRAFT_SECRET: process.env.NEXT_PRIVATE_DRAFT_SECRET,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY:process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY
     // UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
     // SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     // SMTP_HOST: process.env.SMTP_HOST,

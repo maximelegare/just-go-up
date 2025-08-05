@@ -35,7 +35,11 @@ export const CookieMangerProvider = ({
       privacyPolicyUrl="https://example.com/privacy"
       theme="light"
       displayType="popup"
-      cookieKitId="" // Optional: Enable CookieKit.io integration
+      onAccept={() => {
+        // Initialize GA after consent
+        // @ts-ignore
+        window.gtag?.("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)
+      }}
     >
       {children}
     </CookieManager>
