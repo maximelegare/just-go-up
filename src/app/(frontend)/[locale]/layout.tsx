@@ -62,7 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
       {/* Google Analytics */}
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-D9LZLZ354Q"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
         strategy="afterInteractive"
       />
       <Script id="ga-setup" strategy="afterInteractive">
