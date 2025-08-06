@@ -1,25 +1,39 @@
+"use client"
+
 import Script from "next/script"
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 type PlausibleType = {
   disableAnalytics: boolean
   disablePageAnalytics: boolean
 }
 
-const urlsToExclude = ["http://localhost:3000"]
-
-const isExcluded = urlsToExclude.includes(process.env.PAYLOAD_PUBLIC_SERVER_URL!)
+const excludedOrigins = ["http://localhost:3000", "https://dev.justgoup.blog"]
 
 export const Plausible: React.FC<PlausibleType> = ({ disableAnalytics, disablePageAnalytics }) => {
-  if (isExcluded || disableAnalytics || disablePageAnalytics) return null
+  const [shouldRender, setShouldRender] = useState(false)
+
+  useEffect(() => {
+    const origin = window.location.origin
+    const isExcluded = excludedOrigins.includes(origin)
+
+    if (!isExcluded && !disableAnalytics && !disablePageAnalytics) {
+      setShouldRender(true)
+    }
+  }, [disableAnalytics, disablePageAnalytics])
+
+  if (!shouldRender) return null
 
   return (
     <Script
       defer
-      data-domain={process.env.PAYLOAD_PUBLIC_SERVER_URL}
-      data-api="/api/event"
-      src="/js/script.js"
+      data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+      src="https://plausible.io/js/script.js"
       strategy="afterInteractive"
     />
   )
+}
+
+{
+  /* <script defer data-domain="dev.justgoup.blog" src="https://plausible.io/js/script.js"></script> */
 }
