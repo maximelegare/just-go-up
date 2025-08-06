@@ -51,7 +51,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {}
+
+        {process.env.NEXT_PUBLIC_SERVER_URL && (
+          <script
+            defer
+            data-domain={process.env.NEXT_PUBLIC_SERVER_URL}
+            src="https://plausible.io/js/script.js"
+          ></script>
+        )}
       </head>
 
       <body>

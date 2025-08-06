@@ -5,22 +5,21 @@ import React, { useEffect, useState } from "react"
 
 type PlausibleType = {
   disableAnalytics: boolean
-  disablePageAnalytics: boolean
 }
 
 const excludedOrigins = ["http://localhost:3000", "https://dev.justgoup.blog"]
 
-export const Plausible: React.FC<PlausibleType> = ({ disableAnalytics, disablePageAnalytics }) => {
+export const Plausible: React.FC<PlausibleType> = ({ disableAnalytics }) => {
   const [shouldRender, setShouldRender] = useState(false)
 
   useEffect(() => {
     const origin = window.location.origin
     const isExcluded = excludedOrigins.includes(origin)
 
-    if (!isExcluded && !disableAnalytics && !disablePageAnalytics) {
+    if (!isExcluded && !disableAnalytics) {
       setShouldRender(true)
     }
-  }, [disableAnalytics, disablePageAnalytics])
+  }, [disableAnalytics])
 
   if (!shouldRender) return null
 
