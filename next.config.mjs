@@ -11,7 +11,6 @@ await import('./src/env.mjs')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   webpack:(config, {webpack}) => {
     config.plugins.push(
       new webpack.DefinePlugin({
@@ -40,6 +39,18 @@ const nextConfig = {
 
   reactStrictMode: true,
   redirects,
+  async rewrites() {
+    return [
+      {
+        source: '/js/script.js',
+        destination: 'https://plausible.io/js/script.js'
+      },
+      {
+        source: '/api/event',
+        destination: 'https://plausible.io/api/event'
+      }
+    ]
+  },
   async headers() {
     const headers = []
 

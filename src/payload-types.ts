@@ -156,6 +156,7 @@ export interface Page {
   title: string;
   publishedOn?: string | null;
   showRightSidebar?: boolean | null;
+  disablePageAnalytics?: boolean | null;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -1295,6 +1296,7 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   publishedOn?: T;
   showRightSidebar?: T;
+  disablePageAnalytics?: T;
   hero?:
     | T
     | {
@@ -2212,7 +2214,7 @@ export interface GetInTouch {
 export interface Settings {
   id: string;
   underConstruction?: boolean | null;
-  showCookieManager?: boolean | null;
+  disableAnalytics?: boolean | null;
   showLocaleSwitcher?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2350,7 +2352,7 @@ export interface GetInTouchSelect<T extends boolean = true> {
  */
 export interface SettingsSelect<T extends boolean = true> {
   underConstruction?: T;
-  showCookieManager?: T;
+  disableAnalytics?: T;
   showLocaleSwitcher?: T;
   updatedAt?: T;
   createdAt?: T;

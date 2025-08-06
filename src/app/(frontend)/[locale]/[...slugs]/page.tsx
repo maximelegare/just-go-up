@@ -13,7 +13,9 @@ import { generatePageSlug } from "@app/utilities/generatePageSlug"
 import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
 import { draftMode, headers } from "next/headers"
-import { Page as PageType } from "@payload-types"
+import { Page as PageType, Settings } from "@payload-types"
+import { getCachedGlobal } from "@app/utilities/getGlobals"
+import { Plausible } from "@app/components/Plausible"
 
 export const dynamic = "force-dynamic"
 
@@ -46,6 +48,8 @@ export default async function Page({
   const { slugs = ["home"], locale = defaultLocale } = await params
   const { slug, url } = generatePageSlug(slugs)
 
+  const { disableAnalytics }: Settings = await getCachedGlobal("settings", 5, locale)()
+
   const page = (await queryPageBySlug({
     collection: "pages",
     slug,
@@ -56,28 +60,31 @@ export default async function Page({
     return <PayloadRedirects url={url} locale={locale} />
   }
 
-  const { hero, layout, showRightSidebar } = page
+  const { hero, layout, showRightSidebar, disablePageAnalytics } = page
 
   return (
-    <article className="pb-24">
-      <PayloadRedirects disableNotFound url={url} locale={locale} />
-      <Hero {...hero} />
-      <div className={cn(showRightSidebar && "block sm:flex")}>
-        <div className="container">
-          <Blocks
-            blocks={layout}
-            urlSearchParams={await searchParams}
+    <>
+      <Plausible disableAnalytics={disableAnalytics} disablePageAnalytics={disablePageAnalytics} />
+      <article className="pb-24">
+        <PayloadRedirects disableNotFound url={url} locale={locale} />
+        <Hero {...hero} />
+        <div className={cn(showRightSidebar && "block sm:flex")}>
+          <div className="container">
+            <Blocks
+              blocks={layout}
+              urlSearchParams={await searchParams}
+              params={{ locale, url, slugs }}
+            />
+          </div>
+          <RightSidebar
+            locale={locale}
+            show={showRightSidebar}
+            side="right"
             params={{ locale, url, slugs }}
           />
         </div>
-        <RightSidebar
-          locale={locale}
-          show={showRightSidebar}
-          side="right"
-          params={{ locale, url, slugs }}
-        />
-      </div>
-    </article>
+      </article>
+    </>
   )
 }
 

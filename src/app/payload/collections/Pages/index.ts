@@ -72,6 +72,13 @@ export const Pages: CollectionConfig = {
         position: "sidebar",
       },
     }),
+    switchField({
+      label: "Disable Page Analytics",
+      name: "disablePageAnalytics",
+      admin: {
+        position: "sidebar",
+      },
+    }),
     {
       type: "tabs",
       tabs: [
