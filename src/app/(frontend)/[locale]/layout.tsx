@@ -52,7 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
+        {!settings?.disableAnalytics && process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
           <script
             defer
             data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
