@@ -23,6 +23,7 @@ import { headers } from "next/headers"
 import { detectLocaleFromPathname } from "@app/utilities/detectLocale"
 import { Prerenderer } from "@app/components/Prerenderer"
 import { AdminBar } from "@app/components/AdminBar"
+import { Plausible } from "@app/components/Plausible"
 // import { AppSidebar } from '@app/components/Sidebar'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -52,13 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {!settings?.disableAnalytics && process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
-          <script
-            defer
-            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
-            src="https://plausible.io/js/script.js"
-          ></script>
-        )}
+        <Plausible disableAnalytics={settings.disableAnalytics} />
       </head>
 
       <body>
