@@ -156,7 +156,6 @@ export interface Page {
   title: string;
   publishedOn?: string | null;
   showRightSidebar?: boolean | null;
-  disablePageAnalytics?: boolean | null;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -1296,7 +1295,6 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   publishedOn?: T;
   showRightSidebar?: T;
-  disablePageAnalytics?: T;
   hero?:
     | T
     | {
