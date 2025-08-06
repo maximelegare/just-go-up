@@ -65,13 +65,29 @@ export const Pages: CollectionConfig = {
         ],
       },
     },
-    switchField({
-      label: "Right Sidebar",
-      name: "showRightSidebar",
+    {
+      name: "globalsToShow",
+      type: "group",
+      fields: [
+        switchField({
+          label: "Right Sidebar",
+          name: "rightSidebar",
+          admin: {
+            position: "sidebar",
+          },
+        }),
+        switchField({
+          label: "Footer",
+          name: "footer",
+          admin: {
+            position: "sidebar",
+          },
+        }),
+      ],
       admin: {
         position: "sidebar",
       },
-    }),
+    },
     {
       type: "tabs",
       tabs: [

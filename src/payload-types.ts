@@ -155,7 +155,10 @@ export interface Page {
   id: string;
   title: string;
   publishedOn?: string | null;
-  showRightSidebar?: boolean | null;
+  globalsToShow?: {
+    rightSidebar?: boolean | null;
+    footer?: boolean | null;
+  };
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -1294,7 +1297,12 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   publishedOn?: T;
-  showRightSidebar?: T;
+  globalsToShow?:
+    | T
+    | {
+        rightSidebar?: T;
+        footer?: T;
+      };
   hero?:
     | T
     | {

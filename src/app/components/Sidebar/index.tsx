@@ -40,7 +40,7 @@ export const RightSidebar: React.FC<SidebarProps> = async ({
         >
           <Blocks blocks={sidebar[side].sections} params={params} />
         </div>
-        <Footer locale={locale} show />
+        <Footer locale={locale} show fixed className="w-[17rem] xl:w-[26rem] pl-5 pr-8" />
       </div>
     </Sidebar>
   )

@@ -14,6 +14,7 @@ import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
 import { draftMode, headers } from "next/headers"
 import { Page as PageType } from "@payload-types"
+import { Footer } from "@app/components/Footer"
 // import { Plausible } from "@app/components/Plausible"
 
 export const dynamic = "force-dynamic"
@@ -57,15 +58,19 @@ export default async function Page({
     return <PayloadRedirects url={url} locale={locale} />
   }
 
-  const { hero, layout, showRightSidebar } = page
+  const {
+    hero,
+    layout,
+    globalsToShow: { footer, rightSidebar },
+  } = page
 
   return (
     <>
       {/* <Plausible disableAnalytics={disableAnalytics} disablePageAnalytics={disablePageAnalytics} /> */}
-      <article className="pb-24">
+      <article>
         <PayloadRedirects disableNotFound url={url} locale={locale} />
         <Hero {...hero} />
-        <div className={cn(showRightSidebar && "block sm:flex")}>
+        <div className={cn(rightSidebar && "block sm:flex")}>
           <div className="container">
             <Blocks
               blocks={layout}
@@ -75,11 +80,12 @@ export default async function Page({
           </div>
           <RightSidebar
             locale={locale}
-            show={showRightSidebar}
+            show={rightSidebar}
             side="right"
             params={{ locale, url, slugs }}
           />
         </div>
+        <Footer locale={locale} show={footer} className="mt-20 container" />
       </article>
     </>
   )
