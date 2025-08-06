@@ -5,14 +5,14 @@ const policies = {
     "'unsafe-inline'",
     "'unsafe-eval'",
     "https://maps.googleapis.com",
-    "https://www.googletagmanager.com/gtag/js",
+    "https://plausible.io",
   ],
   "child-src": ["'self'"],
   "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
   "img-src": ["'self'", "https://www.gravatar.com", "https://raw.githubusercontent.com", "data:"],
   "font-src": ["'self'"],
   "frame-src": ["'self'"],
-  "connect-src": ["'self'", "https://maps.googleapis.com"],
+  "connect-src": ["'self'", "https://maps.googleapis.com", "https://plausible.io"],
 }
 
 export default Object.entries(policies)
