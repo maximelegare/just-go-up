@@ -1,10 +1,10 @@
 import React from "react"
 import { TitleSectionBlockProps } from "@app/blocks/layouts/TitleSectionBlock"
 
-export const LowImpactTitle: React.FC<
+export const MediumImpactTitle: React.FC<
   TitleSectionBlockProps & { className?: string; linkClassName?: string; subtitle?: string }
 > = async (props) => {
   const { title } = props
 
-  return <h5>{title}</h5>
+  return <h4 className="font-bold">{title}</h4>
 }

@@ -1,6 +1,7 @@
 import { TitleSectionBlockProps } from "@app/blocks/layouts/TitleSectionBlock"
 import { HighImpactTitle } from "@app/blocks/layouts/TitleSectionBlock/HighImpact"
 import { LowImpactTitle } from "@app/blocks/layouts/TitleSectionBlock/LowImpact"
+import { MediumImpactTitle } from "@app/blocks/layouts/TitleSectionBlock/MediumImpact"
 
 // export type CardComponentsMap = {
 //   product: React.FC<ProductCardProps>
@@ -23,9 +24,11 @@ import { LowImpactTitle } from "@app/blocks/layouts/TitleSectionBlock/LowImpact"
 export type TitleComponentsMap = {
   highImpact: React.FC<TitleSectionBlockProps>
   lowImpact: React.FC<TitleSectionBlockProps>
+  mediumImpact: React.FC<TitleSectionBlockProps>
 }
 
 export const titlesComponentsMap: TitleComponentsMap = {
   highImpact: HighImpactTitle,
+  mediumImpact: MediumImpactTitle,
   lowImpact: LowImpactTitle,
 }

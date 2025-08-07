@@ -5,7 +5,7 @@ import type { Page } from "@payload-types"
 import { toKebabCase } from "@app/utilities/toKebabCase"
 import { Locale } from "ROOT/locales/locales"
 import { blockComponentsMap } from "@app/_Map/blocks.map"
-import { cn } from "@app/utilities/cn"
+import { Gutter } from "../Gutter"
 
 export const Blocks: React.FC<{
   limit?: number
@@ -60,15 +60,16 @@ export const Blocks: React.FC<{
             const Block = blockComponentsMap[blockType]
 
             if (Block) {
+              const gutter = block.gutter
               return (
-                <div className={cn(containerClassName)} key={index}>
+                <Gutter gutter={gutter} className={containerClassName} key={index}>
                   <Block
                     id={toKebabCase(blockType)}
                     {...block}
                     params={props.params}
                     urlSearchParams={props.urlSearchParams}
                   />
-                </div>
+                </Gutter>
               )
             }
           }

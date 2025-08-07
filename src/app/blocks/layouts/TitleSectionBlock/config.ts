@@ -3,10 +3,11 @@ import { autoFillField } from "@app/utilities/autoFillField"
 import switchField from "@app/payload/fields/switch/config"
 // import { link } from "@app/payload/fields/link"
 import { titlesComponentsMap } from "@app/_Map/titles.map"
+import { gutterField } from "@app/payload/fields/gutter"
 
 type TitleType = keyof typeof titlesComponentsMap
 
-const titles: Array<TitleType> = ["highImpact", "lowImpact"]
+const titles: Array<TitleType> = ["highImpact", "lowImpact", "mediumImpact"]
 
 export const TitleSectionBlock: Block = {
   slug: "titleSection",
@@ -66,6 +67,7 @@ export const TitleSectionBlock: Block = {
           Boolean(showImage) && useDocuementFields !== true,
       },
     },
+    gutterField(),
     // switchField({
     //   label: "Enable Link",
     //   name: "enableLink",
