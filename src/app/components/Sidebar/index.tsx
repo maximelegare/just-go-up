@@ -35,7 +35,7 @@ export const RightSidebar: React.FC<SidebarProps> = async ({
     <Sidebar side="right">
       <div className="relative">
         <div
-          className={cn("pl-5 pr-8  h-ful flex flex-col gap-4", {})}
+          className={cn("pl-5 pr-8  h-ful flex flex-col", {})}
           style={{ marginTop: meUser.user ? 107 + 16 : 78 + 16 }}
         >
           <Blocks blocks={sidebar[side].sections} params={params} />
