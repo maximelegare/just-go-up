@@ -10,14 +10,7 @@ import {
   MediaCardProps,
 } from "@app/components/Card/types"
 import { CategoryLabel } from "@app/components/Card/CategoryLabel"
-
-export type CardComponentsMap = {
-  category: React.FC<CategoryCardProps>
-  blog: React.FC<BlogCardProps>
-  "blog-condensed": React.FC<BlogCardProps>
-  media: React.FC<MediaCardProps>
-  "category-label": React.FC<CategoryLabelprops>
-}
+import { CMSLink, CMSLinkType } from "@app/components/Link"
 
 export const cardComponentsMap: CardComponentsMap = {
   category: CategoryCard,
@@ -25,4 +18,18 @@ export const cardComponentsMap: CardComponentsMap = {
   "blog-condensed": BlogCardCondensed,
   "category-label": CategoryLabel,
   media: MediaCard,
+  link: CMSLink,
+}
+
+export type CardPropsMap = {
+  category: CategoryCardProps
+  blog: BlogCardProps
+  "blog-condensed": BlogCardProps
+  media: MediaCardProps
+  "category-label": CategoryLabelprops
+  link: CMSLinkType
+}
+
+export type CardComponentsMap = {
+  [K in keyof CardPropsMap]: React.FC<CardPropsMap[K]>
 }

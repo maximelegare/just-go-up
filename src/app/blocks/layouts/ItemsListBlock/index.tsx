@@ -5,7 +5,7 @@ import React from "react"
 import { ItemsList } from "@app/blocks/layouts/ItemsListBlock/ItemsList"
 import { Pagination } from "@app/components/Pagination"
 
-import type { Page } from "@payload-types"
+import type { Blog, Category, Link, Page } from "@payload-types"
 import { Locale } from "ROOT/locales/locales"
 import { OptionsBar } from "@app/components/OptionsBar"
 
@@ -34,6 +34,7 @@ export const ItemsListBlock: React.FC<
     optionsBar,
     featured,
     populateBy,
+    specificList,
   } = props
 
   const pageNumber = urlSearchParams?.page ? parseInt(urlSearchParams?.page) : 1
@@ -60,9 +61,15 @@ export const ItemsListBlock: React.FC<
     }
   }
 
-  const getWhere = () => {
-    switch (relationTo) {
+  const getSpecificListIds = (items: Blog[] | Category[] | Link[]) => items?.map((i) => i.id) || []
+
+  const getWhere = (
+    r: typeof specificList.relationTo | typeof relationTo | typeof featured.relationTo,
+  ) => {
+    switch (r) {
       case "blogs": {
+        const ids = getSpecificListIds(specificList.blogs as Blog[])
+
         return {
           isActive: {
             equals: true,
@@ -72,6 +79,37 @@ export const ItemsListBlock: React.FC<
               equals: true,
             },
           }),
+          ...(populateBy === "specificList" && {
+            _id: {
+              in: ids,
+            },
+          }),
+        }
+      }
+      case "categories": {
+        const ids = getSpecificListIds(specificList.categories as Category[])
+        return {
+          ...(populateBy === "featured" && {
+            isFeatured: {
+              equals: true,
+            },
+          }),
+          ...(populateBy === "specificList" && {
+            _id: {
+              in: ids,
+            },
+          }),
+        }
+      }
+      case "links": {
+        const ids = getSpecificListIds(specificList.links as Link[])
+
+        return {
+          ...(populateBy === "specificList" && {
+            _id: {
+              in: ids,
+            },
+          }),
         }
       }
       default:
@@ -79,12 +117,26 @@ export const ItemsListBlock: React.FC<
     }
   }
 
+  const getRelationTo = () => {
+    switch (populateBy) {
+      case "collection":
+        return relationTo
+      case "featured":
+        return featured.relationTo
+      case "specificList":
+        return specificList.relationTo
+    }
+  }
+
   const fetchedItems = await payload.find({
     locale: props.params?.locale,
-    collection: populateBy === "collection" ? relationTo : featured.relationTo,
+    collection: getRelationTo(),
     limit: limit ?? undefined,
     where: {
-      and: [getWhere(), filterValues ? getSearchParamWhere(filterValues[0], filterValues[1]) : {}],
+      and: [
+        getWhere(getRelationTo()),
+        filterValues ? getSearchParamWhere(filterValues[0], filterValues[1]) : {},
+      ],
     },
     page: pageNumber,
   })
