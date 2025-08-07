@@ -2,6 +2,7 @@ import React from "react"
 import { TitleSectionBlockProps } from "@app/blocks/layouts/TitleSectionBlock"
 import { Media } from "@app/components/Media"
 import { MediaCaption } from "@app/components/Media/MediaCaption"
+import { cn } from "@app/utilities/cn"
 
 export const HighImpactTitle: React.FC<
   TitleSectionBlockProps & { className?: string; linkClassName?: string; subtitle?: string }
@@ -18,7 +19,7 @@ export const HighImpactTitle: React.FC<
           <h4 className="font-normal">{subtitle}</h4>
         </div>
       </div>
-      <div className="mb-8 lg:mb-14">
+      <div className={cn(showImage && "mb-8 lg:mb-14")}>
         {showImage && (
           <div>
             <div className="relative w-full h-full min-h-[40vh] lg:min-h-[60vh]">

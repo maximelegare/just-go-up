@@ -155,7 +155,10 @@ export interface Page {
   id: string;
   title: string;
   publishedOn?: string | null;
-  showRightSidebar?: boolean | null;
+  globalsToShow?: {
+    rightSidebar?: boolean | null;
+    footer?: boolean | null;
+  };
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -201,6 +204,7 @@ export interface Page {
                   | 'menu'
                   | 'categoryLabel'
                   | 'richtextLink'
+                  | 'sideDrawer'
                 )
               | null;
             /**
@@ -227,6 +231,7 @@ export interface Page {
                   }[]
                 | null;
             };
+            isSheet?: boolean | null;
           };
           id?: string | null;
         }[]
@@ -294,10 +299,12 @@ export interface Page {
                           }[]
                         | null;
                     };
+                    isSheet?: boolean | null;
                   };
                   id?: string | null;
                 }[]
               | null;
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             id?: string | null;
             blockName?: string | null;
             blockType: 'cta';
@@ -349,6 +356,7 @@ export interface Page {
                           | 'menu'
                           | 'categoryLabel'
                           | 'richtextLink'
+                          | 'sideDrawer'
                         )
                       | null;
                     /**
@@ -375,6 +383,7 @@ export interface Page {
                           }[]
                         | null;
                     };
+                    isSheet?: boolean | null;
                   };
                   id?: string | null;
                 }[]
@@ -422,6 +431,7 @@ export interface Page {
                       | 'menu'
                       | 'categoryLabel'
                       | 'richtextLink'
+                      | 'sideDrawer'
                     )
                   | null;
                 /**
@@ -448,8 +458,10 @@ export interface Page {
                       }[]
                     | null;
                 };
+                isSheet?: boolean | null;
               };
             };
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             conditionalRenderer?: {
               show?: ('always' | 'conditionally') | null;
               showParams?: (string | SearchParamValue)[] | null;
@@ -462,6 +474,7 @@ export interface Page {
         | {
             position?: ('default' | 'fullscreen') | null;
             media: string | Media;
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             id?: string | null;
             blockName?: string | null;
             blockType: 'mediaBlock';
@@ -484,6 +497,7 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             id?: string | null;
             blockName?: string | null;
             blockType: 'formBlock';
@@ -494,18 +508,25 @@ export interface Page {
               data?: (string | null) | OptionsBar;
             };
             blockTitle: string;
-            populateBy: 'collection' | 'featured';
+            populateBy: 'collection' | 'featured' | 'specificList';
             relationTo?: ('categories' | 'blogs') | null;
-            cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label') | null;
             featured?: {
               relationTo?: ('categories' | 'blogs') | null;
               categories?: (string | Category)[] | null;
             };
+            specificList?: {
+              relationTo?: ('categories' | 'blogs' | 'links') | null;
+              categories?: (string | Category)[] | null;
+              blogs?: (string | Blog)[] | null;
+              links?: (string | Link)[] | null;
+            };
+            cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label' | 'link') | null;
             layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList' | 'horizontalWrap') | null;
             imageSelector?: ('images' | 'dots') | null;
             hasLimit?: boolean | null;
             limit?: number | null;
             hasPagination?: boolean | null;
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             conditionalRenderer?: {
               show?: ('always' | 'conditionally') | null;
               showParams?: (string | SearchParamValue)[] | null;
@@ -528,7 +549,7 @@ export interface Page {
             blockType: 'dynamicContent';
           }
         | {
-            type?: ('highImpact' | 'lowImpact') | null;
+            type?: ('highImpact' | 'lowImpact' | 'mediumImpact') | null;
             /**
              * Only available for dynamic-content
              */
@@ -537,6 +558,7 @@ export interface Page {
             subtitle?: string | null;
             showImage?: boolean | null;
             image?: (string | null) | Media;
+            gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
             id?: string | null;
             blockName?: string | null;
             blockType: 'titleSection';
@@ -681,6 +703,7 @@ export interface Blog {
                         | 'menu'
                         | 'categoryLabel'
                         | 'richtextLink'
+                        | 'sideDrawer'
                       )
                     | null;
                   /**
@@ -707,6 +730,7 @@ export interface Blog {
                         }[]
                       | null;
                   };
+                  isSheet?: boolean | null;
                 };
                 id?: string | null;
               }[]
@@ -754,6 +778,7 @@ export interface Blog {
                     | 'menu'
                     | 'categoryLabel'
                     | 'richtextLink'
+                    | 'sideDrawer'
                   )
                 | null;
               /**
@@ -780,8 +805,10 @@ export interface Blog {
                     }[]
                   | null;
               };
+              isSheet?: boolean | null;
             };
           };
+          gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
           conditionalRenderer?: {
             show?: ('always' | 'conditionally') | null;
             showParams?: (string | SearchParamValue)[] | null;
@@ -794,12 +821,13 @@ export interface Blog {
       | {
           position?: ('default' | 'fullscreen') | null;
           media: string | Media;
+          gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
           id?: string | null;
           blockName?: string | null;
           blockType: 'mediaBlock';
         }
       | {
-          type?: ('highImpact' | 'lowImpact') | null;
+          type?: ('highImpact' | 'lowImpact' | 'mediumImpact') | null;
           /**
            * Only available for dynamic-content
            */
@@ -808,6 +836,7 @@ export interface Blog {
           subtitle?: string | null;
           showImage?: boolean | null;
           image?: (string | null) | Media;
+          gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
           id?: string | null;
           blockName?: string | null;
           blockType: 'titleSection';
@@ -1102,6 +1131,7 @@ export interface Link {
           | 'menu'
           | 'categoryLabel'
           | 'richtextLink'
+          | 'sideDrawer'
         )
       | null;
     /**
@@ -1128,6 +1158,7 @@ export interface Link {
           }[]
         | null;
     };
+    isSheet?: boolean | null;
   };
   logo?: (string | null) | Media;
   updatedAt: string;
@@ -1294,7 +1325,12 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   publishedOn?: T;
-  showRightSidebar?: T;
+  globalsToShow?:
+    | T
+    | {
+        rightSidebar?: T;
+        footer?: T;
+      };
   hero?:
     | T
     | {
@@ -1341,6 +1377,7 @@ export interface PagesSelect<T extends boolean = true> {
                                 id?: T;
                               };
                         };
+                    isSheet?: T;
                   };
               id?: T;
             };
@@ -1398,9 +1435,11 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                     id?: T;
                   };
+              gutter?: T;
               id?: T;
               blockName?: T;
             };
@@ -1452,6 +1491,7 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                     id?: T;
                   };
@@ -1498,8 +1538,10 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                   };
+              gutter?: T;
               conditionalRenderer?:
                 | T
                 | {
@@ -1515,6 +1557,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               position?: T;
               media?: T;
+              gutter?: T;
               id?: T;
               blockName?: T;
             };
@@ -1524,6 +1567,7 @@ export interface PagesSelect<T extends boolean = true> {
               form?: T;
               enableIntro?: T;
               introContent?: T;
+              gutter?: T;
               id?: T;
               blockName?: T;
             };
@@ -1539,18 +1583,27 @@ export interface PagesSelect<T extends boolean = true> {
               blockTitle?: T;
               populateBy?: T;
               relationTo?: T;
-              cardVariant?: T;
               featured?:
                 | T
                 | {
                     relationTo?: T;
                     categories?: T;
                   };
+              specificList?:
+                | T
+                | {
+                    relationTo?: T;
+                    categories?: T;
+                    blogs?: T;
+                    links?: T;
+                  };
+              cardVariant?: T;
               layout?: T;
               imageSelector?: T;
               hasLimit?: T;
               limit?: T;
               hasPagination?: T;
+              gutter?: T;
               conditionalRenderer?:
                 | T
                 | {
@@ -1583,6 +1636,7 @@ export interface PagesSelect<T extends boolean = true> {
               subtitle?: T;
               showImage?: T;
               image?: T;
+              gutter?: T;
               id?: T;
               blockName?: T;
             };
@@ -1719,6 +1773,7 @@ export interface BlogsSelect<T extends boolean = true> {
                                             id?: T;
                                           };
                                     };
+                                isSheet?: T;
                               };
                           id?: T;
                         };
@@ -1765,8 +1820,10 @@ export interface BlogsSelect<T extends boolean = true> {
                                             id?: T;
                                           };
                                     };
+                                isSheet?: T;
                               };
                         };
+                    gutter?: T;
                     conditionalRenderer?:
                       | T
                       | {
@@ -1782,6 +1839,7 @@ export interface BlogsSelect<T extends boolean = true> {
                 | {
                     position?: T;
                     media?: T;
+                    gutter?: T;
                     id?: T;
                     blockName?: T;
                   };
@@ -1794,6 +1852,7 @@ export interface BlogsSelect<T extends boolean = true> {
                     subtitle?: T;
                     showImage?: T;
                     image?: T;
+                    gutter?: T;
                     id?: T;
                     blockName?: T;
                   };
@@ -1872,6 +1931,7 @@ export interface LinksSelect<T extends boolean = true> {
                     id?: T;
                   };
             };
+        isSheet?: T;
       };
   logo?: T;
   updatedAt?: T;
@@ -2178,12 +2238,250 @@ export interface Footer {
  */
 export interface SideDrawer {
   id: string;
-  sections?:
-    | {
-        links?: (string | Link)[] | null;
-        id?: string | null;
-      }[]
-    | null;
+  header?: {};
+  body?: {
+    content?: {
+      layout?:
+        | (
+            | {
+                hasMultipleColumns?: boolean | null;
+                columns?:
+                  | {
+                      size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+                      richText?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom' | 'current') | null;
+                        newTab?: boolean | null;
+                        reference?: {
+                          relationTo: 'pages';
+                          value: string | Page;
+                        } | null;
+                        url?: string | null;
+                        label: string;
+                        /**
+                         * Dictates how the link should be rendered.
+                         */
+                        appearance?:
+                          | (
+                              | 'default'
+                              | 'destructive'
+                              | 'ghost'
+                              | 'link'
+                              | 'outline'
+                              | 'text'
+                              | 'secondary'
+                              | 'underline'
+                              | 'iconOnly'
+                              | 'menu'
+                              | 'categoryLabel'
+                              | 'richtextLink'
+                              | 'sideDrawer'
+                            )
+                          | null;
+                        /**
+                         * Highlights the link based on the URL
+                         */
+                        isActive?: ('default' | 'exact' | 'never') | null;
+                        searchParams?: {
+                          toggleOnClick?: boolean | null;
+                          params?:
+                            | {
+                                key: string | SearchParamKey;
+                                value?: {
+                                  valueType?: ('collection' | 'custom') | null;
+                                  collectionData?: {
+                                    type?: ('category' | 'blog') | null;
+                                    category?: (string | null) | Category;
+                                    blog?: (string | null) | Blog;
+                                  };
+                                  custom?: {
+                                    value?: (string | null) | SearchParamValue;
+                                  };
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                        };
+                        isSheet?: boolean | null;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                column?: {
+                  richText?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  enableLink?: boolean | null;
+                  link?: {
+                    type?: ('reference' | 'custom' | 'current') | null;
+                    newTab?: boolean | null;
+                    reference?: {
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null;
+                    url?: string | null;
+                    label: string;
+                    /**
+                     * Dictates how the link should be rendered.
+                     */
+                    appearance?:
+                      | (
+                          | 'default'
+                          | 'destructive'
+                          | 'ghost'
+                          | 'link'
+                          | 'outline'
+                          | 'text'
+                          | 'secondary'
+                          | 'underline'
+                          | 'iconOnly'
+                          | 'menu'
+                          | 'categoryLabel'
+                          | 'richtextLink'
+                          | 'sideDrawer'
+                        )
+                      | null;
+                    /**
+                     * Highlights the link based on the URL
+                     */
+                    isActive?: ('default' | 'exact' | 'never') | null;
+                    searchParams?: {
+                      toggleOnClick?: boolean | null;
+                      params?:
+                        | {
+                            key: string | SearchParamKey;
+                            value?: {
+                              valueType?: ('collection' | 'custom') | null;
+                              collectionData?: {
+                                type?: ('category' | 'blog') | null;
+                                category?: (string | null) | Category;
+                                blog?: (string | null) | Blog;
+                              };
+                              custom?: {
+                                value?: (string | null) | SearchParamValue;
+                              };
+                            };
+                            id?: string | null;
+                          }[]
+                        | null;
+                    };
+                    isSheet?: boolean | null;
+                  };
+                };
+                gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
+                conditionalRenderer?: {
+                  show?: ('always' | 'conditionally') | null;
+                  showParams?: (string | SearchParamValue)[] | null;
+                  hideParams?: (string | SearchParamValue)[] | null;
+                };
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'content';
+              }
+            | {
+                form: string | Form;
+                enableIntro?: boolean | null;
+                introContent?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'formBlock';
+              }
+            | {
+                optionsBar?: {
+                  enable?: boolean | null;
+                  data?: (string | null) | OptionsBar;
+                };
+                blockTitle: string;
+                populateBy: 'collection' | 'featured' | 'specificList';
+                relationTo?: ('categories' | 'blogs') | null;
+                featured?: {
+                  relationTo?: ('categories' | 'blogs') | null;
+                  categories?: (string | Category)[] | null;
+                };
+                specificList?: {
+                  relationTo?: ('categories' | 'blogs' | 'links') | null;
+                  categories?: (string | Category)[] | null;
+                  blogs?: (string | Blog)[] | null;
+                  links?: (string | Link)[] | null;
+                };
+                cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label' | 'link') | null;
+                layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList' | 'horizontalWrap') | null;
+                imageSelector?: ('images' | 'dots') | null;
+                hasLimit?: boolean | null;
+                limit?: number | null;
+                hasPagination?: boolean | null;
+                gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
+                conditionalRenderer?: {
+                  show?: ('always' | 'conditionally') | null;
+                  showParams?: (string | SearchParamValue)[] | null;
+                  hideParams?: (string | SearchParamValue)[] | null;
+                };
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'itemsList';
+              }
+            | {
+                type?: ('highImpact' | 'lowImpact' | 'mediumImpact') | null;
+                /**
+                 * Only available for dynamic-content
+                 */
+                useDocuementFields?: boolean | null;
+                title?: string | null;
+                subtitle?: string | null;
+                showImage?: boolean | null;
+                image?: (string | null) | Media;
+                gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'titleSection';
+              }
+          )[]
+        | null;
+    };
+  };
+  footer?: {};
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2212,7 +2510,7 @@ export interface GetInTouch {
 export interface Settings {
   id: string;
   underConstruction?: boolean | null;
-  showCookieManager?: boolean | null;
+  disableAnalytics?: boolean | null;
   showLocaleSwitcher?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2232,18 +2530,25 @@ export interface Sidebars {
                 data?: (string | null) | OptionsBar;
               };
               blockTitle: string;
-              populateBy: 'collection' | 'featured';
+              populateBy: 'collection' | 'featured' | 'specificList';
               relationTo?: ('categories' | 'blogs') | null;
-              cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label') | null;
               featured?: {
                 relationTo?: ('categories' | 'blogs') | null;
                 categories?: (string | Category)[] | null;
               };
+              specificList?: {
+                relationTo?: ('categories' | 'blogs' | 'links') | null;
+                categories?: (string | Category)[] | null;
+                blogs?: (string | Blog)[] | null;
+                links?: (string | Link)[] | null;
+              };
+              cardVariant?: ('category' | 'blog' | 'blog-condensed' | 'category-label' | 'link') | null;
               layout?: ('grid' | 'carousel' | 'horizontalScroll' | 'verticalList' | 'horizontalWrap') | null;
               imageSelector?: ('images' | 'dots') | null;
               hasLimit?: boolean | null;
               limit?: number | null;
               hasPagination?: boolean | null;
+              gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
               conditionalRenderer?: {
                 show?: ('always' | 'conditionally') | null;
                 showParams?: (string | SearchParamValue)[] | null;
@@ -2254,7 +2559,7 @@ export interface Sidebars {
               blockType: 'itemsList';
             }
           | {
-              type?: ('highImpact' | 'lowImpact') | null;
+              type?: ('highImpact' | 'lowImpact' | 'mediumImpact') | null;
               /**
                * Only available for dynamic-content
                */
@@ -2263,6 +2568,7 @@ export interface Sidebars {
               subtitle?: string | null;
               showImage?: boolean | null;
               image?: (string | null) | Media;
+              gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
               id?: string | null;
               blockName?: string | null;
               blockType: 'titleSection';
@@ -2316,12 +2622,195 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "sideDrawer_select".
  */
 export interface SideDrawerSelect<T extends boolean = true> {
-  sections?:
+  header?: T | {};
+  body?:
     | T
     | {
-        links?: T;
-        id?: T;
+        content?:
+          | T
+          | {
+              layout?:
+                | T
+                | {
+                    content?:
+                      | T
+                      | {
+                          hasMultipleColumns?: T;
+                          columns?:
+                            | T
+                            | {
+                                size?: T;
+                                richText?: T;
+                                enableLink?: T;
+                                link?:
+                                  | T
+                                  | {
+                                      type?: T;
+                                      newTab?: T;
+                                      reference?: T;
+                                      url?: T;
+                                      label?: T;
+                                      appearance?: T;
+                                      isActive?: T;
+                                      searchParams?:
+                                        | T
+                                        | {
+                                            toggleOnClick?: T;
+                                            params?:
+                                              | T
+                                              | {
+                                                  key?: T;
+                                                  value?:
+                                                    | T
+                                                    | {
+                                                        valueType?: T;
+                                                        collectionData?:
+                                                          | T
+                                                          | {
+                                                              type?: T;
+                                                              category?: T;
+                                                              blog?: T;
+                                                            };
+                                                        custom?:
+                                                          | T
+                                                          | {
+                                                              value?: T;
+                                                            };
+                                                      };
+                                                  id?: T;
+                                                };
+                                          };
+                                      isSheet?: T;
+                                    };
+                                id?: T;
+                              };
+                          column?:
+                            | T
+                            | {
+                                richText?: T;
+                                enableLink?: T;
+                                link?:
+                                  | T
+                                  | {
+                                      type?: T;
+                                      newTab?: T;
+                                      reference?: T;
+                                      url?: T;
+                                      label?: T;
+                                      appearance?: T;
+                                      isActive?: T;
+                                      searchParams?:
+                                        | T
+                                        | {
+                                            toggleOnClick?: T;
+                                            params?:
+                                              | T
+                                              | {
+                                                  key?: T;
+                                                  value?:
+                                                    | T
+                                                    | {
+                                                        valueType?: T;
+                                                        collectionData?:
+                                                          | T
+                                                          | {
+                                                              type?: T;
+                                                              category?: T;
+                                                              blog?: T;
+                                                            };
+                                                        custom?:
+                                                          | T
+                                                          | {
+                                                              value?: T;
+                                                            };
+                                                      };
+                                                  id?: T;
+                                                };
+                                          };
+                                      isSheet?: T;
+                                    };
+                              };
+                          gutter?: T;
+                          conditionalRenderer?:
+                            | T
+                            | {
+                                show?: T;
+                                showParams?: T;
+                                hideParams?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    formBlock?:
+                      | T
+                      | {
+                          form?: T;
+                          enableIntro?: T;
+                          introContent?: T;
+                          gutter?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    itemsList?:
+                      | T
+                      | {
+                          optionsBar?:
+                            | T
+                            | {
+                                enable?: T;
+                                data?: T;
+                              };
+                          blockTitle?: T;
+                          populateBy?: T;
+                          relationTo?: T;
+                          featured?:
+                            | T
+                            | {
+                                relationTo?: T;
+                                categories?: T;
+                              };
+                          specificList?:
+                            | T
+                            | {
+                                relationTo?: T;
+                                categories?: T;
+                                blogs?: T;
+                                links?: T;
+                              };
+                          cardVariant?: T;
+                          layout?: T;
+                          imageSelector?: T;
+                          hasLimit?: T;
+                          limit?: T;
+                          hasPagination?: T;
+                          gutter?: T;
+                          conditionalRenderer?:
+                            | T
+                            | {
+                                show?: T;
+                                showParams?: T;
+                                hideParams?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    titleSection?:
+                      | T
+                      | {
+                          type?: T;
+                          useDocuementFields?: T;
+                          title?: T;
+                          subtitle?: T;
+                          showImage?: T;
+                          image?: T;
+                          gutter?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+            };
       };
+  footer?: T | {};
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2350,7 +2839,7 @@ export interface GetInTouchSelect<T extends boolean = true> {
  */
 export interface SettingsSelect<T extends boolean = true> {
   underConstruction?: T;
-  showCookieManager?: T;
+  disableAnalytics?: T;
   showLocaleSwitcher?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2379,18 +2868,27 @@ export interface SidebarsSelect<T extends boolean = true> {
                     blockTitle?: T;
                     populateBy?: T;
                     relationTo?: T;
-                    cardVariant?: T;
                     featured?:
                       | T
                       | {
                           relationTo?: T;
                           categories?: T;
                         };
+                    specificList?:
+                      | T
+                      | {
+                          relationTo?: T;
+                          categories?: T;
+                          blogs?: T;
+                          links?: T;
+                        };
+                    cardVariant?: T;
                     layout?: T;
                     imageSelector?: T;
                     hasLimit?: T;
                     limit?: T;
                     hasPagination?: T;
+                    gutter?: T;
                     conditionalRenderer?:
                       | T
                       | {
@@ -2410,6 +2908,7 @@ export interface SidebarsSelect<T extends boolean = true> {
                     subtitle?: T;
                     showImage?: T;
                     image?: T;
+                    gutter?: T;
                     id?: T;
                     blockName?: T;
                   };

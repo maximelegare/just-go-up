@@ -11,6 +11,7 @@ import { link } from "@app/payload/fields/link"
 import switchField from "@app/payload/fields/switch/config"
 
 import { conditionalRenderer } from "@app/payload/fields/conditionalBlockRenderer"
+import { gutterField } from "@app/payload/fields/gutter"
 
 const columnFields: Field[] = [
   {
@@ -118,6 +119,7 @@ export const Content: Block = {
         condition: (_, { hasMultipleColumns }) => Boolean(!hasMultipleColumns),
       },
     },
+    gutterField(),
     conditionalRenderer(),
   ],
 }

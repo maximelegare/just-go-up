@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical"
+import { gutterField } from "@app/payload/fields/gutter"
 
 export const FormBlock: Block = {
   slug: "formBlock",
@@ -39,6 +40,7 @@ export const FormBlock: Block = {
       }),
       label: "Intro Content",
     },
+    gutterField(),
   ],
   graphQL: {
     singularName: "FormBlock",

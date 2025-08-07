@@ -61,7 +61,6 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
-        console.log("NODE:", node)
         if (node == null) {
           return null
         }
@@ -151,7 +150,6 @@ export function serializeLexical({ nodes, textClassName }: Props): JSX.Element {
         }
 
         if (node.type === "block") {
-          console.log("NODE IN BLOCK", node)
           const block = node.fields
 
           const blockType = block?.blockType

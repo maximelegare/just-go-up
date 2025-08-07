@@ -31,23 +31,12 @@ jobs:
       #Prevents from crashing if memory excess
       - name: "Do it anyways"
         run: export NODE_OPTIONS="--max_old_space_size=4096" 
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y ca-certificates
       - name: Use Node.js 20.8.1
         uses: actions/setup-node@v2
         with:
           node-version: 20.8.1
-      # - run: npm ci --force
-      # - name: Get next version
-      #   id: read_version
-      #   run: echo "version=$(npm run semantic-release --dry-run  | grep -oP 'Published release \K.*? ' | sed 's/[[:space:]]*$//')" >> $GITHUB_OUTPUT 
-      #   env:
-      #     NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      #     GH_TOKEN: ${{secrets.GH_SEMANTIC_TOKEN}}
-
-      # - name: Update Version
-      #   if: ${{ steps.read_version.outputs.version }}
-      #   run: npm version ${{ steps.read_version.outputs.version }} --no-git-tag-version --allow-same-version
-      #   env:
-      #     credentials: ${{secrets.GH_SEMANTIC_TOKEN}}
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Install Vercel CLI

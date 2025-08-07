@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { PayloadRedirects } from "@app/components/PayloadRedirects"
 import configPromise from "@payload-config"
 import { getPayload } from "payload"
-import { draftMode, headers } from "next/headers"
 import React from "react"
 
 import { Blocks } from "../../../components/Blocks"
@@ -13,6 +12,11 @@ import { Locale, defaultLocale } from "ROOT/locales/locales"
 import { generatePageSlug } from "@app/utilities/generatePageSlug"
 import { RightSidebar } from "@app/components/Sidebar"
 import { cn } from "@app/utilities/cn"
+import { draftMode, headers } from "next/headers"
+import { Page as PageType } from "@payload-types"
+import { Footer } from "@app/components/Footer"
+import { getMeUser } from "@app/utilities/getMeUser"
+// import { Plausible } from "@app/components/Plausible"
 
 export const dynamic = "force-dynamic"
 
@@ -45,37 +49,54 @@ export default async function Page({
   const { slugs = ["home"], locale = defaultLocale } = await params
   const { slug, url } = generatePageSlug(slugs)
 
-  const page = await queryPageBySlug({
+  const page = (await queryPageBySlug({
+    collection: "pages",
     slug,
     locale: locale as Locale,
-  })
+  })) as PageType
 
   if (!page) {
-    return <PayloadRedirects url={url} />
+    return <PayloadRedirects url={url} locale={locale} />
   }
 
-  const { hero, layout, showRightSidebar } = page
+  const meUser = await getMeUser()
+
+  const {
+    hero,
+    layout,
+    globalsToShow: { footer, rightSidebar },
+  } = page
 
   return (
-    <article className="pb-24">
-      <PayloadRedirects disableNotFound url={url} />
-      <Hero {...hero} />
-      <div className={cn(showRightSidebar && "block sm:flex")}>
-        <div className="container">
-          <Blocks
-            blocks={layout}
-            urlSearchParams={await searchParams}
+    <>
+      <article
+        className={cn(
+          "flex  flex-col",
+          meUser?.user ? "min-h-[calc(100vh-93px)]" : "min-h-[calc(100vh-65px)]",
+        )}
+      >
+        <PayloadRedirects disableNotFound url={url} locale={locale} />
+        <Hero {...hero} />
+
+        <div className={cn("flex-grow", rightSidebar && "block sm:flex")}>
+          <div className="container">
+            <Blocks
+              blocks={layout}
+              urlSearchParams={await searchParams}
+              params={{ locale, url, slugs }}
+            />
+          </div>
+          <RightSidebar
+            locale={locale}
+            show={rightSidebar}
+            side="right"
             params={{ locale, url, slugs }}
           />
         </div>
-        <RightSidebar
-          locale={locale}
-          show={showRightSidebar}
-          side="right"
-          params={{ locale, url, slugs }}
-        />
-      </div>
-    </article>
+
+        <Footer locale={locale} show={footer} className="container mt-auto" />
+      </article>
+    </>
   )
 }
 
@@ -88,17 +109,50 @@ export async function generateMetadata({
   }>
 }): Promise<Metadata> {
   const { slugs = ["home"], locale } = await params
-  const { slug } = generatePageSlug(slugs)
+  const { slug, urlSlugs } = generatePageSlug(slugs)
+
+  // Gets either the first argument of the url (checks if it is a collection)
+  // Or uses Pages
+  // Meant to render
+  const collectionSlug = urlSlugs[0]
+  const collection = collectionSlug === "blogs" ? "blogs" : "pages"
 
   const page = await queryPageBySlug({
-    slug,
+    collection,
     locale,
+    slug: collection === "blogs" && urlSlugs && urlSlugs[1] ? urlSlugs[1] : slug,
   })
-
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale }) => {
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{
+//     slugs: string[]
+//     locale: Locale
+//   }>
+// }): Promise<Metadata> {
+//   const { slugs = ["home"], locale } = await params
+//   const { slug } = generatePageSlug(slugs)
+
+//   const page = await queryPageBySlug({
+//     slug,
+//     locale,
+//   })
+
+//   return generateMeta({ doc: page })
+// }
+
+const queryPageBySlug = async ({
+  slug,
+  locale,
+  collection,
+}: {
+  slug: string
+  locale: Locale
+  collection: "pages" | "blogs"
+}) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -110,7 +164,7 @@ const queryPageBySlug = async ({ slug, locale }: { slug: string; locale: Locale 
 
   const result = await payload.find({
     locale,
-    collection: "pages",
+    collection,
     draft,
     limit: 1,
     depth: 5,

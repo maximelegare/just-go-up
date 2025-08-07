@@ -21,7 +21,8 @@
     "semantic-release": "semantic-release --branches MAIN",
     "lint-staged": "lint-staged",
     "generate:icons": "npx tsx ./build-icons.mts",
-    "db:update": "pnpm ./db/updateDevDatabase.sh"
+    "db:update": "pnpm ./db/updateDevDatabase.sh",
+    "db:backupLocalDBLocally": "pnpm ./db/copydb.sh"
   },
   "dependencies": {
     "@lexical/list": "0.28.0",
@@ -86,7 +87,6 @@
     "qs": "6.11.2",
     "react": "19.0.0",
     "react-colorful": "^5.6.1",
-    "react-cookie-manager": "^3.7.2",
     "react-dom": "19.0.0",
     "react-hook-form": "7.45.4",
     "react-i18next": "^15.2.0",

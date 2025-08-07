@@ -7,6 +7,8 @@ import Link from "next/link"
 import { NavigationMenu } from "@app/components/HeaderNavigationMenu"
 import { Separator } from "../ui/separator"
 import { getCachedGlobal } from "@app/utilities/getGlobals"
+// import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
+import { SideDrawer } from "@app/components/SideDrawer"
 import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 
 type HeaderProps = {
@@ -35,10 +37,13 @@ export async function Header({ locale, show, showLocaleSwitcher }: HeaderProps) 
               </div>
             </div>
             {showLocaleSwitcher && (
-              <div className="relative z-30">
+              <div className="relative z-30 hidden md:block">
                 <LocaleSelector triggerClassName="justify-center" />
               </div>
             )}
+            <div className="relative z-30 block md:hidden">
+              <SideDrawer locale={locale} />
+            </div>
           </div>
         </div>
         <Separator />

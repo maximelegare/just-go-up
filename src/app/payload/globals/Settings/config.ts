@@ -20,8 +20,8 @@ export const Settings: GlobalConfig = {
       name: "underConstruction",
     }),
     switchField({
-      label: "Cookie Manager",
-      name: "showCookieManager",
+      label: "Disable Analytics",
+      name: "disableAnalytics",
     }),
     switchField({
       label: "Locale Switcher",

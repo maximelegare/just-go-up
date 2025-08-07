@@ -11,11 +11,12 @@ import {
 } from "@app/components/ui/Carousel"
 
 import { ScrollArea } from "@app/components/ui/scroll-area"
-import { cardComponentsMap, CardComponentsMap } from "@app/_Map/cards.map"
+import { cardComponentsMap } from "@app/_Map/cards.map"
 import { PrerendedCard } from "@app/components/Prerenderer/Card"
 import { Separator } from "@app/components/ui/separator"
 import { CardVariant } from "../config"
 import { Category, Media } from "@payload-types"
+import { CMSLinkType } from "@app/components/Link"
 
 export type RelationTo = ItemsListBlockProps["relationTo"] | "media"
 export type Item = Category | Media
@@ -43,60 +44,76 @@ export const ItemsList = <T extends Item>(props: Props<T>) => {
     isPrerendered = true,
   } = props
 
-  const getCard = (
-    Card: CardComponentsMap[keyof CardComponentsMap],
-    result: any,
+  function getCard(
+    Card: React.FC<{ doc: unknown; relationTo?: string; className?: string }>,
+    props: { doc: unknown; relationTo?: string; className?: string },
     idx: number,
-    cardClassName?: string,
-  ) => {
-    if (!result) return null
+  ) {
+    if (!props.doc) return null
+
     switch (layout) {
-      case "carousel": {
+      case "carousel":
         return (
           <CarouselItem key={idx} isPrerendered={isPrerendered}>
             <PrerendedCard isPrerendered={isPrerendered}>
-              <Card relationTo={relationTo} doc={result} className={cn(cardClassName)} />
+              <Card {...props} />
             </PrerendedCard>
           </CarouselItem>
         )
-      }
-      case "verticalList": {
+
+      case "verticalList":
         return (
           <React.Fragment key={idx}>
             {idx === 0 && <Separator />}
-            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
+            <Card {...props} />
             <Separator />
           </React.Fragment>
         )
-      }
-      case "horizontalWrap": {
-        return <Card key={idx} className={cn(cardClassName)} relationTo={relationTo} doc={result} />
-      }
+
+      case "horizontalWrap":
+        return <Card key={idx} {...props} />
 
       case "grid":
       case "horizontalScroll":
-      default: {
+      default:
         return (
           <PrerendedCard isPrerendered={isPrerendered} key={idx}>
-            <Card className={cn(cardClassName)} relationTo={relationTo} doc={result} />
+            <Card {...props} />
           </PrerendedCard>
         )
-      }
     }
   }
 
-  const mapCards = (cardVariant: CardVariant, cardClassName: string): ReactNode =>
+  const mapCards = (cardVariant: CardVariant, cardClassName: string): ReactNode[] =>
     items?.map((result, index) => {
-      if (typeof result === "object" && result !== null) {
-        if (cardVariant && cardVariant in cardComponentsMap) {
-          const Card = cardComponentsMap[cardVariant]
-          if (Card) {
-            return getCard(Card, result, index, cardClassName)
-          }
-        }
+      if (typeof result !== "object" || result === null) return null
+
+      const Card = cardComponentsMap[cardVariant]
+
+      if (cardVariant === "link") {
+        return (
+          // @ts-ignore
+          <Card
+            key={index}
+            className="rounded-none"
+            justifyContent="left"
+            size="clear"
+            // @ts-ignore
+            {...(result.link as CMSLinkType)}
+          />
+        )
       }
-      return null
-    })
+
+      return getCard(
+        Card as React.FC<{ doc: unknown; relationTo?: string; className?: string }>,
+        {
+          doc: result,
+          relationTo,
+          className: cardClassName,
+        },
+        index,
+      )
+    }) ?? []
 
   const getContainer = (
     layout: ItemsListBlockProps["layout"],
