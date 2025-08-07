@@ -59,7 +59,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <Providers>
           <div className="prose">
-            {/* <ScrollArea className="h-screen w-screen"> */}
             <LivePreviewListener />
             <AdminBar />
             <Header
@@ -68,9 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               showLocaleSwitcher={settings?.showLocaleSwitcher || false}
             />
             {children}
-            {/* <Footer locale={locale} show={!pathname.includes('under-construction')} /> */}
             <Prerenderer numberOfCards={4} />
-            {/* </ScrollArea> */}
           </div>
         </Providers>
       </body>

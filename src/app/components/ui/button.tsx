@@ -18,6 +18,8 @@ export const buttonVariant = {
   menu: "tracking-[0.15em] rounded-sm px-3 text-sm font-medium outline-none border-none flex items-center",
   categoryLabel: "text-xs rounded-2xl bg-muted w-fit outline-none",
   richtextLink: "text-foreground",
+  sideDrawer:
+    "px-3 bg-background hover:bg-foreground hover:text-background border-none text-foreground w-full text-2xl text-left py-4 font-bold",
 }
 
 export const buttonVariantActif = {
@@ -33,14 +35,16 @@ export const buttonVariantActif = {
   menu: "bg-muted",
   categoryLabel: "text-xs rounded-2xl bg-muted w-fit outline-none",
   richtextLink: "text-red-400",
+  sideDrawer: "bg-transparent border-none text-foreground w-full ",
 }
 
 const buttonVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap rounded  font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${textTransitions}`,
+  `inline-flex items-center whitespace-nowrap rounded  font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${textTransitions}`,
   {
     defaultVariants: {
       size: "default",
       variant: "default",
+      justifyContent: "center",
     },
     variants: {
       size: {
@@ -54,6 +58,11 @@ const buttonVariants = cva(
       },
       variant: buttonVariant,
       variantActif: buttonVariantActif,
+      justifyContent: {
+        center: "justify-center",
+        left: "justify-start",
+        right: "justify-end",
+      },
     },
   },
 )
@@ -66,7 +75,7 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild = false, className, size, variant, isActive, ...props }, ref) => {
+  ({ asChild = false, className, size, variant, isActive, justifyContent, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
 
     return (
@@ -77,6 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             size,
             variant,
             variantActif: isActive ? variant : undefined,
+            justifyContent,
           }),
         )}
         ref={ref}

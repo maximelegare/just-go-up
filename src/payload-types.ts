@@ -204,6 +204,7 @@ export interface Page {
                   | 'menu'
                   | 'categoryLabel'
                   | 'richtextLink'
+                  | 'sideDrawer'
                 )
               | null;
             /**
@@ -352,6 +353,7 @@ export interface Page {
                           | 'menu'
                           | 'categoryLabel'
                           | 'richtextLink'
+                          | 'sideDrawer'
                         )
                       | null;
                     /**
@@ -425,6 +427,7 @@ export interface Page {
                       | 'menu'
                       | 'categoryLabel'
                       | 'richtextLink'
+                      | 'sideDrawer'
                     )
                   | null;
                 /**
@@ -684,6 +687,7 @@ export interface Blog {
                         | 'menu'
                         | 'categoryLabel'
                         | 'richtextLink'
+                        | 'sideDrawer'
                       )
                     | null;
                   /**
@@ -757,6 +761,7 @@ export interface Blog {
                     | 'menu'
                     | 'categoryLabel'
                     | 'richtextLink'
+                    | 'sideDrawer'
                   )
                 | null;
               /**
@@ -1105,6 +1110,7 @@ export interface Link {
           | 'menu'
           | 'categoryLabel'
           | 'richtextLink'
+          | 'sideDrawer'
         )
       | null;
     /**
