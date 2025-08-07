@@ -24,7 +24,7 @@ export async function Footer({ locale, show, className, fixed }: FooterProps) {
   return (
     <footer
       className={cn(
-        "bg-muted/40 text-white w-full",
+        "bg-muted text-foreground w-full",
         fixed && "fixed bottom-0",
         !show ? "block md:hidden" : "", // Hide on larger screens if show is false, but always show on small
       )}

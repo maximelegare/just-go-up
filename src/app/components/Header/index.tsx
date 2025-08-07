@@ -9,6 +9,7 @@ import { Separator } from "../ui/separator"
 import { getCachedGlobal } from "@app/utilities/getGlobals"
 // import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 import { SideDrawer } from "@app/components/SideDrawer"
+import { LocaleSelector } from "@app/providers/Locale/LocaleSelector"
 
 type HeaderProps = {
   locale: Locale
@@ -16,7 +17,7 @@ type HeaderProps = {
   showLocaleSwitcher: boolean
 }
 
-export async function Header({ locale, show }: HeaderProps) {
+export async function Header({ locale, show, showLocaleSwitcher }: HeaderProps) {
   // @ts-ignore
   const header: Header = await getCachedGlobal("header", 2, locale)()
 
@@ -35,11 +36,11 @@ export async function Header({ locale, show }: HeaderProps) {
                 <NavigationMenu locale={locale} header={header} />
               </div>
             </div>
-            {/* {showLocaleSwitcher && (
-              <div className="relative z-30">
+            {showLocaleSwitcher && (
+              <div className="relative z-30 hidden md:block">
                 <LocaleSelector triggerClassName="justify-center" />
               </div>
-            )} */}
+            )}
             <div className="relative z-30 block md:hidden">
               <SideDrawer locale={locale} />
             </div>

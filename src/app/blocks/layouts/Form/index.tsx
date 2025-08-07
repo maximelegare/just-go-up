@@ -1,14 +1,14 @@
-'use client'
-import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+"use client"
+import type { Form as FormType } from "@payloadcms/plugin-form-builder/types"
 
-import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import RichText from 'src/app/components/RichText'
-import { Button } from '@app/components/ui/button'
+import { useRouter } from "next/navigation"
+import React, { useCallback, useState } from "react"
+import { useForm } from "react-hook-form"
+import RichText from "src/app/components/RichText"
+import { Button } from "@app/components/ui/button"
 
-import { buildInitialFormState } from './buildInitialFormState'
-import { FieldsKeys, fields } from './fields'
+import { buildInitialFormState } from "./buildInitialFormState"
+import { FieldsKeys, fields } from "./fields"
 
 export type Value = unknown
 
@@ -22,7 +22,7 @@ export interface Data {
 
 export type FormBlockType = {
   blockName?: string
-  blockType?: 'formBlock'
+  blockType?: "formBlock"
   enableIntro: boolean
   form: FormType
   introContent?: {
@@ -80,9 +80,9 @@ export const FormBlock: React.FC<
               submissionData: dataToSend,
             }),
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-            method: 'POST',
+            method: "POST",
           })
 
           const res = await req.json()
@@ -93,7 +93,7 @@ export const FormBlock: React.FC<
             setIsLoading(false)
 
             setError({
-              message: res.errors?.[0]?.message || 'Internal Server Error',
+              message: res.errors?.[0]?.message || "Internal Server Error",
               status: res.status,
             })
 
@@ -103,7 +103,7 @@ export const FormBlock: React.FC<
           setIsLoading(false)
           setHasSubmitted(true)
 
-          if (confirmationType === 'redirect' && redirect) {
+          if (confirmationType === "redirect" && redirect) {
             const { url } = redirect
 
             const redirectUrl = url
@@ -114,7 +114,7 @@ export const FormBlock: React.FC<
           console.warn(err)
           setIsLoading(false)
           setError({
-            message: 'Something went wrong.',
+            message: "Something went wrong.",
           })
         }
       }
@@ -124,16 +124,18 @@ export const FormBlock: React.FC<
     [router, formID, redirect, confirmationType],
   )
 
+  console.log("introContent", introContent)
+
   return (
     <div className="max-w-[48rem] pb-20">
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8" content={introContent} enableGutter={false} />
       )}
-      {!isLoading && hasSubmitted && confirmationType === 'message' && (
+      {!isLoading && hasSubmitted && confirmationType === "message" && (
         <RichText content={confirmationMessage} />
       )}
       {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-      {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+      {error && <div>{`${error.status || "500"}: ${error.message || ""}`}</div>}
       {!hasSubmitted && (
         <form id={formID} onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4 last:mb-0">
