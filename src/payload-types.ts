@@ -231,6 +231,7 @@ export interface Page {
                   }[]
                 | null;
             };
+            isSheet?: boolean | null;
           };
           id?: string | null;
         }[]
@@ -298,6 +299,7 @@ export interface Page {
                           }[]
                         | null;
                     };
+                    isSheet?: boolean | null;
                   };
                   id?: string | null;
                 }[]
@@ -381,6 +383,7 @@ export interface Page {
                           }[]
                         | null;
                     };
+                    isSheet?: boolean | null;
                   };
                   id?: string | null;
                 }[]
@@ -455,6 +458,7 @@ export interface Page {
                       }[]
                     | null;
                 };
+                isSheet?: boolean | null;
               };
             };
             gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
@@ -726,6 +730,7 @@ export interface Blog {
                         }[]
                       | null;
                   };
+                  isSheet?: boolean | null;
                 };
                 id?: string | null;
               }[]
@@ -800,6 +805,7 @@ export interface Blog {
                     }[]
                   | null;
               };
+              isSheet?: boolean | null;
             };
           };
           gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
@@ -1152,6 +1158,7 @@ export interface Link {
           }[]
         | null;
     };
+    isSheet?: boolean | null;
   };
   logo?: (string | null) | Media;
   updatedAt: string;
@@ -1370,6 +1377,7 @@ export interface PagesSelect<T extends boolean = true> {
                                 id?: T;
                               };
                         };
+                    isSheet?: T;
                   };
               id?: T;
             };
@@ -1427,6 +1435,7 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                     id?: T;
                   };
@@ -1482,6 +1491,7 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                     id?: T;
                   };
@@ -1528,6 +1538,7 @@ export interface PagesSelect<T extends boolean = true> {
                                       id?: T;
                                     };
                               };
+                          isSheet?: T;
                         };
                   };
               gutter?: T;
@@ -1762,6 +1773,7 @@ export interface BlogsSelect<T extends boolean = true> {
                                             id?: T;
                                           };
                                     };
+                                isSheet?: T;
                               };
                           id?: T;
                         };
@@ -1808,6 +1820,7 @@ export interface BlogsSelect<T extends boolean = true> {
                                             id?: T;
                                           };
                                     };
+                                isSheet?: T;
                               };
                         };
                     gutter?: T;
@@ -1918,6 +1931,7 @@ export interface LinksSelect<T extends boolean = true> {
                     id?: T;
                   };
             };
+        isSheet?: T;
       };
   logo?: T;
   updatedAt?: T;
@@ -2303,6 +2317,7 @@ export interface SideDrawer {
                               }[]
                             | null;
                         };
+                        isSheet?: boolean | null;
                       };
                       id?: string | null;
                     }[]
@@ -2377,6 +2392,7 @@ export interface SideDrawer {
                           }[]
                         | null;
                     };
+                    isSheet?: boolean | null;
                   };
                 };
                 gutter: 'small' | 'medium' | 'large' | 'container' | 'none';
@@ -2664,6 +2680,7 @@ export interface SideDrawerSelect<T extends boolean = true> {
                                                   id?: T;
                                                 };
                                           };
+                                      isSheet?: T;
                                     };
                                 id?: T;
                               };
@@ -2710,6 +2727,7 @@ export interface SideDrawerSelect<T extends boolean = true> {
                                                   id?: T;
                                                 };
                                           };
+                                      isSheet?: T;
                                     };
                               };
                           gutter?: T;

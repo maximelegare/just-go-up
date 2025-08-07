@@ -1,8 +1,9 @@
-import type { Field } from 'payload'
+import type { Field } from "payload"
 
-import deepMerge from '@app/utilities/deepMerge'
-import { buttonVariant } from '@app/components/ui/button'
-import { searchParams } from './searchParams'
+import deepMerge from "@app/utilities/deepMerge"
+import { buttonVariant } from "@app/components/ui/button"
+import { searchParams } from "./searchParams"
+import switchField from "./switch/config"
 
 export type LinkAppearances = keyof typeof buttonVariant
 
@@ -27,48 +28,48 @@ type LinkType = (options?: {
 
 export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
   const linkResult: Field = {
-    name: 'link',
-    type: 'group',
+    name: "link",
+    type: "group",
     admin: {
       hideGutter: true,
     },
     fields: [
       {
-        type: 'row',
+        type: "row",
         fields: [
           {
-            name: 'type',
-            type: 'radio',
+            name: "type",
+            type: "radio",
             admin: {
-              layout: 'horizontal',
-              width: '50%',
+              layout: "horizontal",
+              width: "50%",
             },
-            defaultValue: 'reference',
+            defaultValue: "reference",
             options: [
               {
-                label: 'Internal link',
-                value: 'reference',
+                label: "Internal link",
+                value: "reference",
               },
               {
-                label: 'Custom URL',
-                value: 'custom',
+                label: "Custom URL",
+                value: "custom",
               },
               {
-                label: 'Current URL',
-                value: 'current',
+                label: "Current URL",
+                value: "current",
               },
             ],
           },
           {
-            name: 'newTab',
-            type: 'checkbox',
+            name: "newTab",
+            type: "checkbox",
             admin: {
               style: {
-                alignSelf: 'flex-end',
+                alignSelf: "flex-end",
               },
-              width: '50%',
+              width: "50%",
             },
-            label: 'Open in new tab',
+            label: "Open in new tab",
           },
         ],
       },
@@ -77,22 +78,22 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
 
   const linkTypes: Field[] = [
     {
-      name: 'reference',
-      type: 'relationship',
+      name: "reference",
+      type: "relationship",
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'reference',
+        condition: (_, siblingData) => siblingData?.type === "reference",
       },
-      label: 'Document to link to',
-      relationTo: ['pages'],
+      label: "Document to link to",
+      relationTo: ["pages"],
       required: true,
     },
     {
-      name: 'url',
-      type: 'text',
+      name: "url",
+      type: "text",
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'custom',
+        condition: (_, siblingData) => siblingData?.type === "custom",
       },
-      label: 'Custom URL',
+      label: "Custom URL",
       required: true,
     },
   ]
@@ -102,19 +103,19 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       ...linkType,
       admin: {
         ...linkType.admin,
-        width: '50%',
+        width: "50%",
       },
     }))
 
     linkResult.fields.push({
-      type: 'row',
+      type: "row",
       fields: [
         ...linkTypes,
         {
-          name: 'label',
+          name: "label",
           localized: true,
-          type: 'text',
-          label: 'Label',
+          type: "text",
+          label: "Label",
           required: true,
         },
       ],
@@ -132,28 +133,32 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
 
     linkResult.fields.push(
       {
-        name: 'appearance',
-        type: 'select',
+        name: "appearance",
+        type: "select",
         admin: {
-          description: 'Dictates how the link should be rendered.',
+          description: "Dictates how the link should be rendered.",
         },
-        defaultValue: 'default',
+        defaultValue: "default",
         options: appearanceOptionsToUse,
       },
       {
-        name: 'isActive',
-        type: 'select',
-        defaultValue: 'default',
+        name: "isActive",
+        type: "select",
+        defaultValue: "default",
         admin: {
-          description: 'Highlights the link based on the URL',
+          description: "Highlights the link based on the URL",
         },
         options: [
-          { value: 'default', label: 'Default' },
-          { value: 'exact', label: 'Exact' },
-          { value: 'never', label: 'Never' },
+          { value: "default", label: "Default" },
+          { value: "exact", label: "Exact" },
+          { value: "never", label: "Never" },
         ],
       },
       searchParams(),
+      switchField({
+        label: "isSheet",
+        name: "isSheet",
+      }),
     )
   }
   return deepMerge(linkResult, overrides)

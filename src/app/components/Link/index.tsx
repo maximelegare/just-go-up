@@ -12,6 +12,7 @@ import { Icon, type IconName } from "../Icon"
 import { Link as LinkType } from "@payload-types"
 import { getUrlData, getSearchParams, getSearchParamsFromURL } from "@app/utilities/searchParams"
 import { buttonsComponentsMap } from "@app/_Map/buttons.map"
+import { SheetClose } from "../ui/sheet"
 
 export type SearchParams = LinkType["link"]["searchParams"]
 
@@ -38,6 +39,7 @@ export type CMSLinkType = {
   isCurrentlySelected?: boolean
   currentUrl: string
   justifyContent?: ButtonProps["justifyContent"] | null
+  isSheet?: boolean
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -56,6 +58,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     currentUrl,
     isCurrentlySelected,
     justifyContent,
+    isSheet,
   } = props
 
   const href =
@@ -125,23 +128,56 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   const ButtonComponents: React.FC<CMSLinkType> =
     buttonsComponentsMap[appearance] ?? buttonsComponentsMap["base"]
 
+  const getJustifyContent = () => {
+    switch (justifyContent) {
+      case "center":
+        return "justify-center"
+      case "center":
+        return "justify-right"
+      case "center":
+        return "justify-left"
+    }
+  }
+
   return (
-    <Button
-      asChild
-      className={cn(className, "group")}
-      size={size}
-      justifyContent={justifyContent}
-      variant={appearance}
-      isActive={getIsActive(currentUrl) || isCurrentlySelected}
-    >
-      <Link
-        className={cn("relative no-underline prose", className)}
-        href={urlWithParams}
-        {...newTabProps}
-      >
-        <ButtonComponents {...props} />
-      </Link>
-    </Button>
+    <>
+      {isSheet ? (
+        <Button
+          asChild
+          className={cn(className, "group")}
+          size={size}
+          variant={appearance}
+          isActive={getIsActive(currentUrl) || isCurrentlySelected}
+        >
+          <Link
+            className={cn("relative no-underline prose", className)}
+            href={urlWithParams}
+            {...newTabProps}
+          >
+            <SheetClose className={cn("w-full flex", getJustifyContent())}>
+              <ButtonComponents {...props} />
+            </SheetClose>
+          </Link>
+        </Button>
+      ) : (
+        <Button
+          asChild
+          className={cn(className, "group")}
+          size={size}
+          variant={appearance}
+          justifyContent={justifyContent}
+          isActive={getIsActive(currentUrl) || isCurrentlySelected}
+        >
+          <Link
+            className={cn("relative no-underline prose", className)}
+            href={urlWithParams}
+            {...newTabProps}
+          >
+            <ButtonComponents {...props} />
+          </Link>
+        </Button>
+      )}
+    </>
   )
 }
 
