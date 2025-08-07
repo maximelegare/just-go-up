@@ -15,6 +15,7 @@ import { cn } from "@app/utilities/cn"
 import { draftMode, headers } from "next/headers"
 import { Page as PageType } from "@payload-types"
 import { Footer } from "@app/components/Footer"
+import { getMeUser } from "@app/utilities/getMeUser"
 // import { Plausible } from "@app/components/Plausible"
 
 export const dynamic = "force-dynamic"
@@ -58,6 +59,8 @@ export default async function Page({
     return <PayloadRedirects url={url} locale={locale} />
   }
 
+  const meUser = await getMeUser()
+
   const {
     hero,
     layout,
@@ -66,11 +69,16 @@ export default async function Page({
 
   return (
     <>
-      {/* <Plausible disableAnalytics={disableAnalytics} disablePageAnalytics={disablePageAnalytics} /> */}
-      <article>
+      <article
+        className={cn(
+          "flex  flex-col",
+          meUser?.user ? "min-h-[calc(100vh-93px)]" : "min-h-[calc(100vh-65px)]",
+        )}
+      >
         <PayloadRedirects disableNotFound url={url} locale={locale} />
         <Hero {...hero} />
-        <div className={cn(rightSidebar && "block sm:flex")}>
+
+        <div className={cn("flex-grow", rightSidebar && "block sm:flex")}>
           <div className="container">
             <Blocks
               blocks={layout}
@@ -85,7 +93,8 @@ export default async function Page({
             params={{ locale, url, slugs }}
           />
         </div>
-        <Footer locale={locale} show={footer} className="mt-20 container" />
+
+        <Footer locale={locale} show={footer} className="container mt-auto" />
       </article>
     </>
   )
